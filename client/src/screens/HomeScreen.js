@@ -9,7 +9,6 @@ import "../components/styles/HomeScreen.css";
 const HomeScreen = () => {
   return (
     <>
-      <h1>Hello world</h1>
       <section class='banner-section'>
         <div className='hero_section_container'>
           <div className='hero_section_sub_title'>Fashion Guide</div>
