@@ -51,58 +51,6 @@ const products = [
     rating: 4.9,
     numReviews: 2,
   },
-  {
-    _id: "4",
-    name: "Logitech G-Series Gaming Mouse",
-    image: "/images/mouse.jpg",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
-    brand: "Apple",
-    catagory: "Electronics",
-    price: 49.99,
-    countInStock: 2,
-    rating: 5,
-    numReviews: 7,
-  },
-  {
-    _id: "5",
-    name: "Sony Playstation 4 Pro White Version",
-    image: "/images/playstation.jpg",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
-    brand: "Apple",
-    catagory: "Electronics",
-    price: 399.99,
-    countInStock: 10,
-    rating: 4.9,
-    numReviews: 2,
-  },
-  {
-    _id: "6",
-    name: "iPhone 11 Pro 256GB Memory",
-    image: "/images/phone.jpg",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
-    brand: "Apple",
-    catagory: "Electronics",
-    price: 599.99,
-    countInStock: 10,
-    rating: 4.5,
-    numReviews: 4,
-  },
-  {
-    _id: "7",
-    name: "Amazon Echo Dot 3rd Generation",
-    image: "/images/alexa.jpg",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
-    brand: "Apple",
-    catagory: "Electronics",
-    price: 29.99,
-    countInStock: 0,
-    rating: 4,
-    numReviews: 4,
-  },
 ];
 
 export default products;
