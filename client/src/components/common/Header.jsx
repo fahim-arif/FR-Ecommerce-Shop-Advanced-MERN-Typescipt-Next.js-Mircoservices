@@ -11,7 +11,9 @@ const Header = () => {
           <div className='row v-center'>
             <div className='header-item itme-left'>
               <div className='logo'>
-                <Link to='/'>FR Store</Link>
+                <Link to='/'>
+                  <img src='/images/FR Store.png' alt='' />
+                </Link>
               </div>
             </div>
             {/*  */}
@@ -208,10 +210,17 @@ const Header = () => {
                   <li>
                     <a href='#'>Contact</a>
                   </li>
+                  <li>
+                    <Link to='/sign-in'>Signin</Link>
+                  </li>
+                  <li>
+                    <Link to='/sign-up'>Signup</Link>
+                  </li>
+                 
                 </ul>
               </nav>
             </div>
-            <div class='header-item item-right'>
+            {/* <div class='header-item item-right'>
               <a href='#'>
                 <i class='fas fa-search'></i>
               </a>
@@ -221,11 +230,11 @@ const Header = () => {
               <a href='#'>
                 <i class='fas fa-shopping-cart'></i>
               </a>
-              {/* <!-- mobile menu trigger --> */}
+              
               <div class='mobile-menu-trigger'>
                 <span></span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>

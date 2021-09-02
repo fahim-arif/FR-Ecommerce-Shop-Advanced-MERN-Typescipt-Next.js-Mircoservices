@@ -1,8 +1,7 @@
 import express from "express";
 import env from "dotenv";
 import cors from "cors";
-import bodyParser from "body-parser";
-
+import colors from "colors";
 import productRoutes from "./Routes/ProductRoutes.js";
 import connectDB from "./config/db.js";
 import userRoutes from "./Routes/userRoutes.js";

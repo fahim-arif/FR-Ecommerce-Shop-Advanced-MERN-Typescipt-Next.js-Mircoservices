@@ -15,11 +15,12 @@ const importData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     // await User.deleteMany();
+    
 
-    // await Product.insertMany(sampleProducts);
+    // await Product.insertMany(products);
 
     // const createUser = await User.insertMany(users);
-    const adminUser = await User.findById("608842ce95b978408472c6d9");
+    const adminUser = await User.findById("612fed7279094e3cd015ce5a");
 
     const sampleProduct = products.map((product) => {
       return { ...product, user: adminUser };
