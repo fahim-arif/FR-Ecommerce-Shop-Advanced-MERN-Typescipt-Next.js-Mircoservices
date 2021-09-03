@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,600;1,700;1,800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,600;1,700;1,800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,800;1,800&display=swap");
 :root {
   --dark: #00bd9d;
   --light: #8bd7d2;
@@ -18,27 +18,32 @@
   --mb-side-space: 1.25rem;
   --box-shadow: 0 0 15px -10px rgba(0, 0, 0, 0.75);
   --webkit-box-shadow: -0 0 15px -10px rgba(0, 0, 0, 0.75);
-  --moz-box-shadow: -1px 2px 10px 1px rgba(123, 123, 123, 0.5)0 0 15px -10px rgba(0, 0, 0, 0.75);
+  --moz-box-shadow: -1px 2px 10px 1px rgba(123, 123, 123, 0.5) 0 0 15px -10px rgba(0, 0, 0, 0.75);
 }
 
 body {
   line-height: 1.5;
   font-weight: 400;
   overflow-x: hidden;
+  font-family: "Open Sans", sans-serif;
 }
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
 }
 :before,
 :after {
   box-sizing: border-box;
 }
+
 main {
   height: auto;
 }
 
 a {
+  color: #000000;
   text-decoration: none;
+}
+a:hover {
+  color: #000000;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Table, Button, Row, Col, Pagination } from "react-bootstrap";
+import { Table, Button, Row, Col, Pagination, Container } from "react-bootstrap";
 
 import { useSelector, useDispatch } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -35,6 +35,14 @@ const ProductListScreen = ({ history, match }) => {
     success: successCreate,
     product: createdProduct,
   } = productCreate;
+  useEffect(() => {
+    dispatch(getProducts());
+    // const render = async () => {
+    //   await dispatch(getProducts());
+    // };
+    // render();
+    // console.log(products);
+  }, [dispatch, getProducts]);
 
   // useEffect(() => {
   //   dispatch()
@@ -77,7 +85,7 @@ const ProductListScreen = ({ history, match }) => {
     dispatch(createProduct());
   };
   return (
-    <>
+    <Container>
       <Row className='align-items-center'>
         <Col>
           <h1>Products</h1>
@@ -97,7 +105,7 @@ const ProductListScreen = ({ history, match }) => {
       ) : error ? (
         <Message variant='danger' />
       ) : (
-        <>
+        <Container>
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
@@ -136,9 +144,9 @@ const ProductListScreen = ({ history, match }) => {
             </tbody>
           </Table>
           {/* <Pagination pages={pages} page={page} isAdmin={true}></Pagination> */}
-        </>
+        </Container>
       )}
-    </>
+    </Container>
   );
 };
 

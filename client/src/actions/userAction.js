@@ -13,14 +13,14 @@ export const registerUser = (name, email, password) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = axios.post(
+    const { data } = await axios.post(
       "http://localhost:5000/user/register",
       { name, email, password },
       config
     );
 
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-    localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,

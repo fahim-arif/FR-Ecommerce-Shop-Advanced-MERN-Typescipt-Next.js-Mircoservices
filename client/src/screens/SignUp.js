@@ -23,11 +23,14 @@ const SignUp = ({ history, location }) => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, user } = userRegister;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
-    if (user) {
+    if (userInfo) {
       history.push("/");
     }
-  }, [history, user, dispatch]);
+  }, [history, userInfo, dispatch]);
 
   const nextStepHandler = (e) => {
     e.preventDefault();
@@ -75,7 +78,9 @@ const SignUp = ({ history, location }) => {
       {loading && <Loader></Loader>}
       {error && <Message>{error}</Message>}
       <div className='text-center pt-4'>
-        <img src='/images/FR Store.png' alt='' />
+        <Link to='/'>
+          <img src='/images/FR Store.png' alt='' />
+        </Link>
       </div>
       <div className='SignUp-container'>
         <form onSubmit={submitHandler} className='SignUp-form'>

@@ -50,7 +50,9 @@ const SignIn = ({ history }) => {
       {/* {error && <Message>{error}</Message>}
       {loading && <Loader></Loader>} */}
       <div className='text-center pt-4'>
-        <img src="/images/FR Store.png" alt="" />
+        <Link to='/'>
+          <img src='/images/FR Store.png' alt='' />
+        </Link>
       </div>
       <div className='SignIn-container'>
         <form onSubmit={submitHandler} className='SignIn-form'>
