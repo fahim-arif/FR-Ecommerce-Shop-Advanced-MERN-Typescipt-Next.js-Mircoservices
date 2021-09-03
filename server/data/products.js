@@ -24,12 +24,12 @@ const products = [
     numReviews: 4,
   },
   {
-    name: "Calvin Klein mens Slim Fit Suit Separates",
-    image: "/images/pro3.jpg",
+    name: "Cannon EOS 80D DSLR Camera",
+    image: "/images/camera.jpg",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
-    brand: "Calvin Klein",
-    catagory: "Men Fashion Suit",
+    brand: "Apple",
+    catagory: "Electronics",
     price: 929.99,
     countInStock: 5,
     rating: 4.3,
@@ -46,6 +46,30 @@ const products = [
     countInStock: 10,
     rating: 4.9,
     numReviews: 2,
+  },
+  {
+    name: "Logitech G-Series Gaming Mouse",
+    image: "/images/mouse.jpg",
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
+    brand: "Apple",
+    catagory: "Electronics",
+    price: 49.99,
+    countInStock: 2,
+    rating: 5,
+    numReviews: 7,
+  },
+  {
+    name: "Amazon Echo Dot 3rd Generation",
+    image: "/images/alexa.jpg",
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
+    brand: "Apple",
+    catagory: "Electronics",
+    price: 29.99,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 4,
   },
 ];
 
