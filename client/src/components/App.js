@@ -5,6 +5,7 @@ import Footer from "../components/common/Footer";
 import HomeScreen from "../screens/HomeScreen";
 // import ProductScreen from "../screens/ProductScreenDepricated";
 import DemoScreen from "../screens/DemoScreen";
+
 import ProductScreen from "../screens/ProductScreen";
 import CartScreen from "../screens/CartScreen";
 import ProductListScreen from "../screens/ProductListScreen";
@@ -12,6 +13,8 @@ import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
 import ProductDetailScreen from "../screens/ProductDetailScreen";
 import MainHeader from "./MainHeader";
+import SuperHomeScreen from "../screens/HomeScreen";
+
 function App() {
   return (
     <>

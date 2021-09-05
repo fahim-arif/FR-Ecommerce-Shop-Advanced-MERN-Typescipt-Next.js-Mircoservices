@@ -81,7 +81,7 @@ const ProductScreen = () => {
                   aria-labelledby='panelsStayOpen-headingOne'
                 >
                   <div class='accordion-body'>
-                    <strong>Price</strong> 
+                    <strong>Price</strong>
                   </div>
                 </div>
               </div>
@@ -150,7 +150,7 @@ const ProductScreen = () => {
                   aria-labelledby='panelsStayOpen-headingFour'
                 >
                   <div class='accordion-body'>
-                    <strong>Availability</strong> 
+                    <strong>Availability</strong>
                   </div>
                 </div>
               </div>
