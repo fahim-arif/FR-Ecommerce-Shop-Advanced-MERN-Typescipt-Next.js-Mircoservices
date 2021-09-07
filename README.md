@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-<h1> Please pull from the project-dev branch as master branch is some issues </h1>
-=======
+
 <h1> Instructions before pulling the repo:</h1>
 <ul>
   <li>First open your terminal in the root directory of this repository and type <code>npm install</code>. This will install (nodejs-express) all the npm packages for the backend. </li>
@@ -13,4 +11,4 @@
 <code>JWT_SECRET=SOMETHING</code></li> As I said earlier that this .env file should be located inside root directory of this repository.
   <li>Finally run <code>npm start</code> in the the terminal inside root directory to run backend server. Then open another terminal and navigate to client folder and inside this folder open up your terminal and type<code>npm start</code>. This will start your frontend server. Thank you and enjoy :)</li>
 </ul>
->>>>>>> 7d496d331a0c920df8eee452d2571134280565ec
+
