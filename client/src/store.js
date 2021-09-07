@@ -8,6 +8,9 @@ import {
   productCreateReducer,
   productDeleteReducer,
 } from "./reducers/productsReducer";
+
+import { marginReducer } from "./reducers/marginReducer";
+
 import { cartReducer } from "./reducers/cartsReducer";
 
 const reducer = combineReducers({
@@ -18,6 +21,7 @@ const reducer = combineReducers({
   productDelete: productDeleteReducer,
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
+  sideMargin: marginReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -1,0 +1,48 @@
+.admin_userCreate {
+  flex: 4;
+}
+.admin_create_user_form {
+  display: flex;
+  flex-wrap: wrap;
+}
+.admin_create_user_item {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.admin_create_user_item > label {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: grey;
+}
+.admin_create_user_item > input {
+  height: 50px;
+  padding: 15px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.admin_create_user_gender > input {
+  margin-top: 15px;
+}
+.admin_create_user_gender > label {
+  margin: 10px;
+  font-size: 18px;
+  color: #555;
+}
+.admin_create_new_user_btn {
+  display: block;
+  width: 200px;
+  height: 50px;
+  border: none;
+  background-color: darkblue;
+  color: #fff;
+  padding: 7px 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 30px;
+}

@@ -1,4 +1,5 @@
 .hero_container {
+  position: relative;
   max-width: 1400px;
   display: flex;
   margin: 0 auto;
@@ -35,14 +36,21 @@
 .sub_slider_right {
   flex: 1;
   height: 126px;
+  background: url("../images/slider/hero2.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background: url("../images/slider/hero2.jpg");
+}
+.hero_main_images {
+  z-index: 500;
+  width: 1135px;
+  height: 295px;
+  object-fit: cover;
+  cursor: pointer;
 }
 .hero_sub_slider {
   display: flex;
-  margin-top: 15px;
+  margin-top: 310px;
 }
 
 /* Collapse Menu */
@@ -69,9 +77,112 @@
   height: 45px;
   border-bottom: 1px solid var(--clr-light-border);
 }
+.collapse_menu_item:hover {
+  background-color: #d8d8d8;
+}
 
 /* .flex-space_between {
   display: flex;
   justify-content: space-between;
   width: 100%;
 } */
+
+/* Dropdown  */
+.mega_collapse_menu {
+  box-shadow: var(--webkit-box-shadow);
+  -webkit-box-shadow: var(--webkit-box-shadow);
+  position: absolute;
+  height: 350px;
+  width: 900px;
+  background-color: #fff;
+  left: 240px;
+  top: 0;
+}
+
+.rows {
+  display: flex;
+}
+
+.cols {
+  flex: 1;
+  padding: 10px 0;
+  padding-left: 30px;
+  font-weight: 700;
+}
+.col {
+  padding: 10px 0;
+  padding-left: 30px;
+  font-weight: 400;
+}
+
+.mega_collapse_menu-2 {
+  box-shadow: var(--webkit-box-shadow);
+  -webkit-box-shadow: var(--webkit-box-shadow);
+  position: absolute;
+  height: 350px;
+  width: 900px;
+  background-color: #fff;
+  left: 240px;
+  top: 45px;
+}
+.mega_collapse_menu-3 {
+  box-shadow: var(--webkit-box-shadow);
+  -webkit-box-shadow: var(--webkit-box-shadow);
+  position: absolute;
+  height: 280px;
+  width: 900px;
+  background-color: #fff;
+  left: 240px;
+  top: 90px;
+}
+
+.close {
+  display: none;
+}
+
+.hero_container_right {
+  /* position: absolute; */
+  /* padding-left: 518px; */
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
+.exp_slider {
+  flex: 4.71;
+}
+
+.flex {
+  display: flex;
+}
+
+/*  */
+
+.flex-container {
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  width: 100%;
+  height: 295px;
+
+  /* Using flexbox */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+  /*----*/
+  color: #333;
+  /* background: #419be0; */
+  margin-top: 165px;
+  margin-left: 518px;
+  z-index: -1;
+}
+.flex-child {
+  cursor: pointer;
+  width: 1200px;
+  /* height: 300; */
+  order: 0;
+  flex: 1;
+  align-self: center;
+}

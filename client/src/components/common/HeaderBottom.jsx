@@ -12,7 +12,7 @@ const HeaderBottom = () => {
             <KeyboardArrowDownOutlined className={styles.down_icon} />
           </div>
           <div className={styles.regular_link}>
-            <Link to='#'>Shop</Link>
+            <Link to='/shop'>Shop</Link>
             <Link to='#'>New Arrival</Link>
             <Link to='#'>Hot Deals</Link>
             <Link to='#'>Contact Us</Link>

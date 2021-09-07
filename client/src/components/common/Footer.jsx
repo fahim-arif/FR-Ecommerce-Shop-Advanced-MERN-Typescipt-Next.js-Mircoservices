@@ -2,16 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "../../components/styles/Footer.css";
-const Footer = () => {
+const Footer = ({ children }) => {
   return (
     <>
+      {children}
       <footer className='footer'>
         <div className='footer-wrapper'>
           <div className='site_footer'>
             <div className='footer__row'>
               <div className='footer__col'>
                 <div className='footer_title footer_title--row_one'>
-                Get to Know Us
+                  Get to Know Us
                 </div>
                 <div className='footer_links'>
                   <ul>
@@ -32,7 +33,7 @@ const Footer = () => {
               </div>
               <div className='footer__col'>
                 <div className='footer_title footer_title--row_one'>
-                 Make Money with Us 
+                  Make Money with Us
                 </div>
                 <div className='footer_links'>
                   <ul>
@@ -91,10 +92,10 @@ const Footer = () => {
                       <Link to='/sign-in'>Help</Link>
                     </li>
                     <li>
-                      <Link to='/sign-in'>Shipping Rates {'&'} Policies</Link>
+                      <Link to='/sign-in'>Shipping Rates {"&"} Policies</Link>
                     </li>
                     <li>
-                      <Link to='/sign-in'>Returns {'&'} Replacements</Link>
+                      <Link to='/sign-in'>Returns {"&"} Replacements</Link>
                     </li>
                   </ul>
                 </div>

@@ -1,0 +1,7 @@
+.admin_home_page {
+  flex: 5;
+}
+.admin_home_widgets{
+    display: flex;
+    margin: 20px;
+}

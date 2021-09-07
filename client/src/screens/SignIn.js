@@ -49,12 +49,12 @@ const SignIn = ({ history }) => {
     <>
       {/* {error && <Message>{error}</Message>}
       {loading && <Loader></Loader>} */}
-      <div className='text-center pt-4'>
+      <div className='text-center pt-4 mt-4'>
         <Link to='/'>
           <img src='/images/FR Store.png' alt='' />
         </Link>
       </div>
-      <div className='SignIn-container'>
+      <div className='SignIn-container pt-5'>
         <form onSubmit={submitHandler} className='SignIn-form'>
           <div className='SignIn-heading'>Sign in</div>
           <button className='SignIn-sign-in-fb-button'>

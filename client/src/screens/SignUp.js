@@ -77,12 +77,12 @@ const SignUp = ({ history, location }) => {
     <>
       {loading && <Loader></Loader>}
       {error && <Message>{error}</Message>}
-      <div className='text-center pt-4'>
+      <div className='text-center pt-4 mt-4'>
         <Link to='/'>
           <img src='/images/FR Store.png' alt='' />
         </Link>
       </div>
-      <div className='SignUp-container'>
+      <div className='SignUp-container pt-5'>
         <form onSubmit={submitHandler} className='SignUp-form'>
           <div className='SignIn-heading'>Create account</div>
           <div className='alertMessage'>
