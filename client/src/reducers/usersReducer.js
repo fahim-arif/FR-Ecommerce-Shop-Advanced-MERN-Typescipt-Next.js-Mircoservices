@@ -9,7 +9,7 @@ import {
 } from "../types/userTypes";
 
 export const userLoginReducer = (state = {}, action) => {
-  switch (action.payload) {
+  switch (action.type) {
     case USER_LOGIN_REQUEST:
       return { loading: true };
     case USER_LOGIN_SUCCESS:

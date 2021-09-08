@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./serviceList.css";
+import "./productLists.css";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
@@ -66,6 +66,9 @@ const ServiceList = () => {
   ];
   return (
     <div className='admin_services'>
+      <Link to='/admin/create-product'>
+        <button className='admin_userDetails_btn'>Create</button>
+      </Link>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid
           rows={data}

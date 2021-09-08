@@ -7,21 +7,28 @@ export const getLogin = (req, res, next) => {
 };
 
 export const authUser = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, googleAuth } = req.body;
 
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
+  if (googleAuth && googleAuth === user.googleAuth) {
+    res.status(200).json({
       _id: user._id,
-      name: user.name,
+      username: user.username,
       email: user.email,
-      isAdmin: user.isAdmin,
-      password: user.password,
+      googleAuth: user.googleAuth,
+      token: generateToken(user._id),
+    });
+  } else if (user && (await user.matchPassword(password))) {
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      googleAuth: user.googleAuth,
       token: generateToken(user._id),
     });
   } else {
-    res.status(401);
+    res.status(400);
     throw new Error("Invalid Email or Password");
   }
 });
@@ -73,7 +80,6 @@ export const updateUserProfile = asyncHandler(async (req, res, next) => {
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
     });
-    
   } else {
     res.status(404);
     throw new Error("Invalid Email or Password");

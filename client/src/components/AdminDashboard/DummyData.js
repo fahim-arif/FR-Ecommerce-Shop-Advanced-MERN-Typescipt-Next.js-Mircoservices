@@ -16,6 +16,10 @@ export const DummyData = [
     "Active User": 8000,
   },
   {
+    name: "May",
+    "Active User": 6000,
+  },
+  {
     name: "Jun",
     "Active User": 4000,
   },
@@ -25,11 +29,11 @@ export const DummyData = [
   },
   {
     name: "Aug",
-    "Active User": 5000,
+    "Active User": 6000,
   },
   {
     name: "Sep",
-    "Active User": 6000,
+    "Active User": 8000,
   },
   {
     name: "Oct",

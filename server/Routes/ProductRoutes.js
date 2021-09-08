@@ -4,12 +4,13 @@ import {
   getProducts,
   getProduct,
 } from "../controllers/productControllers.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/", getProducts);
 
-router.post("/", postProduct);
+router.post("/", protect, postProduct);
 
 router.get("/:id", getProduct);
 

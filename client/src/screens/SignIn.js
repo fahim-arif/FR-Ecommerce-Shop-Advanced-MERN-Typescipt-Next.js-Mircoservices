@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import GoogleLogin from "react-google-login";
+import axios from "axios";
 
-// import { login } from "../../actions/userActions";
+import { login } from "../actions/userAction";
 import Message from "../components/Message";
 import Loader from "../components/Loading";
 
@@ -13,23 +14,26 @@ const SignIn = ({ history }) => {
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
 
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { loading, error, userInfo } = userLogin;
+  const [errors, setErrors] = useState("");
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push("/");
-  //   }
-  // }, [history, userInfo]);
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/");
+    }
+  }, [history, userInfo]);
 
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
 
     try {
-      // dispatch(login(null, null, token));
+      dispatch(login(null, null, token));
     } catch (error) {
+      setErrors(error);
       console.error(error);
     }
   };
@@ -39,16 +43,31 @@ const SignIn = ({ history }) => {
     console.log(error);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const enteredEmail = inputEmailRef.current.value;
     const enteredPassword = inputPasswordRef.current.value;
-    // dispatch(login(enteredEmail, enteredPassword));
+
+    dispatch(login(enteredEmail, enteredPassword));
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+    // const { data } = await axios.post(
+    //   "http://localhost:5000/api/user/",
+    //   {
+    //     email: enteredEmail,
+    //     password: enteredPassword,
+    //   },
+    //   config
+    // );
+    // console.log(data);
   };
   return (
     <>
-      {/* {error && <Message>{error}</Message>}
-      {loading && <Loader></Loader>} */}
+      {error && <Message variant='danger'>{error}</Message>}
+      {loading && <Loader></Loader>}
       <div className='text-center pt-4 mt-4'>
         <Link to='/'>
           <img src='/images/FR Store.png' alt='' />
@@ -96,7 +115,9 @@ const SignIn = ({ history }) => {
             placeholder='Password'
           />
           <div className='SignIn-button-continue-container'>
-            <button className='SignIn-button-continue'>Continue</button>
+            <button type='submit' className='SignIn-button-continue'>
+              Continue
+            </button>
           </div>
 
           <div className='SignIn-remember-forgot-cotainer'>
@@ -105,7 +126,9 @@ const SignIn = ({ history }) => {
           </div>
           <div className='SignIn-join-now-button'>
             Not a member yet?
-            <Link className='SignIn-join-now'>Join Now</Link>
+            <Link to='/sign-up' className='SignIn-join-now'>
+              Join Now
+            </Link>
           </div>
         </form>
       </div>

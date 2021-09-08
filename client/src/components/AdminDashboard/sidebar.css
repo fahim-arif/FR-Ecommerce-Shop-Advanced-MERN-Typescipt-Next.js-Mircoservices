@@ -1,10 +1,11 @@
 .admin_side_bar {
   flex: 2;
   height: calc(100vh - 50px);
-  background-color: rgb(253, 253, 253);
+  background-color: rgb(224, 58, 58);
   position: sticky;
   top: 50px;
   min-width: 350px;
+  
 }
 .admin_side_bar_wrapper {
   padding: 20px;

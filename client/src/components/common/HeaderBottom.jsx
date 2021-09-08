@@ -1,8 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styles from "../styles/header-bottom.module.css";
 import { Link } from "react-router-dom";
+import { logout } from "../../actions/userAction";
+
 import { KeyboardArrowDownOutlined } from "@material-ui/icons";
 const HeaderBottom = () => {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -19,8 +26,16 @@ const HeaderBottom = () => {
           </div>
         </div>
         <div className={styles.header_right}>
-          <Link to='/sign-in'>Sign In</Link>
-          <Link to='/sign-up'>Join</Link>
+          {localStorage.getItem("userInfo") ? (
+            <Link to='/' onClick={handleLogout}>
+              Logout
+            </Link>
+          ) : (
+            <>
+              <Link to='/sign-in'>Sign In</Link>
+              <Link to='/sign-up'>Join</Link>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -16,7 +16,6 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
-
 const productSchema = new mongoose.Schema(
   {
     user: {
@@ -34,7 +33,6 @@ const productSchema = new mongoose.Schema(
     },
     brandImage: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
@@ -55,7 +53,7 @@ const productSchema = new mongoose.Schema(
     },
     numReviews: {
       type: Number,
-      required: true,
+      default: 0,
     },
     countInStock: {
       type: Number,

@@ -125,7 +125,7 @@ const SignUp = ({ history, location }) => {
           </div>
           <div className='SignIn-join-now-button'>
             Already Joined?
-            <Link className='SignIn-join-now'>Sign In</Link>
+            <Link to='/sign-in' className='SignIn-join-now'>Sign In</Link>
           </div>
         </form>
       </div>

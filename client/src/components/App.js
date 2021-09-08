@@ -13,8 +13,17 @@ import SignUp from "../screens/SignUp";
 import ProductDetailScreen from "../screens/ProductDetailScreen";
 import MainHeader from "./MainHeader";
 import SecondaryFooter from "./common/SecondaryFooter";
-
-import AdminScreen from "../screens/AdminScreen";
+// Admin Screens
+import AdminHomePage from "../components/AdminDashboard/pages/HomePage.jsx";
+import CreateUser from "../components/AdminDashboard/pages/users/CreateUser.jsx";
+import ProductList from "../components/AdminDashboard/pages/products/ProductList.jsx";
+import UserDetails from "../components/AdminDashboard/pages/users/UserDetails.jsx";
+import UserList from "../components/AdminDashboard/pages/users/UserList.jsx";
+import Sidebar from "../components/AdminDashboard/Sidebar.jsx";
+import Topbar from "../components/AdminDashboard/Topbar.jsx";
+import "../components/styles/AdminScreen.css";
+import ProductDetails from "../components/AdminDashboard/pages/products/ProductDetails.jsx";
+import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
 
 function App() {
   return (
@@ -55,7 +64,58 @@ function App() {
           </Switch>
           {/* <Route component={DemoScreen} path='/demo' exact></Route> */}
         </main>
-        <Route component={AdminScreen} path='/admin' exact></Route>
+        {/* <Route component={AdminScreen} path='/admin' exact></Route> */}
+        <Switch>
+          <Route path='/admin' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <AdminHomePage />
+            </div>
+          </Route>
+          <Route path='/admin/users' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <UserList />
+            </div>
+          </Route>
+          <Route path='/admin/create-user' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <CreateUser />
+            </div>
+          </Route>
+          <Route path='/admin/product-list' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <ProductList />
+            </div>
+          </Route>
+          <Route path='/admin/product-list/:id' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <ProductDetails />
+            </div>
+          </Route>
+          <Route path='/admin/create-product' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <CreateProduct />
+            </div>
+          </Route>
+          <Route path='/admin/users/:id' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <UserDetails />
+            </div>
+          </Route>
+        </Switch>
       </Router>
     </>
   );

@@ -18,7 +18,12 @@ const Sidebar = () => {
   return (
     <div
       classname='admin_side_bar'
-      style={{ width: "250px", marginLeft: "20px" }}
+      style={{
+        width: "250px",
+        paddingLeft: "20px",
+        borderRight: "1px solid #dbdbdb",
+        marginTop: "0",
+      }}
     >
       <div classname='admin_side_bar_wrapper'>
         <div classname='admin_side_bar_menu'>
@@ -49,22 +54,22 @@ const Sidebar = () => {
                 Users
               </li>
             </Link>
-            <Link to='/admin/service-list'>
+            <Link to='/admin/product-list'>
               <li className='admin_side_bar_item'>
                 <WorkOutline />
                 Products
               </li>
             </Link>
-            <Link to='/admin/tutors'>
+            <Link to='/admin/transaction'>
               <li className='admin_side_bar_item'>
                 <AccountCircle />
                 Transaction
               </li>
             </Link>
-            <Link to='/admin/garians'>
+            <Link to='/admin/sales-report'>
               <li className='admin_side_bar_item'>
                 <Group />
-                Reports
+                Sales Report
               </li>
             </Link>
           </ul>

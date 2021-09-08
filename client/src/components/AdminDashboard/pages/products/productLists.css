@@ -23,6 +23,9 @@
   font-size: 14px;
   font-weight: 300;
 }
+.admin_service_list_edit:hover {
+  color: #ffff;
+}
 .admin_service_list_delete {
   color: red;
   cursor: pointer;

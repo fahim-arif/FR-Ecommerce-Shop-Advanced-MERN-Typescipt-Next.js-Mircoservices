@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "../../charts/Chart";
 import { serviceData } from "../../DummyData";
-import "./serviceDetails.css";
+import "./productDetails.css";
 
 const ServiceDetails = () => {
   return (

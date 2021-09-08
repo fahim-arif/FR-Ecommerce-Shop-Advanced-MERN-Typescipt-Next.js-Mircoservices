@@ -12,20 +12,22 @@ const getProduct = async (req, res, next) => {
 };
 
 const postProduct = async (req, res, next) => {
-  const { input } = req.body;
-  const { name, image, description, price } = input;
+  const { name, image, brandImage, description, brand, price, countInStock } =
+    req.body;
+
   const product = new Product({
-    name: name,
-    image: image,
-    description: description,
-    price: price,
+    name,
+    image,
+    brandImage,
+    description,
+    brand,
+    price,
+    countInStock,
+    user: req.user,
   });
-  product.save().then(() => {
-    console.log("Product was added to the database");
-  });
-  res.status(201).json({
-    input,
-  });
+
+  const createProduct = await product.save();
+  res.status(201).json(createProduct);
 };
 
 export { getProducts, postProduct, getProduct };
