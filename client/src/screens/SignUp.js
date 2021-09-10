@@ -23,14 +23,14 @@ const SignUp = ({ history, location }) => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, user } = userRegister;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  // const userLogin = useSelector((state) => state.userLogin);
+  // const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
+    if (user) {
       history.push("/");
     }
-  }, [history, userInfo, dispatch]);
+  }, [history, user]);
 
   const nextStepHandler = (e) => {
     e.preventDefault();
@@ -62,21 +62,37 @@ const SignUp = ({ history, location }) => {
       setMessage2(
         "That’s too short. A great username must include at least 6 characters."
       );
+    } else if (name.length > 5) {
+      setMessage2("");
     }
-    if (password.length < 8 && confirmPassword.length < 8) {
-      setMessage("Password must be min. 8 characters.");
+
+    if (password.length < 6 && confirmPassword.length < 6) {
+      setMessage("Password must be min. 6 characters.");
     } else if (confirmPassword !== password) {
       setMessage("Password did not matched");
-    } else if (name.length >= 6) {
-      setMessage("");
-      setMessage2("");
+    } else if (password === confirmPassword && name.length > 5) {
       dispatch(registerUser(name, email, password));
+    }
+    if (
+      password.length > 5 &&
+      confirmPassword > 5 &&
+      password === confirmPassword
+    ) {
+      setMessage("");
     }
   };
   return (
     <>
-      {loading && <Loader></Loader>}
-      {error && <Message>{error}</Message>}
+      <div className='signin_error_container'>
+        {loading && <Loader></Loader>}
+        <div className='signin_error_msg'>
+          {error && (
+            <Message className='signin_error_msg' variant='danger'>
+              {error}
+            </Message>
+          )}
+        </div>
+      </div>
       <div className='text-center pt-4 mt-4'>
         <Link to='/'>
           <img src='/images/FR Store.png' alt='' />
@@ -101,7 +117,7 @@ const SignUp = ({ history, location }) => {
             type='email'
           />{" "}
           <div className='alertMessage'>
-            {message2 && <Message variant='danger'>{message}</Message>}
+            {message && <Message variant='danger'>{message}</Message>}
           </div>
           <label className='signUp_label'>Password</label>
           <input
@@ -125,7 +141,9 @@ const SignUp = ({ history, location }) => {
           </div>
           <div className='SignIn-join-now-button'>
             Already Joined?
-            <Link to='/sign-in' className='SignIn-join-now'>Sign In</Link>
+            <Link to='/sign-in' className='SignIn-join-now'>
+              Sign In
+            </Link>
           </div>
         </form>
       </div>

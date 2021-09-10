@@ -127,7 +127,7 @@ const OtherSections = () => {
           <div className={`${styles.title} mb-4`}>Covid-19 Info & Updates</div>
           <div className={styles.covid_row}>
             <div className={styles.covid_col}>
-              <Link to='#'>
+              <a href='https://surokkha.gov.bd/'>
                 <div className={styles.covid_info_container}>
                   <img
                     src='/images/Vaccine_D-210810-1628610814413.jpg'
@@ -143,7 +143,7 @@ const OtherSections = () => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
             <div className={styles.covid_col}>
               <Link to='#'>

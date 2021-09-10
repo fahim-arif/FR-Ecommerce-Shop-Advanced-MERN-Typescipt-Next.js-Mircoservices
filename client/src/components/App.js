@@ -24,6 +24,8 @@ import Topbar from "../components/AdminDashboard/Topbar.jsx";
 import "../components/styles/AdminScreen.css";
 import ProductDetails from "../components/AdminDashboard/pages/products/ProductDetails.jsx";
 import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
+import ProfileScreen from "../screens/ProfileScreen";
+import ContactUsScreen from "../screens/ContactUsScreen";
 
 function App() {
   return (
@@ -59,6 +61,24 @@ function App() {
             <MainHeader path='/shop' exact>
               <Footer path='/shop' exact>
                 <Route component={ProductScreen} path='/shop' exact></Route>
+              </Footer>
+            </MainHeader>
+          </Switch>
+          <Switch>
+            <MainHeader path='/profile' exact>
+              <Footer path='/profile' exact>
+                <Route component={ProfileScreen} path='/profile' exact></Route>
+              </Footer>
+            </MainHeader>
+          </Switch>
+          <Switch>
+            <MainHeader path='/contact-us' exact>
+              <Footer path='/contact-us' exact>
+                <Route
+                  component={ContactUsScreen}
+                  path='/contact-us'
+                  exact
+                ></Route>
               </Footer>
             </MainHeader>
           </Switch>

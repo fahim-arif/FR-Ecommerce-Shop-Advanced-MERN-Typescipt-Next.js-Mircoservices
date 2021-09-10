@@ -7,6 +7,7 @@ import productRoutes from "./Routes/ProductRoutes.js";
 import connectDB from "./config/db.js";
 import userRoutes from "./Routes/userRoutes.js";
 import uploadRoutes from "./Routes/uploadRoutes.js";
+import contactRoutes from "./Routes/contactRoutes.js";
 
 import { notFound, errorPageHandler } from "./middleware/errorMiddleware.js";
 
@@ -23,10 +24,10 @@ app.use("/api/products", productRoutes);
 
 app.use("/api/user", userRoutes);
 
-app.use("/uploads", uploadRoutes);
-// app.get("/", (req, res, next) => {
-//   res.json(products);
-// });
+app.use("/api/upload", uploadRoutes);
+
+app.use("/api/contact-us", contactRoutes);
+
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 

@@ -255,3 +255,16 @@
   padding: 17px 25px 0;
   background-color: #fff;
 }
+
+/* error msg */
+.signin_error_container {
+  position: relative;
+}
+
+.signin_error_msg {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+}

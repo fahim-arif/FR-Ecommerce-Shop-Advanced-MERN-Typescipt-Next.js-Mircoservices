@@ -8,7 +8,7 @@ import {
   PRODUCT_CREATE_FAIL,
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_RESET,
-  PRODUCT_CREATE_SUCESS,
+  PRODUCT_CREATE_SUCCESS,
   PRODUCT_LIST_SUCESS,
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
@@ -21,7 +21,7 @@ import axios from "axios";
 export const getProducts = () => async (dispatch) => {
   try {
     dispatch({ type: GET_PRODUCTS_REQUEST });
-
+    // http://localhost:5000/api/user/
     const { data } = await axios.get("http://localhost:5000/products");
 
     dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
@@ -55,7 +55,16 @@ export const getProduct = (id) => async (dispatch) => {
 };
 
 export const createProduct =
-  (name, image, brandImage, description, brand, price, countInStock) =>
+  (
+    name,
+    brandImage,
+    image,
+    brand,
+    price,
+    category,
+    description,
+    countInStock
+  ) =>
   async (dispatch, getState) => {
     try {
       dispatch({ type: PRODUCT_CREATE_REQUEST });
@@ -69,9 +78,33 @@ export const createProduct =
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.post(`/api/products`, {}, config);
 
-      dispatch({ type: PRODUCT_CREATE_SUCESS, payload: data });
+      // console.log(
+      //   name,
+      //   brandImage,
+      //   image,
+      //   brand,
+      //   price,
+      //   category,
+      //   description,
+      //   countInStock
+      // );
+      const { data } = await axios.post(
+        "http://localhost:5000/api/products",
+        {
+          name,
+          brandImage,
+          image,
+          price,
+          brand,
+          category,
+          description,
+          countInStock,
+        },
+        config
+      );
+
+      dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
         type: PRODUCT_CREATE_FAIL,

@@ -66,14 +66,23 @@ const SignIn = ({ history }) => {
   };
   return (
     <>
-      {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader></Loader>}
       <div className='text-center pt-4 mt-4'>
         <Link to='/'>
           <img src='/images/FR Store.png' alt='' />
         </Link>
       </div>
+      <div className='signin_error_container'>
+        {loading && <Loader></Loader>}
+        <div className='signin_error_msg'>
+          {error && (
+            <Message className='signin_error_msg' variant='danger'>
+              {error}
+            </Message>
+          )}
+        </div>
+      </div>
       <div className='SignIn-container pt-5'>
+        {loading && <Loader></Loader>}
         <form onSubmit={submitHandler} className='SignIn-form'>
           <div className='SignIn-heading'>Sign in</div>
           <button className='SignIn-sign-in-fb-button'>
@@ -106,6 +115,7 @@ const SignIn = ({ history }) => {
             className='SignIn-email_sign'
             type='text'
             placeholder='Email/Username'
+            required
           />
 
           <input
@@ -113,7 +123,9 @@ const SignIn = ({ history }) => {
             className='SignIn-password_sign'
             type='password'
             placeholder='Password'
+            required
           />
+
           <div className='SignIn-button-continue-container'>
             <button type='submit' className='SignIn-button-continue'>
               Continue

@@ -39,17 +39,13 @@ const Header = () => {
               <Link to='#'>
                 <PersonOutline class={styles.header_icons} />
               </Link>
-              <Link to='#'>Account</Link>
+              <Link to='/profile'>Account</Link>
             </div>
             <div className={styles.header_icon_content}>
               <Link to='#'>
-
-              <ShoppingCartOutlined class={styles.header_icons} />
+                <ShoppingCartOutlined class={styles.header_icons} />
               </Link>
-              <Link to='#'>
-              Cart
-
-              </Link>
+              <Link to='#'>Cart</Link>
             </div>
           </div>
         </div>
