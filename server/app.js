@@ -28,6 +28,7 @@ app.use("/api/upload", uploadRoutes);
 
 app.use("/api/contact-us", contactRoutes);
 
+
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 

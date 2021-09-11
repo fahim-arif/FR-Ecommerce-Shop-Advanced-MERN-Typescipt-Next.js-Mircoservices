@@ -54,6 +54,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(image);
     //Update Product
     dispatch(
       updateProduct({
@@ -84,6 +85,7 @@ const ProductEditScreen = ({ match, history }) => {
 
       const { data } = await axios.post("/api/upload", formData, config);
       setImage(data);
+      console.log(data);
       setUploading(false);
     } catch (error) {
       console.error(error);

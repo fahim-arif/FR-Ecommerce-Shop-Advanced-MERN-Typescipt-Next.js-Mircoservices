@@ -3,6 +3,8 @@ import {
   postProduct,
   getProducts,
   getProduct,
+  deleteProduct,
+  editProduct,
 } from "../controllers/productControllers.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -12,6 +14,6 @@ router.get("/", getProducts);
 
 router.post("/", protect, postProduct);
 
-router.get("/:id", getProduct);
+router.route("/:id").delete(deleteProduct).put(editProduct).get(getProduct);
 
 export default router;

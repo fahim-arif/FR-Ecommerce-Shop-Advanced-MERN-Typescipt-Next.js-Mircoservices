@@ -6,27 +6,27 @@ const CreateUser = () => {
       <h1 className='admin_userCreate_title'>Create User</h1>
       <form className='admin_create_user_form'>
         <div className='admin_create_user_item'>
-          <label>Username</label>
+          <label className="create_user_label">Username</label>
           <input type='text' />
         </div>
         <div className='admin_create_user_item'>
-          <label>First name</label>
+          <label className="create_user_label">First name</label>
           <input type='text' />
         </div>
         <div className='admin_create_user_item'>
-          <label>Last name</label>
+          <label className="create_user_label">Last name</label>
           <input type='text' />
         </div>
         <div className='admin_create_user_item'>
-          <label>Email</label>
+          <label className="create_user_label">Email</label>
           <input type='email' />
         </div>
         <div className='admin_create_user_item'>
-          <label>Phone Number</label>
+          <label className="create_user_label">Phone Number</label>
           <input type='number' />
         </div>
         <div className='admin_create_user_item'>
-          <label>Password</label>
+          <label className="create_user_label">Password</label>
           <input type='password' />
         </div>
         <div className='admin_create_user_item'>

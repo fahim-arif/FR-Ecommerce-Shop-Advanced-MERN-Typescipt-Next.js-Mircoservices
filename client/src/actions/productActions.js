@@ -15,6 +15,9 @@ import {
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCESS,
+  PRODUCT_EDIT_FAIL,
+  PRODUCT_EDIT_REQUEST,
+  PRODUCT_EDIT_SUCCESS,
 } from "../types/productTypes.js";
 import axios from "axios";
 
@@ -22,7 +25,7 @@ export const getProducts = () => async (dispatch) => {
   try {
     dispatch({ type: GET_PRODUCTS_REQUEST });
     // http://localhost:5000/api/user/
-    const { data } = await axios.get("http://localhost:5000/products");
+    const { data } = await axios.get("http://localhost:5000/api/products");
 
     dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
@@ -40,7 +43,9 @@ export const getProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_PRODUCT_REQUEST });
 
-    const { data } = await axios.get(`http://localhost:5000/products/${id}`);
+    const { data } = await axios.get(
+      `http://localhost:5000/api/products/${id}`
+    );
 
     dispatch({ type: GET_PRODUCT_SUCCESS, payload: data });
   } catch (error) {
@@ -128,7 +133,8 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    await axios.delete(`/api/products/${id}`, config);
+    console.log(id);
+    await axios.delete(`http://localhost:5000/api/products/${id}`, config);
 
     dispatch({ type: PRODUCT_DELETE_SUCESS });
   } catch (error) {
@@ -163,3 +169,37 @@ export const listProduct =
       });
     }
   };
+
+export const editProduct = (product) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: PRODUCT_EDIT_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const token = userInfo.token;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = axios.put(
+      `http://localhost:5000/api/products/${product._id}`,
+      product,
+      config
+    );
+    console.log(data);
+
+    dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_EDIT_FAIL,
+      error:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

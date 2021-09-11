@@ -261,10 +261,23 @@
   position: relative;
 }
 
-.signin_error_msg {
+.signup_error_msg {
   position: absolute;
-  top: 40px;
+  top: 74px;
   left: 50%;
   transform: translateX(-50%);
   width: 400px;
+  text-align: center;
+  font-weight: 600;
+  font-family: "Open Sans";
+}
+.signin_msg_error {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  text-align: center;
+  font-weight: 600;
+  font-family: "Open Sans";
 }

@@ -73,16 +73,16 @@ const SignIn = ({ history }) => {
       </div>
       <div className='signin_error_container'>
         {loading && <Loader></Loader>}
-        <div className='signin_error_msg'>
+        <div className='signin_msg_error'>
           {error && (
-            <Message className='signin_error_msg' variant='danger'>
+            <Message className='signin_msg_error' variant='danger'>
               {error}
             </Message>
           )}
         </div>
       </div>
       <div className='SignIn-container pt-5'>
-        {loading && <Loader></Loader>}
+        {/* {loading && <Loader></Loader>} */}
         <form onSubmit={submitHandler} className='SignIn-form'>
           <div className='SignIn-heading'>Sign in</div>
           <button className='SignIn-sign-in-fb-button'>
@@ -113,7 +113,7 @@ const SignIn = ({ history }) => {
           <input
             ref={inputEmailRef}
             className='SignIn-email_sign'
-            type='text'
+            type='email'
             placeholder='Email/Username'
             required
           />

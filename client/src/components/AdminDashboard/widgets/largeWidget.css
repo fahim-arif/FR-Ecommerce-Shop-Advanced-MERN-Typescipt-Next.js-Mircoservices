@@ -7,8 +7,9 @@
   border-spacing: 20px !important;
 }
 .largeWidget_title {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 28px;
+  font-family: "Open Sans Condensed";
+  /* font-weight: 600; */
 }
 .largeWidget_table_row {
   margin: 10px 0 !important;

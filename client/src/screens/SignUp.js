@@ -5,6 +5,7 @@ import GoogleLogin from "react-google-login";
 import { registerUser } from "../actions/userAction";
 import Message from "../components/Message";
 import Loader from "../components/Loading";
+import { login } from "../actions/userAction";
 
 import "../components/styles/Signin.css";
 
@@ -23,14 +24,18 @@ const SignUp = ({ history, location }) => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, user } = userRegister;
 
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     if (user) {
-      history.push("/");
+      dispatch(login(email, password))
+        .then(() => {
+          history.push("/");
+        })
+        .catch((error) => console.error(error));
     }
-  }, [history, user]);
+  }, [history, user, userInfo, dispatch]);
 
   const nextStepHandler = (e) => {
     e.preventDefault();
@@ -85,9 +90,9 @@ const SignUp = ({ history, location }) => {
     <>
       <div className='signin_error_container'>
         {loading && <Loader></Loader>}
-        <div className='signin_error_msg'>
+        <div className='signup_error_msg'>
           {error && (
-            <Message className='signin_error_msg' variant='danger'>
+            <Message className='signup_error_msg' variant='danger'>
               {error}
             </Message>
           )}

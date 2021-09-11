@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../Loading";
 import { createProduct } from "../../../../actions/productActions";
@@ -47,7 +47,13 @@ const CreateProduct = () => {
         formData,
         config
       );
-      setImage(data);
+      let d = data;
+      // client\uploads\image-1631300593073.png
+      d = d.replace(/\\/g, "/");
+      d = d.substring(13);
+      const imgStr = d;
+      setImage(imgStr);
+      d = "";
       setUploading(false);
     } catch (error) {
       console.error(error);
@@ -57,18 +63,18 @@ const CreateProduct = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(
-    //   createProduct(
-    //     name,
-    //     brandImage,
-    //     image,
-    //     brand,
-    //     price,
-    //     category,
-    //     description,
-    //     countInStock
-    //   )
-    // );
+    dispatch(
+      createProduct(
+        name,
+        brandImage,
+        image,
+        brand,
+        price,
+        category,
+        description,
+        countInStock
+      )
+    );
     setName("");
     setBrand("");
     setCategory("");
@@ -83,6 +89,7 @@ const CreateProduct = () => {
       <div className='admin_product_create'>
         {loading && <Loading></Loading>}
         {error && <Message variant='danger'>{error}</Message>}
+        {success && <Message>{"A Product was added Successfully"}</Message>}
         <div className='admin_product_create_title text-center mb-5 mt-3'>
           Create Product
         </div>

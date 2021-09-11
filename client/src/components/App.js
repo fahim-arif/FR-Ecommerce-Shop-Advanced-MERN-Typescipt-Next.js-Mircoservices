@@ -22,7 +22,7 @@ import UserList from "../components/AdminDashboard/pages/users/UserList.jsx";
 import Sidebar from "../components/AdminDashboard/Sidebar.jsx";
 import Topbar from "../components/AdminDashboard/Topbar.jsx";
 import "../components/styles/AdminScreen.css";
-import ProductDetails from "../components/AdminDashboard/pages/products/ProductDetails.jsx";
+import ProductDetails from "./AdminDashboard/pages/products/AdminProductEdit.jsx";
 import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
 import ProfileScreen from "../screens/ProfileScreen";
 import ContactUsScreen from "../screens/ContactUsScreen";
@@ -56,7 +56,11 @@ function App() {
               <Route component={SignIn} path='/sign-in' exact></Route>
             </SecondaryFooter>
           </Switch>
-          <Route component={SignUp} path='/sign-up' exact></Route>
+          <Switch>
+            <SecondaryFooter path='/sign-up' exact>
+              <Route component={SignUp} path='/sign-up' exact></Route>
+            </SecondaryFooter>
+          </Switch>
           <Switch>
             <MainHeader path='/shop' exact>
               <Footer path='/shop' exact>

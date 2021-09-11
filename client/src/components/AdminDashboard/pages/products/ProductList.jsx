@@ -1,32 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "./productLists.css";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { serviceRows } from "../../DummyData";
-const ServiceList = () => {
-  const [data, setData] = useState(serviceRows);
+import { getProducts, deleteProduct } from "../../../../actions/productActions";
+import Product from "../../../../components/Product_depricated";
+import { Col, Row, Container, Image } from "react-bootstrap";
+import Loading from "../../../Loading";
+import Message from "../../../Message";
+
+import AdminProductEdit from "./AdminProductEdit";
+
+const AdminProductList = ({ history }) => {
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const { error, loading, products } = productList;
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const { loading: loadingDelete, error: errorDelete, success } = productDelete;
+
+  const productCreate = useSelector((state) => state.productCreate);
+  const { success: successCreate } = productCreate;
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch, success, successCreate]);
 
   const deleteHandler = (id) => {
-    setData(data.filter((d) => d.id !== id));
+    if (window.confirm("Are You sure")) {
+      //Delete Products
+      dispatch(deleteProduct(id));
+    }
   };
+
+  // const handleEdit = (id) => {
+  //   console.log(id);
+  //   // history.push("/");
+  //   history.push(`/admin/product-list/${id}`);
+  // };
 
   const columns = [
     {
       field: "id",
       headerName: "ID",
-      width: 70,
+      width: 120,
     },
     {
       field: "name",
       headerName: "Name",
-      width: 200,
+      width: 300,
       renderCell: (params) => {
         return (
           <div className='admin_service_list'>
             <img
               className='admin_service_list_img'
-              src={params.row.avatar}
+              src={params.row.image}
               alt=''
             />
             {params.row.name}
@@ -35,14 +65,29 @@ const ServiceList = () => {
       },
     },
     {
-      field: "registeredUser",
-      headerName: "Registed Users",
+      field: "brand",
+      headerName: "Brand",
       width: 200,
     },
     {
-      field: "status",
-      headerName: "Status",
+      field: "price",
+      headerName: "Price",
       width: 130,
+    },
+    {
+      field: "rating",
+      headerName: "rating",
+      width: 120,
+    },
+    {
+      field: "createdAt",
+      headerName: "Created At",
+      width: 160,
+    },
+    {
+      field: "user",
+      headerName: "Created By",
+      width: 160,
     },
     {
       field: "action",
@@ -51,9 +96,17 @@ const ServiceList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/service-list/${params.row.id}`}>
-              <div className='admin_service_list_edit btn'>Details</div>
+            <Link to={`/admin/product-list/${params.row.id}`}>
+              <div className='admin_service_list_edit btn'>Edit</div>
             </Link>
+            {/* <div>
+              <AdminProductEdit
+                id={params.row.id}
+                className='admin_service_list_edit btn'
+              >
+                Edit
+              </AdminProductEdit>
+            </div> */}
 
             <DeleteOutline
               className='admin_service_list_delete'
@@ -67,14 +120,19 @@ const ServiceList = () => {
   return (
     <div className='admin_services'>
       <Link to='/admin/create-product'>
-        <button className='admin_userDetails_btn'>Create</button>
+        <button className='create_new_product_btn my-3 mb-5'>
+          Create New Product
+        </button>
       </Link>
-      <div style={{ height: 400, width: "100%" }}>
+      {loadingDelete && <Loading></Loading>}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {success && <Message>{"Product Was Deleted Successfully"}</Message>}
+      <div style={{ height: 780, width: "100%", fontFamily: "Open Sans" }}>
         <DataGrid
-          rows={data}
+          rows={products}
           disableSelectionOnClick
           columns={columns}
-          pageSize={6}
+          pageSize={12}
           checkboxSelection
         />
       </div>
@@ -82,4 +140,4 @@ const ServiceList = () => {
   );
 };
 
-export default ServiceList;
+export default AdminProductList;

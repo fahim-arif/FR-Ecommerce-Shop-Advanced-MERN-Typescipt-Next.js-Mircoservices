@@ -13,8 +13,9 @@
   -moz-box-shadow: var(--box-shadow);
 }
 .admin_featuredTitle {
-  font-size: 20px;
-  font-weight: 500;
+  font-family: "Open Sans Condensed";
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .admin_featured_money_container {
@@ -24,7 +25,8 @@
 }
 .admin_featuredMoney {
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: "Open Sans";
 }
 .admin_featuredMoneyRate {
   margin-left: 20px;

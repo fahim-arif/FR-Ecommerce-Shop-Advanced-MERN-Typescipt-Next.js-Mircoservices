@@ -70,6 +70,29 @@ const productSchema = new mongoose.Schema(
   }
 );
 
+// Duplicate the ID field.
+productSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+productSchema.set("toJSON", {
+  virtuals: true,
+});
+productSchema.method("toClient", function () {
+  var obj = this.toObject();
+
+  //Rename fields
+  obj.id = obj._id;
+  delete obj._id;
+
+  return obj;
+});
+
+// productSchema.virtual("id").get(function () {
+//   return this._id;
+// });
+
 const Product = mongoose.model("Product", productSchema);
 
 export default Product;
