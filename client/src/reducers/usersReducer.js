@@ -15,6 +15,9 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  USER_EDIT_REQUEST,
+  USER_EDIT_SUCCESS,
+  USER_EDIT_FAIL,
 } from "../types/userTypes";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -86,11 +89,11 @@ export const userDeleteReducer = (state = {}, action) => {
 
 export const userEditReducer = (state = { user: [] }, action) => {
   switch (action.type) {
-    case USER_DELETE_REQUEST:
+    case USER_EDIT_REQUEST:
       return { loading: true, ...state };
-    case USER_DELETE_SUCCESS:
+    case USER_EDIT_SUCCESS:
       return { loading: false, success: true, user: action.payload };
-    case USER_DELETE_FAIL:
+    case USER_EDIT_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

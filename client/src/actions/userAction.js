@@ -179,6 +179,7 @@ export const editUser = (user) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
+
     const token = userInfo.token;
     const config = {
       headers: {
@@ -186,6 +187,7 @@ export const editUser = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${token}`,
       },
     };
+
     const { data } = await axios.put(
       `http://localhost:5000/api/user/admin/${user._id}`,
       user,

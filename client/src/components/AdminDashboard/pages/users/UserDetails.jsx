@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, editUser } from "../../../../actions/userAction";
 import axios from "axios";
 
+import Message from "../../../Message";
+import Loading from "../../../Loading";
 import { Publish } from "@material-ui/icons";
 import "./userDetails.css";
 const UserDetails = () => {
@@ -11,6 +13,14 @@ const UserDetails = () => {
 
   const userFetch = useSelector((state) => state.userFetch);
   const { loading, error, user } = userFetch;
+
+  const userEdit = useSelector((state) => state.userEdit);
+  const {
+    loading: loadingEdit,
+    error: errorEdit,
+    success,
+    user: editedUser,
+  } = userEdit;
 
   const dispatch = useDispatch();
 
@@ -85,6 +95,19 @@ const UserDetails = () => {
 
   return (
     <div className='admin_userDetails'>
+      {loading && <Loading></Loading>}
+      {loadingEdit && <Loading></Loading>}
+      <div className='admin_product_update_success_msg'>
+        {error && <Message variant='danger'>{error}</Message>}
+      </div>
+      <div className='admin_product_update_success_msg'>
+        {editedUser && editedUser.length > 0 && (
+          <Message variant='danger'>{error}</Message>
+        )}
+      </div>
+      <div className='admin_product_update_success_msg'>
+        {success && <Message>{"User Was Edited Successfully"}</Message>}
+      </div>
       <div className='admin_userDetails_title_container'>
         <h1 className='admin_userDetails_title'>Edit User</h1>
       </div>
@@ -179,7 +202,7 @@ const UserDetails = () => {
                 <input
                   type='text'
                   onChange={(e) => setAddress(e.target.value)}
-                  value=''
+                  value={address}
                   className='admin_user_update_input'
                 />
               </div>
@@ -197,7 +220,7 @@ const UserDetails = () => {
                 <input
                   type='password'
                   onChange={(e) => setPassword(e.target.value)}
-                  value=''
+                  value={password}
                   className='admin_user_update_input'
                 />
               </div>
