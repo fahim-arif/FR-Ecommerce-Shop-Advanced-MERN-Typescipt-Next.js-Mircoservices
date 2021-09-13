@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 
 const getProducts = async (req, res, next) => {
   const response = await Product.find();
+
   res.json(response);
 };
 

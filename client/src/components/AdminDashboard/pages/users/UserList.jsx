@@ -47,6 +47,7 @@ const UserList = () => {
     {
       field: "name",
       headerName: "User Name",
+
       width: 200,
       renderCell: (params) => {
         return (

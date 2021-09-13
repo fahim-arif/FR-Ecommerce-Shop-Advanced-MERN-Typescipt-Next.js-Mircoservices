@@ -36,3 +36,4 @@ const admin = asyncHandler(async (req, res, next) => {
   }
 });
 export { protect, admin };
+

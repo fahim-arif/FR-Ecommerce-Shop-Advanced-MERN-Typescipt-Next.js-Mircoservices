@@ -40,6 +40,7 @@
   height: 630px;
   margin-left: 20px;
   margin-right: 20px;
+
   box-shadow: var(--box-shadow);
   -webkit-box-shadow: var(--box-shadow);
 }
@@ -58,6 +59,7 @@
   font-size: 15px;
   font-weight: 600;
 }
+
 .user_show_top_title {
   display: flex;
   flex-direction: column;
@@ -116,6 +118,7 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
+
   object-fit: cover;
   margin-right: 20px;
 }

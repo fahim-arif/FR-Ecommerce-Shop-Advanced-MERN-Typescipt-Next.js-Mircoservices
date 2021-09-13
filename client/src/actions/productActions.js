@@ -177,7 +177,7 @@ export const editProduct = (product) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-    
+
     const token = userInfo.token;
     const config = {
       headers: {

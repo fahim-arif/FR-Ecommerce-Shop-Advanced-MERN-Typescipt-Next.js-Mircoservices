@@ -19,4 +19,5 @@ router.get("/:id", getProduct);
 router.delete("/:id", protect, admin, deleteProduct);
 
 router.put("/:id", protect, admin, editProduct);
+
 export default router;

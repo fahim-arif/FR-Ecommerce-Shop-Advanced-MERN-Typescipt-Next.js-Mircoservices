@@ -256,6 +256,7 @@ const AdminProductEdit = () => {
                 <label htmlFor='file'>
                   <Publish className='upload_icon_edit_screen' />
                 </label>
+
                 <input
                   type='file'
                   onChange={uploadFileHandler}

@@ -95,6 +95,7 @@ export const userEditReducer = (state = { user: [] }, action) => {
       return { loading: false, success: true, user: action.payload };
     case USER_EDIT_FAIL:
       return { loading: false, error: action.payload };
+
     default:
       return state;
   }

@@ -96,8 +96,14 @@ const ProductList = ({ product }) => {
           <span className={styles.view_btn}>
             <Link to='#'>VIEW DETAILS {">"}</Link>
           </span>
+<<<<<<< HEAD
         </div> */}
       {/* <div className={styles.row}>
+=======
+        </div>
+      </div>
+      <div className={styles.row}>
+>>>>>>> 1eacdda188d85fd152442a0e00bb65e17d3ba5eb
         <div className={styles.col}>
           <div className={styles.img_container}>
             <Link to='#'>
@@ -390,6 +396,7 @@ const ProductList = ({ product }) => {
             <Link to='#'>VIEW DETAILS {">"}</Link>
           </span>
         </div>
+
       </div> */}
     </div>
   );

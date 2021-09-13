@@ -20,6 +20,7 @@ import {
   USER_EDIT_REQUEST,
   USER_EDIT_SUCCESS,
   USER_EDIT_FAIL,
+  b,
 } from "../types/userTypes";
 
 export const registerUser = (name, email, password) => async (dispatch) => {

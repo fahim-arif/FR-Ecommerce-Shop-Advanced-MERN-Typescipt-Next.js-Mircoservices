@@ -162,19 +162,39 @@ const UserDetails = () => {
                 <span className='admin_bold'>Admin: </span>{" "}
                 {isAdmin ? "YES" : "NO"}
               </span>
+              =======
+              <span className='user_show_info_title'>fahim17</span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>Fahim Arif</span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>10.02.1998</span>
+            </div>
+            <span className='user_show_title'>Contact Details</span>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>01638418833</span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>
+                u1704040@student.cuet.ac.bd
+              </span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>C-office Bogra</span>
             </div>
           </div>
         </div>
         <div className='admin_userDetails_user_update'>
           <div className='admin_user_update_title'>Edit</div>
-          <form onSubmit={handleSubmit} className='admin_user_update_form'>
+
+          <form action='' className='admin_user_update_form'>
             <div className='user_update_left'>
               <div className='user_update_item'>
-                <label className='admin_bold'>Username</label>
+                <label>Username</label>
                 <input
                   type='text'
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  placeholder='fahim17'
                   className='admin_user_update_input'
                 />
               </div>
@@ -185,6 +205,7 @@ const UserDetails = () => {
                   type='text'
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  b
                   className='admin_user_update_input'
                 />
               </div>
@@ -221,6 +242,7 @@ const UserDetails = () => {
                   type='password'
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
+                  b
                   className='admin_user_update_input'
                 />
               </div>
@@ -270,7 +292,7 @@ const UserDetails = () => {
                   style={{ display: "none" }}
                 />
               </div>
-              <button className='admin_edit_update_btn'>Update</button>
+              <button className='admin_edit_update_btn'>Update</button>b
             </div>
           </form>
         </div>
