@@ -16,6 +16,7 @@
 .product_image {
   height: 369px;
   width: 453px;
+  object-fit: contain;
 }
 .product_slider_container {
   border-top: 1px solid var(--clr-light-border);

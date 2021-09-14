@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import styles from "../components/styles/productScreen.module.css";
 import ProductList from "../components/ProductList";
+import { getProducts } from "../actions/productActions";
+import { Row, Col } from "react-bootstrap";
+
 const ProductScreen = () => {
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
   return (
     <div className={styles.product_container}>
       <div className={styles.side_bar}>
@@ -192,7 +204,13 @@ const ProductScreen = () => {
           </div>
         </div>
         <div className={styles.product_list}>
-          <ProductList></ProductList>
+          <Row>
+            {products.map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                <ProductList product={product}></ProductList>
+              </Col>
+            ))}
+          </Row>
         </div>
       </div>
     </div>

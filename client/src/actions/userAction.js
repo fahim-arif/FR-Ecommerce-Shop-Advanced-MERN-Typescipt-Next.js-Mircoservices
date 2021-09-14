@@ -20,6 +20,7 @@ import {
   USER_EDIT_REQUEST,
   USER_EDIT_SUCCESS,
   USER_EDIT_FAIL,
+  b,
 } from "../types/userTypes";
 
 export const registerUser = (name, email, password) => async (dispatch) => {
@@ -179,6 +180,7 @@ export const editUser = (user) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
+
     const token = userInfo.token;
     const config = {
       headers: {
@@ -186,6 +188,7 @@ export const editUser = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${token}`,
       },
     };
+
     const { data } = await axios.put(
       `http://localhost:5000/api/user/admin/${user._id}`,
       user,

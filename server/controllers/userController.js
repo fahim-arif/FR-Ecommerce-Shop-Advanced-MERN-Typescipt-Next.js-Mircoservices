@@ -18,6 +18,7 @@ export const authUser = asyncHandler(async (req, res, next) => {
       email: user.email,
       googleAuth: user.googleAuth,
       isAdmin: user.isAdmin,
+
       token: generateToken(user._id),
     });
   } else if (user && (await user.matchPassword(password))) {

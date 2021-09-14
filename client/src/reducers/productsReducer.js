@@ -65,6 +65,7 @@ export const productEditReducer = (state = { product: [] }, action) => {
   switch (action.type) {
     case PRODUCT_EDIT_REQUEST:
       return { loading: true, ...state };
+
     case PRODUCT_EDIT_SUCCESS:
       return { loading: false, success: true, product: action.payload };
     case PRODUCT_EDIT_FAIL:

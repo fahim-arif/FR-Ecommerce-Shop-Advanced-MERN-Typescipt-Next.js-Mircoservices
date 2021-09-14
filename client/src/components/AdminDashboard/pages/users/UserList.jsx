@@ -47,19 +47,19 @@ const UserList = () => {
     {
       field: "name",
       headerName: "User Name",
+
       width: 200,
-      // renderCell: (params) => {
-      //   return (
-      //     <div className='admin_user_list_user'>
-      //       <img
-      //         className='admin_user_list_img'
-      //         src={params.row.avatar}
-      //         alt=''
-      //       />
-      //       {params.row.username}
-      //     </div>
-      //   );
-      // },
+      renderCell: (params) => {
+        return (
+          <div className='admin_user_list_user'>
+            <img
+              className='admin_user_list_img'
+              src={params.row.image}
+              alt=''
+            />
+          </div>
+        );
+      },
     },
     {
       field: "email",

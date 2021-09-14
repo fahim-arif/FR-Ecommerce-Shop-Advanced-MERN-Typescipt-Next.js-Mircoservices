@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, editUser } from "../../../../actions/userAction";
 import axios from "axios";
 
+import Message from "../../../Message";
+import Loading from "../../../Loading";
 import { Publish } from "@material-ui/icons";
 import "./userDetails.css";
 const UserDetails = () => {
@@ -11,6 +13,14 @@ const UserDetails = () => {
 
   const userFetch = useSelector((state) => state.userFetch);
   const { loading, error, user } = userFetch;
+
+  const userEdit = useSelector((state) => state.userEdit);
+  const {
+    loading: loadingEdit,
+    error: errorEdit,
+    success,
+    user: editedUser,
+  } = userEdit;
 
   const dispatch = useDispatch();
 
@@ -85,6 +95,19 @@ const UserDetails = () => {
 
   return (
     <div className='admin_userDetails'>
+      {loading && <Loading></Loading>}
+      {loadingEdit && <Loading></Loading>}
+      <div className='admin_product_update_success_msg'>
+        {error && <Message variant='danger'>{error}</Message>}
+      </div>
+      <div className='admin_product_update_success_msg'>
+        {editedUser && editedUser.length > 0 && (
+          <Message variant='danger'>{error}</Message>
+        )}
+      </div>
+      <div className='admin_product_update_success_msg'>
+        {success && <Message>{"User Was Edited Successfully"}</Message>}
+      </div>
       <div className='admin_userDetails_title_container'>
         <h1 className='admin_userDetails_title'>Edit User</h1>
       </div>
@@ -139,19 +162,39 @@ const UserDetails = () => {
                 <span className='admin_bold'>Admin: </span>{" "}
                 {isAdmin ? "YES" : "NO"}
               </span>
+              =======
+              <span className='user_show_info_title'>fahim17</span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>Fahim Arif</span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>10.02.1998</span>
+            </div>
+            <span className='user_show_title'>Contact Details</span>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>01638418833</span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>
+                u1704040@student.cuet.ac.bd
+              </span>
+            </div>
+            <div className='user_show_info'>
+              <span className='user_show_info_title'>C-office Bogra</span>
             </div>
           </div>
         </div>
         <div className='admin_userDetails_user_update'>
           <div className='admin_user_update_title'>Edit</div>
-          <form onSubmit={handleSubmit} className='admin_user_update_form'>
+
+          <form action='' className='admin_user_update_form'>
             <div className='user_update_left'>
               <div className='user_update_item'>
-                <label className='admin_bold'>Username</label>
+                <label>Username</label>
                 <input
                   type='text'
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  placeholder='fahim17'
                   className='admin_user_update_input'
                 />
               </div>
@@ -162,6 +205,7 @@ const UserDetails = () => {
                   type='text'
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  b
                   className='admin_user_update_input'
                 />
               </div>
@@ -179,7 +223,7 @@ const UserDetails = () => {
                 <input
                   type='text'
                   onChange={(e) => setAddress(e.target.value)}
-                  value=''
+                  value={address}
                   className='admin_user_update_input'
                 />
               </div>
@@ -197,7 +241,8 @@ const UserDetails = () => {
                 <input
                   type='password'
                   onChange={(e) => setPassword(e.target.value)}
-                  value=''
+                  value={password}
+                  b
                   className='admin_user_update_input'
                 />
               </div>
@@ -247,7 +292,7 @@ const UserDetails = () => {
                   style={{ display: "none" }}
                 />
               </div>
-              <button className='admin_edit_update_btn'>Update</button>
+              <button className='admin_edit_update_btn'>Update</button>b
             </div>
           </form>
         </div>

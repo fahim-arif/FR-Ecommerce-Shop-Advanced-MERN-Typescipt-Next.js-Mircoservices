@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "../styles/productCart.module.css";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Link } from "react-router-dom";
-const ProductCart = ({ product }) => {
-  const [numStock, setNumStock] = useState(0);
-  if (numStock < 0) {
-    setNumStock(0);
-  }
-  if (numStock > product.countInStock) {
-    setNumStock((prev) => prev - 1);
-  }
-  const cartValueHandler = (e) => {};
+const ProductCart = () => {
   return (
     <div className={styles.cart_container}>
       <div className={styles.cart_box}>
@@ -29,7 +21,7 @@ const ProductCart = ({ product }) => {
         <div className={styles.middle}>
           <div className={styles.total}>
             <span className={styles.money_sign}>৳</span>
-            {product.price}
+            489.00
           </div>
           <div className={styles.shipping_cost}>
             <span className={styles.money_sign_2}>৳</span>
@@ -37,25 +29,10 @@ const ProductCart = ({ product }) => {
           </div>
           <div className={styles.add_to_cart}>
             <div className={styles.item_container}>
-              <input
-                // type='number'
-                // onChange={cartValueHandler}
-                value={numStock}
-                className={styles.input}
-              />
+              <input type='text' className={styles.input} />
               <div className={styles.button_container}>
-                <button
-                  onClick={() => setNumStock((count) => count + 1)}
-                  className={styles.plus_btn}
-                >
-                  +
-                </button>
-                <button
-                  onClick={() => setNumStock((count) => count - 1)}
-                  className={styles.minus_btn}
-                >
-                  -
-                </button>
+                <button className={styles.plus_btn}>+</button>
+                <button className={styles.minus_btn}>-</button>
               </div>
             </div>
             <button className={styles.cart_btn}>ADD TO CART</button>
@@ -73,11 +50,7 @@ const ProductCart = ({ product }) => {
       <div className={styles.news_letter_box}>
         <div className={styles.title}>SUSCRIBE TO OUR NEWSLETTER</div>
         <div className={styles.row}>
-          <input
-            type='text'
-            placeholder='Enter Your Email'
-            className={styles.email_input}
-          />
+          <input type='text' placeholder='Enter Your Email' className={styles.email_input} />
           <div className={styles.subscribe_btn}>SUBSCRIBE</div>
         </div>
       </div>
