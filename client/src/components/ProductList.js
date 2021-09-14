@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../components/styles/productList.module.css";
 import { Link } from "react-router-dom";
 const ProductList = ({ product }) => {
-  console.log(product);
   return (
     <div className={styles.products_container}>
       <div className={styles.row}>

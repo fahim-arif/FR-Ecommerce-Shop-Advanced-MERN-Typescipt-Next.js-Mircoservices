@@ -1,18 +1,26 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+// COMMON
 import Footer from "../components/common/Footer";
 import HomeScreen from "../screens/HomeScreen";
+import ContactUsScreen from "../screens/ContactUsScreen";
+import SecondaryFooter from "./common/SecondaryFooter"; //Secondary Footer in Sign and Signup screen so that signin and signup have short listed footer
 // import ProductScreen from "../screens/ProductScreenDepricated";
 
+//Product Related Screens
 import ProductScreen from "../screens/ProductScreen";
 import CartScreen from "../screens/CartScreen";
 import ProductListScreen from "../screens/ProductListScreen";
+import MainHeader from "./MainHeader";
+import ProductDetailScreen from "../screens/ProductDetailScreen";
+import ProductDetailSampleScreen from "../screens/ProductDetailSampleScreen";
+
+// USER PROFILE SCREEN
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
-import ProductDetailScreen from "../screens/ProductDetailScreen";
-import MainHeader from "./MainHeader";
-import SecondaryFooter from "./common/SecondaryFooter";
+import ProfileScreen from "../screens/ProfileScreen";
+
 // Admin Screens
 import AdminHomePage from "../components/AdminDashboard/pages/HomePage.jsx";
 import CreateUser from "../components/AdminDashboard/pages/users/CreateUser.jsx";
@@ -24,14 +32,11 @@ import Topbar from "../components/AdminDashboard/Topbar.jsx";
 import "../components/styles/AdminScreen.css";
 import ProductDetails from "./AdminDashboard/pages/products/AdminProductEdit.jsx";
 import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
-import ProfileScreen from "../screens/ProfileScreen";
-import ContactUsScreen from "../screens/ContactUsScreen";
 
 function App() {
   return (
     <>
       <Router>
-        {/* <Header /> */}
         <main>
           <Switch>
             <MainHeader exact path='/'>
@@ -43,7 +48,7 @@ function App() {
           <Switch>
             <MainHeader exact path='/product'>
               <Route
-                component={ProductDetailScreen}
+                component={ProductDetailSampleScreen}
                 path='/product'
                 exact
               ></Route>
@@ -68,6 +73,24 @@ function App() {
               </Footer>
             </MainHeader>
           </Switch>
+          <Switch>
+            <MainHeader path='/shop/:id' exact>
+              <Footer path='/shop/:id' exact>
+                <Route
+                  component={ProductDetailScreen}
+                  path='/shop/:id'
+                  exact
+                ></Route>
+              </Footer>
+            </MainHeader>
+          </Switch>
+          {/* <Switch>
+            <MainHeader path='/cart' exact>
+              <Footer path='/cart' exact>
+                <Route component={CartScreen} path='/cart' exact></Route>
+              </Footer>
+            </MainHeader>
+          </Switch> */}
           <Switch>
             <MainHeader path='/profile' exact>
               <Footer path='/profile' exact>
