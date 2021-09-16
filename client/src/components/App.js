@@ -34,6 +34,7 @@ import Topbar from "../components/AdminDashboard/Topbar.jsx";
 import "../components/styles/AdminScreen.css";
 import ProductDetails from "./AdminDashboard/pages/products/AdminProductEdit.jsx";
 import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
+import CheckoutPayment from "../screens/CheckoutPayment";
 
 function App() {
   return (
@@ -93,7 +94,7 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/checkout-login' exact>
-              <div style={{background:'#f4f4f4'}}>
+              <div style={{ background: "#f4f4f4" }}>
                 <Footer path='/checkout-login' exact>
                   <Route
                     component={CheckoutLogin}
@@ -106,13 +107,28 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/checkout-shipping' exact>
-              <Footer path='/checkout-shipping' exact>
-                <Route
-                  component={CheckoutShipping}
-                  path='/checkout-shipping'
-                  exact
-                ></Route>
-              </Footer>
+              <div style={{ background: "#f4f4f4" }}>
+                <Footer path='/checkout-shipping' exact>
+                  <Route
+                    component={CheckoutShipping}
+                    path='/checkout-shipping'
+                    exact
+                  ></Route>
+                </Footer>
+              </div>
+            </MainHeader>
+          </Switch>
+          <Switch>
+            <MainHeader path='/checkout-payment' exact>
+              <div style={{ background: "#f4f4f4" }}>
+                <Footer path='/checkout-payment' exact>
+                  <Route
+                    component={CheckoutPayment}
+                    path='/checkout-payment'
+                    exact
+                  ></Route>
+                </Footer>
+              </div>
             </MainHeader>
           </Switch>
           <Switch>
