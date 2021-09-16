@@ -83,6 +83,9 @@
   padding: 0 50px;
   font: 300;
 }
+.cart_btn:hover {
+  background-color: #c60;
+}
 
 .middle {
   padding-bottom: 20px;

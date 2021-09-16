@@ -5,7 +5,7 @@
   --dark: #00bd9d;
   --light: #8bd7d2;
   --white: #fffbfa;
-  --clr-primary: #5d5fef;
+  --clr-primary: #f39834;
   --clr-dark: #000000;
   --clr-light: #f92c8b;
   --clr-light-border: #dbdbdb;
@@ -15,6 +15,7 @@
   --fw-black: 900;
   --fw-mb-bold: ;
   --font-normal: 1rem;
+  --btn-hover: #cc6600;
   --mb-side-space: 1.25rem;
   --box-shadow: 0 0 15px -10px rgba(0, 0, 0, 0.75);
   --webkit-box-shadow: -0 0 15px -10px rgba(0, 0, 0, 0.75);

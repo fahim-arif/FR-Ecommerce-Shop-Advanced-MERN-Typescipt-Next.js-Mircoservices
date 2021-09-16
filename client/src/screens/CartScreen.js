@@ -1,111 +1,101 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../actions/cartActions";
-
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
-
-const CartScreen = ({ history, location, match }) => {
-  const dispatch = useDispatch();
-
-  const { id } = match.params;
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
-
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
-
-  useEffect(() => {
-    if (id) {
-      dispatch(addToCart(id, qty));
-    }
-  }, [dispatch, id, qty]);
-
-  const removeFromCart = (id) => {
-    dispatch(removeFromCart(id));
-  };
-
-  const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
-  };
+import React from "react";
+import styles from "../components/styles/cartScreen.module.css";
+import { DeleteOutline, Favorite, Add, PlayArrow } from "@material-ui/icons";
+export default function CartScreen() {
   return (
-    <Row>
-      <Col md={8}>
-        <h1>Shopping Cart</h1>
-        <ListGroup variant='flush'></ListGroup>
-        {cartItems.map((item) => (
-          <ListGroup.Item key={item.product}>
-            <Row>
-              <Col md={2}>
-                <Image src={item.image} alt={item.name} fluid rounded></Image>
-              </Col>
-              <Col md={2}>
-                <Link to={`/products/${item.product}`}>{item.name}</Link>
-              </Col>
-              <Col md={2}>${item.price}</Col>
-              <Col md={2}>
-                <Form.Control
-                  as='select'
-                  value={item.qty}
-                  onChange={(e) =>
-                    dispatch(addToCart(item.product, Number(e.target.value)))
-                  }
-                >
-                  {[...Array(item.countInStock).keys()].map((x) => (
-                    <option key={x + 1} value={x + 1}>
-                      {x + 1}
-                    </option>
-                  ))}
-                </Form.Control>
-              </Col>
-              <Col md={2}>
-                <Button
-                  type='button'
-                  variant='light'
-                  onClick={() => removeFromCart(item.product)}
-                >
-                  <i className='fas fa-trash'></i>
-                </Button>
-              </Col>
-            </Row>
-          </ListGroup.Item>
-        ))}
-      </Col>
-      <Col md={4}>
-        <Card>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                Items
-              </h2>
-              $
-              {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Button
-                type='button'
-                className='btn-block'
-                disable={cartItems.length === 0}
-                onClick={checkoutHandler}
-              >
-                Proceed To Chechout
-              </Button>
-            </ListGroup.Item>
-          </ListGroup>
-        </Card>
-      </Col>
-    </Row>
-  );
-};
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.left_container}>
+          <div className={styles.main_title_container}>
+            <div className={styles.total_item_container}>
+              Shipping Cart <span className={styles.light}>(5 Items)</span>
+            </div>
+            <button className={styles.remove_all_btn}>
+              <DeleteOutline className={styles.icon}></DeleteOutline>
+              REMOVE ALL
+            </button>
+          </div>
+          <div className={styles.row}>
+            <div className={styles.col_1}>
+              <div className={styles.image_container}>
+                <img src='/images/3_3629.jpg' alt='' className={styles.img} />
+              </div>
+            </div>
+            <div className={styles.col_2}>
+              <div className={styles.sub_row_1}>
+                <div className={styles.product_name}>
+                  Intel Core i7 10th Gen - Core i7-10700K Comet Lake 8-Core 3.8
+                  GHz LGA 1200 125W Desktop Processor w/ Intel UHD Graphics 630
+                </div>
+                <div className={styles.qty_container}>
+                  <div className={styles.qty_box}>
+                    <form className={styles.qty_form}>
+                      <select className={styles.qty}>
+                        <option value='1'>1</option>
+                      </select>
+                    </form>
+                  </div>
+                  <div className={styles.stock}>Qty: 5</div>
+                </div>
+                <div className={styles.product_price}>৳442.22</div>
+              </div>
+              <div className={styles.sub_row_2}>
+                <button className={styles.wish_list_btn}>
+                  <Favorite className={styles.icon}></Favorite>
+                  MOVE TO WISHLIST
+                </button>
 
-export default CartScreen;
+                <button className={styles.remove_product_btn}>
+                  <DeleteOutline className={styles.icon}></DeleteOutline>
+                  REMOVE
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles.right_container}>
+          <div className={styles.cart_box}>
+            <div className={styles.cart_title}>Summary</div>
+            <div className={styles.cart_item}>
+              <div className={styles.light_text}>Items</div>
+              <div className={styles.items_price}>৳1000</div>
+            </div>
+            <div className={styles.cart_delivery}>
+              <div className={styles.delivery_text}>Delivery Charge</div>
+              <div className={styles.items_price}>৳1000</div>
+            </div>
+            <div className={styles.cart_tax}>
+              <div className={styles.tax_text}>Tax Amount</div>
+              <div className={styles.items_price}>৳100</div>
+            </div>
+            <div
+              onClick={() => console.log("Clicked")}
+              className={styles.promo_section}
+            >
+              <div className={styles.promo_1st_part}>
+                <div className={styles.promo}>APPLY PROMO CODE</div>
+                <div className={styles.promo_plus_btn}>
+                  <Add className={styles.plus_icon}></Add>
+                </div>
+              </div>
+              <div className={`${styles.active_promo} ${styles.hide}`}>
+                <input type='text' className={styles.promo_input} />
+                <button className={styles.promo_apply_btn}>APPLY</button>
+              </div>
+            </div>
+            <div className={styles.total_price_section}>
+              <div className={styles.total_price_text}>Est. Total:</div>
+              <div className={styles.total_price_value}>৳1111</div>
+            </div>
+            <div className={styles.checkout_container}>
+              <button className={styles.secure_payment}>
+                SECURE CHECKOUT
+                <PlayArrow className={styles.arrow_icon}></PlayArrow>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

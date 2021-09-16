@@ -33,7 +33,10 @@ const UserDetails = () => {
   const [image, setImage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [uploading, setUploading] = useState();
-
+  let birthdate = "";
+  if (dateOfBirth) {
+    birthdate = dateOfBirth.split("T")[0];
+  }
   useEffect(() => {
     dispatch(getUser(id));
 
@@ -142,7 +145,15 @@ const UserDetails = () => {
             </div>
             <div className='user_show_info'>
               <span className='user_show_info_title'>
-                <span className='admin_bold'>Date of Birth :{dateOfBirth}</span>
+                <span className='admin_bold'>
+                  Date of Birth :{" "}
+                  <span
+                    className='admin_bold'
+                    style={{ color: "grey", fontSize: "17px" }}
+                  >
+                    {dateOfBirth && dateOfBirth.split("T")[0]} (yy-mm-dd)
+                  </span>
+                </span>
               </span>
             </div>
             <div className='user_show_info'>
@@ -162,39 +173,20 @@ const UserDetails = () => {
                 <span className='admin_bold'>Admin: </span>{" "}
                 {isAdmin ? "YES" : "NO"}
               </span>
-              =======
-              <span className='user_show_info_title'>fahim17</span>
-            </div>
-            <div className='user_show_info'>
-              <span className='user_show_info_title'>Fahim Arif</span>
-            </div>
-            <div className='user_show_info'>
-              <span className='user_show_info_title'>10.02.1998</span>
-            </div>
-            <span className='user_show_title'>Contact Details</span>
-            <div className='user_show_info'>
-              <span className='user_show_info_title'>01638418833</span>
-            </div>
-            <div className='user_show_info'>
-              <span className='user_show_info_title'>
-                u1704040@student.cuet.ac.bd
-              </span>
-            </div>
-            <div className='user_show_info'>
-              <span className='user_show_info_title'>C-office Bogra</span>
             </div>
           </div>
         </div>
         <div className='admin_userDetails_user_update'>
           <div className='admin_user_update_title'>Edit</div>
 
-          <form action='' className='admin_user_update_form'>
+          <form onSubmit={handleSubmit} className='admin_user_update_form'>
             <div className='user_update_left'>
               <div className='user_update_item'>
                 <label>Username</label>
                 <input
                   type='text'
-                  placeholder='fahim17'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className='admin_user_update_input'
                 />
               </div>
@@ -221,7 +213,7 @@ const UserDetails = () => {
               <div className='user_update_item'>
                 <label className='admin_bold'>Address</label>
                 <input
-                  type='text'
+                  type='address'
                   onChange={(e) => setAddress(e.target.value)}
                   value={address}
                   className='admin_user_update_input'
