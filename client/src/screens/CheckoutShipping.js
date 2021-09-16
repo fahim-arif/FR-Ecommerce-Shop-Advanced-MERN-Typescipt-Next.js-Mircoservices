@@ -80,50 +80,55 @@ export default function CheckoutShipping() {
             }`}
           >
             <div className={styles.summary_container}>
-              <div className={styles.summary_title}>Summary</div>
-              <div className={styles.summary_flex}>
-                <div className={styles.item_name}>Items</div>
-                <div className={styles.item_price}>$1,586.98</div>
-              </div>
-              <div className={styles.summary_flex}>
-                <div className={styles.item_name}>Delivery Charge</div>
-                <div className={styles.item_price}>$1,586.98</div>
-              </div>
-              <div className={styles.summary_flex}>
-                <div className={styles.item_name}>Tax Charge</div>
-                <div className={styles.item_price}>$1,586.98</div>
-              </div>
-              <div className={styles.promo_container}>
-                <div className={styles.promo_flex}>
-                  <div onClick={() => setOpen(!open)} className={styles.promo}>
-                    APPLY PROMO CODE
+              <div className={styles.summary_wrapper}>
+                <div className={styles.summary_title}>Summary</div>
+                <div className={styles.summary_flex}>
+                  <div className={styles.item_name}>Items</div>
+                  <div className={styles.item_price}>$1,586.98</div>
+                </div>
+                <div className={styles.summary_flex}>
+                  <div className={styles.item_name}>Delivery Charge</div>
+                  <div className={styles.item_price}>$1,586.98</div>
+                </div>
+                <div className={styles.summary_flex}>
+                  <div className={styles.item_name}>Tax Charge</div>
+                  <div className={styles.item_price}>$1,586.98</div>
+                </div>
+                <div className={styles.promo_container}>
+                  <div className={styles.promo_flex}>
+                    <div
+                      onClick={() => setOpen(!open)}
+                      className={styles.promo}
+                    >
+                      APPLY PROMO CODE
+                    </div>
+                    <div
+                      onClick={() => setOpen(!open)}
+                      className={styles.plus_btn}
+                    >
+                      <Add className={styles.add_icon}></Add>
+                    </div>
                   </div>
-                  <div
-                    onClick={() => setOpen(!open)}
-                    className={styles.plus_btn}
-                  >
-                    <Add className={styles.add_icon}></Add>
+                  <div className={styles.promo_code_container}>
+                    <form
+                      onSubmit={promoSubmit}
+                      className={`${styles.promo_form} ${
+                        open ? styles.show : styles.hide
+                      }`}
+                    >
+                      <input
+                        type='text'
+                        onChange={(e) => setPromo(e.target.value)}
+                        className={styles.promo_input}
+                      />
+                      <button className={styles.promo_apply_btn}>APPLY</button>
+                    </form>
                   </div>
                 </div>
-                <div className={styles.promo_code_container}>
-                  <form
-                    onSubmit={promoSubmit}
-                    className={`${styles.promo_form} ${
-                      open ? styles.show : styles.hide
-                    }`}
-                  >
-                    <input
-                      type='text'
-                      onChange={(e) => setPromo(e.target.value)}
-                      className={styles.promo_input}
-                    />
-                    <button className={styles.promo_apply_btn}>APPLY</button>
-                  </form>
+                <div className={styles.total_flex}>
+                  <div className={styles.total_title}>Est.Total:</div>
+                  <div className={styles.total_price}>$1,621.97</div>
                 </div>
-              </div>
-              <div className={styles.total_flex}>
-                <div className={styles.total_title}>Est.Total:</div>
-                <div className={styles.total_price}>$1,621.97</div>
               </div>
             </div>
           </div>

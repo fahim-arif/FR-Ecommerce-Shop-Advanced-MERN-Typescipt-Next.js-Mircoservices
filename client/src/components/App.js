@@ -17,6 +17,7 @@ import ProductDetailSampleScreen from "../screens/ProductDetailSampleScreen";
 import CartScreen from "../screens/CartScreen";
 import CheckoutLogin from "../screens/CheckoutLogin";
 import CheckoutShipping from "../screens/CheckoutShipping";
+import CheckoutPlaceOrder from "../screens/CheckoutPlaceOrder";
 
 // USER PROFILE SCREEN
 import SignIn from "../screens/SignIn";
@@ -125,6 +126,19 @@ function App() {
                   <Route
                     component={CheckoutPayment}
                     path='/checkout-payment'
+                    exact
+                  ></Route>
+                </Footer>
+              </div>
+            </MainHeader>
+          </Switch>
+          <Switch>
+            <MainHeader path='/checkout-placeorder' exact>
+              <div style={{ background: "#f4f4f4" }}>
+                <Footer path='/checkout-placeorder' exact>
+                  <Route
+                    component={CheckoutPlaceOrder}
+                    path='/checkout-placeorder'
                     exact
                   ></Route>
                 </Footer>
