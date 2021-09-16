@@ -4,6 +4,11 @@ import CheckoutProgressBar from "../components/CheckoutProgressBar";
 import { Add } from "@material-ui/icons";
 export default function CheckoutShipping() {
   const [open, setOpen] = useState(false);
+  const [promo, setPromo] = useState("");
+
+  const promoSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
       <CheckoutProgressBar step1 step2></CheckoutProgressBar>
@@ -102,11 +107,16 @@ export default function CheckoutShipping() {
                 </div>
                 <div className={styles.promo_code_container}>
                   <form
+                    onSubmit={promoSubmit}
                     className={`${styles.promo_form} ${
                       open ? styles.show : styles.hide
                     }`}
                   >
-                    <input type='text' className={styles.promo_input} />
+                    <input
+                      type='text'
+                      onChange={(e) => setPromo(e.target.value)}
+                      className={styles.promo_input}
+                    />
                     <button className={styles.promo_apply_btn}>APPLY</button>
                   </form>
                 </div>
