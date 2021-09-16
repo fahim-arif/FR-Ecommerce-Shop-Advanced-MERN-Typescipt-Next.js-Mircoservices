@@ -1,0 +1,39 @@
+/* Checkout Summary Right Side */
+.checkout_promo_collapse_off {
+  height: 400px;
+}
+.checkout_promo_collapse_on {
+  max-height: 480px;
+}
+.checkout_cart_summary_container {
+  flex: 1;
+  /* margin-left: 20px; */
+  max-height: 480px;
+  background-color: #fff;
+}
+
+/* Place Order button */
+.place_order_btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.place_order_button {
+  margin: 20px 20px;
+  min-width: 270px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #f39834;
+  font-family: "Open Sans Condensed";
+  font-size: 15px;
+  font-weight: 700;
+}
+.place_order_button:hover {
+  background-color: #c60;
+}
+.place_order_button_icon {
+  font-size: 16px !important;
+}
