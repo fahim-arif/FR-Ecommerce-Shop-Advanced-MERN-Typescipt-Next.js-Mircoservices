@@ -10,11 +10,13 @@ import SecondaryFooter from "./common/SecondaryFooter"; //Secondary Footer in Si
 
 //Product Related Screens
 import ProductScreen from "../screens/ProductScreen";
-import CartScreen from "../screens/CartScreen";
-import ProductListScreen from "../screens/ProductListScreen";
 import MainHeader from "./MainHeader";
 import ProductDetailScreen from "../screens/ProductDetailScreen";
 import ProductDetailSampleScreen from "../screens/ProductDetailSampleScreen";
+//CART RELATED SCREEN
+import CartScreen from "../screens/CartScreen";
+import CheckoutLogin from "../screens/CheckoutLogin";
+import CheckoutShipping from "../screens/CheckoutShipping";
 
 // USER PROFILE SCREEN
 import SignIn from "../screens/SignIn";
@@ -54,8 +56,6 @@ function App() {
               ></Route>
             </MainHeader>
           </Switch>
-          <Route component={CartScreen} path='/cart/:id?'></Route>
-          <Route component={ProductListScreen} path='/edit' exact></Route>
           <Switch>
             <SecondaryFooter path='/sign-in' exact>
               <Route component={SignIn} path='/sign-in' exact></Route>
@@ -84,13 +84,37 @@ function App() {
               </Footer>
             </MainHeader>
           </Switch>
-          {/* <Switch>
+          <Switch>
             <MainHeader path='/cart' exact>
               <Footer path='/cart' exact>
                 <Route component={CartScreen} path='/cart' exact></Route>
               </Footer>
             </MainHeader>
-          </Switch> */}
+          </Switch>
+          <Switch>
+            <MainHeader path='/checkout-login' exact>
+              <div style={{background:'#f4f4f4'}}>
+                <Footer path='/checkout-login' exact>
+                  <Route
+                    component={CheckoutLogin}
+                    path='/checkout-login'
+                    exact
+                  ></Route>
+                </Footer>
+              </div>
+            </MainHeader>
+          </Switch>
+          <Switch>
+            <MainHeader path='/checkout-shipping' exact>
+              <Footer path='/checkout-shipping' exact>
+                <Route
+                  component={CheckoutShipping}
+                  path='/checkout-shipping'
+                  exact
+                ></Route>
+              </Footer>
+            </MainHeader>
+          </Switch>
           <Switch>
             <MainHeader path='/profile' exact>
               <Footer path='/profile' exact>
