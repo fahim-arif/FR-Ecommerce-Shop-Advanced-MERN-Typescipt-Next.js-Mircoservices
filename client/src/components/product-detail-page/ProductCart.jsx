@@ -1,17 +1,35 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { addToCart } from "../../actions/cartActions";
+
 import styles from "../styles/productCart.module.css";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import { Link } from "react-router-dom";
 const ProductCart = ({ product }) => {
-  const [numStock, setNumStock] = useState(0);
+  const dispatch = useDispatch();
+
+  const [numStock, setNumStock] = useState(1);
   if (numStock < 0) {
     setNumStock(0);
   }
   if (numStock > product.countInStock) {
     setNumStock((prev) => prev - 1);
   }
+  // numstock = amount of qty user selected
+  // useEffect(() => {
+  //   return () => {};
+  // }, [dispatch]);
+  useEffect(() => {
+    if (product.countInStock === 0) {
+      setNumStock(0);
+      document.getElementById("add-to-cart").disabled = true;
+    }
+  }, [product]);
+  const addToCartHandler = () => {
+    dispatch(addToCart(product._id, numStock));
+  };
   const cartValueHandler = (e) => {};
   return (
     <div className={styles.cart_container}>
@@ -58,7 +76,13 @@ const ProductCart = ({ product }) => {
                 </button>
               </div>
             </div>
-            <button className={styles.cart_btn}>ADD TO CART</button>
+            <button
+              onClick={addToCartHandler}
+              id='add-to-cart'
+              className={`${styles.cart_btn} ${styles.disabled}`}
+            >
+              ADD TO CART
+            </button>
           </div>
         </div>
         <div className={styles.bottom}>

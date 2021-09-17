@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../components/styles/cartScreen.module.css";
 import { DeleteOutline, Favorite, Add, PlayArrow } from "@material-ui/icons";
 export default function CartScreen() {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  // const { product: id, name, image, qty, price } = cart[0];
+  // useEffect(() => {
+  //   console.log(id, name, image, qty, price);
+
+  // }, []);
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -15,43 +23,43 @@ export default function CartScreen() {
               REMOVE ALL
             </button>
           </div>
-          <div className={styles.row}>
-            <div className={styles.col_1}>
-              <div className={styles.image_container}>
-                <img src='/images/3_3629.jpg' alt='' className={styles.img} />
-              </div>
-            </div>
-            <div className={styles.col_2}>
-              <div className={styles.sub_row_1}>
-                <div className={styles.product_name}>
-                  Intel Core i7 10th Gen - Core i7-10700K Comet Lake 8-Core 3.8
-                  GHz LGA 1200 125W Desktop Processor w/ Intel UHD Graphics 630
+          {cartItems.map((item) => (
+            <div className={styles.row}>
+              <div className={styles.col_1}>
+                <div className={styles.image_container}>
+                  <img src={item.image} alt='' className={styles.img} />
                 </div>
-                <div className={styles.qty_container}>
-                  <div className={styles.qty_box}>
-                    <form className={styles.qty_form}>
-                      <select className={styles.qty}>
-                        <option value='1'>1</option>
-                      </select>
-                    </form>
-                  </div>
-                  <div className={styles.stock}>Qty: 5</div>
-                </div>
-                <div className={styles.product_price}>৳442.22</div>
               </div>
-              <div className={styles.sub_row_2}>
-                <button className={styles.wish_list_btn}>
-                  <Favorite className={styles.icon}></Favorite>
-                  MOVE TO WISHLIST
-                </button>
 
-                <button className={styles.remove_product_btn}>
-                  <DeleteOutline className={styles.icon}></DeleteOutline>
-                  REMOVE
-                </button>
+              <div className={styles.col_2}>
+                <div className={styles.sub_row_1}>
+                  <div className={styles.product_name}>{item.name}</div>
+                  <div className={styles.qty_container}>
+                    <div className={styles.qty_box}>
+                      <form className={styles.qty_form}>
+                        <select className={styles.qty}>
+                          <option value='1'>1</option>
+                        </select>
+                      </form>
+                    </div>
+                    <div className={styles.stock}>Qty: 5</div>
+                  </div>
+                  <div className={styles.product_price}>{item.price}</div>
+                </div>
+                <div className={styles.sub_row_2}>
+                  <button className={styles.wish_list_btn}>
+                    <Favorite className={styles.icon}></Favorite>
+                    MOVE TO WISHLIST
+                  </button>
+
+                  <button className={styles.remove_product_btn}>
+                    <DeleteOutline className={styles.icon}></DeleteOutline>
+                    REMOVE
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
         <div className={styles.right_container}>
           <div className={styles.cart_box}>

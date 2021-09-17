@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // COMMON
+import ScrollToTop from "./common/ScrollToTop";
 import Footer from "../components/common/Footer";
 import HomeScreen from "../screens/HomeScreen";
 import ContactUsScreen from "../screens/ContactUsScreen";
@@ -19,6 +20,8 @@ import CheckoutLogin from "../screens/CheckoutLogin";
 import CheckoutShipping from "../screens/CheckoutShipping";
 import CheckoutPlaceOrder from "../screens/CheckoutPlaceOrder";
 
+// Order RELATED SCREEN
+import OrderScreen from "../screens/OrderScreen";
 // USER PROFILE SCREEN
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
@@ -41,6 +44,7 @@ function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <main>
           <Switch>
             <MainHeader exact path='/'>
@@ -145,6 +149,17 @@ function App() {
               </div>
             </MainHeader>
           </Switch>
+
+          <Switch>
+            <MainHeader path='/order' exact>
+              <div style={{ background: "#f4f4f4" }}>
+                <Footer path='/order' exact>
+                  <Route component={OrderScreen} path='/order' exact></Route>
+                </Footer>
+              </div>
+            </MainHeader>
+          </Switch>
+
           <Switch>
             <MainHeader path='/profile' exact>
               <Footer path='/profile' exact>

@@ -7,6 +7,14 @@ const orderSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
     orderItems: [
       {
         name: { type: String, required: true },
@@ -25,10 +33,22 @@ const orderSchema = mongoose.Schema(
       city: { type: String, required: true },
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
+      phone: { type: String, required: true },
     },
     paymentMethod: {
       type: String,
       required: true,
+    },
+    bkash: {
+      phoneNumber: { type: String },
+      txnId: { type: String },
+    },
+    rocket: {
+      phoneNumber: { type: String },
+      txnId: { type: String },
+    },
+    cashOnDelivery: {
+      type: Boolean,
     },
     paymentResult: {
       id: { type: String },

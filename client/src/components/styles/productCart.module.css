@@ -83,9 +83,9 @@
   padding: 0 50px;
   font: 300;
 }
-.cart_btn:hover {
+/* .cart_btn:hover {
   background-color: #c60;
-}
+} */
 
 .middle {
   padding-bottom: 20px;
@@ -142,3 +142,9 @@
   font-size: 14px;
   font-weight: 700;
 }
+
+/* Cart Disable */
+/* .disabled {
+  opacity: 0.6;
+  cursor: default;
+} */

@@ -10,7 +10,6 @@ import {
   userFetchReducer,
 } from "./reducers/usersReducer";
 
-
 import {
   productListReducer,
   productDetailsReducer,
@@ -43,7 +42,14 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+const cartInfoFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
+
 const initialValue = {
+  cart: {
+    cartItems: cartInfoFromStorage,
+  },
   userLogin: {
     userInfo: userInfoFromStorage,
   },
