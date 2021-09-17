@@ -20,11 +20,11 @@ export default function CheckoutLogin({ history }) {
   const { loading, error, userInfo } = userLogin;
 
   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       history.push("/");
-  //     }
-  //   }, [history, userInfo]);
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/checkout-shipping");
+    }
+  }, [history, userInfo]);
 
   const googleSuccess = async (res) => {
     const result = res?.profileObj;

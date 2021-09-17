@@ -92,9 +92,11 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/cart' exact>
-              <Footer path='/cart' exact>
-                <Route component={CartScreen} path='/cart' exact></Route>
-              </Footer>
+              <div style={{ background: "#f4f4f4" }}>
+                <Footer path='/cart' exact>
+                  <Route component={CartScreen} path='/cart' exact></Route>
+                </Footer>
+              </div>
             </MainHeader>
           </Switch>
           <Switch>

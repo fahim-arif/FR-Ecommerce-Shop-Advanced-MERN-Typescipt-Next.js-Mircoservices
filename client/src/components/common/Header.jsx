@@ -45,7 +45,7 @@ const Header = () => {
               <Link to='#'>
                 <ShoppingCartOutlined class={styles.header_icons} />
               </Link>
-              <Link to='#'>Cart</Link>
+              <Link to='/cart'>Cart</Link>
             </div>
           </div>
         </div>

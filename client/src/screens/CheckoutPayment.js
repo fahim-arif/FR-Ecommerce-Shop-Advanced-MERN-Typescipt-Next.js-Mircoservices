@@ -1,42 +1,102 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, savePaymentMethod } from "../actions/cartActions";
+
+import Message from "../components/Message";
 import styles from "../components/styles/checkoutShipping.module.css";
 import "../components/styles/checkoutPayment.css";
 import CheckoutProgressBar from "../components/CheckoutProgressBar";
 import { Add } from "@material-ui/icons";
-export default function CheckoutPayment() {
+export default function CheckoutPayment({ history }) {
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, shippingAddress } = cart;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  let subtotal = cartItems
+    .reduce((acc, item) => acc + item.price * item.qty, 0)
+    .toFixed(2);
+
+  let deliveryCharge = subtotal > 1000 ? 60 : 130;
+
+  let total = (
+    Number(subtotal * 0.025) +
+    Number(subtotal) +
+    Number(deliveryCharge)
+  ).toFixed(2);
+
+  let estTotal = (Number(total * 0.0185) + Number(total)).toFixed(2);
+
+  console.log(estTotal);
+
   const [open, setOpen] = useState(false);
   const [promo, setPromo] = useState("");
   const [bkash, setBkash] = useState(false);
   const [rocket, setRocket] = useState(false);
   const [cash, setCash] = useState(false);
   const [credit, setCredit] = useState(false);
+  const [message, setMessage] = useState("");
 
   const promoSubmit = (e) => {
     e.preventDefault();
   };
   const onBkash = () => {
+    setMessage("");
     setBkash(true);
     setRocket(false);
     setCash(false);
     setCredit(false);
   };
   const onRocket = () => {
+    setMessage("");
     setBkash(false);
     setRocket(true);
     setCash(false);
     setCredit(false);
   };
   const onCredit = () => {
+    setMessage("");
     setBkash(false);
     setRocket(false);
     setCash(false);
     setCredit(true);
   };
   const onCash = () => {
+    setMessage("");
     setBkash(false);
     setRocket(false);
     setCash(true);
     setCredit(false);
+  };
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/checkout-login");
+    }
+    if (!shippingAddress) {
+      history.push("/checkout-shipping");
+    }
+  }, []);
+
+  const handleClick = () => {
+    if (bkash) {
+      dispatch(savePaymentMethod({ method: "bkash" }));
+    } else if (rocket) {
+      dispatch(savePaymentMethod({ method: "rocket" }));
+    } else if (cash) {
+      dispatch(savePaymentMethod({ method: "cash" }));
+    } else if (credit) {
+      dispatch(savePaymentMethod({ method: "credit" }));
+    }
+
+    if (bkash || rocket || cash || credit) {
+      history.push("/checkout-placeorder");
+    } else {
+      setMessage("Please Select a Payment Method");
+    }
   };
   return (
     <>
@@ -46,6 +106,7 @@ export default function CheckoutPayment() {
           <div className={styles.container_left}>
             <div className={styles.address_container}>
               <div className={styles.form_container}>
+                {message && <Message variant='dark'>{message}</Message>}
                 <div className={styles.address_title}>
                   Select Payment Method
                 </div>
@@ -124,12 +185,9 @@ export default function CheckoutPayment() {
                     }`}
                   >
                     <div className='payment_description'>
-                      Please complete your bKash payment at first, then fill up
-                      the form below. Also note that 1.85% bKash "SEND MONEY"
-                      cost will be added with net price. Total amount you need
-                      to send us at ৳ 6315
+                      You have selected bKash as your payment method
                     </div>
-                    <form className='payment_method_form'>
+                    {/* <form className='payment_method_form'>
                       <div className='flex-col'>
                         <label className='payment_input_label'>
                           Your bKash Account Number
@@ -142,7 +200,7 @@ export default function CheckoutPayment() {
                         </label>
                         <input type='text' className='payment_input' />
                       </div>
-                    </form>
+                    </form> */}
                   </div>
                   <div
                     className={`payment_description_container ${
@@ -150,25 +208,8 @@ export default function CheckoutPayment() {
                     }`}
                   >
                     <div className='payment_description'>
-                      Please complete your rocket payment at first, then fill up
-                      the form below. Also note that 1.85% bKash "SEND MONEY"
-                      cost will be added with net price. Total amount you need
-                      to send us at ৳ 6315
+                      You have selected Rocket as your payment Method
                     </div>
-                    <form className='payment_method_form'>
-                      <div className='flex-col'>
-                        <label className='payment_input_label'>
-                          Your Rocket Account Number
-                        </label>
-                        <input type='text' className='payment_input' />
-                      </div>
-                      <div className='flex-col'>
-                        <label className='payment_input_label'>
-                          Rocket Transaction ID
-                        </label>
-                        <input type='text' className='payment_input' />
-                      </div>
-                    </form>
                   </div>
                   {/* Cash On Delivery Conent after clicking at the cash on delivery icon */}
                   <div
@@ -176,7 +217,9 @@ export default function CheckoutPayment() {
                       cash ? "content_show" : "content_hide"
                     }`}
                   >
-                    <div className='payment_description'>You have selected Cash on Delivery system</div>
+                    <div className='payment_description'>
+                      You have selected Cash on Delivery system
+                    </div>
                   </div>
                   <div
                     className={`payment_description_container ${
@@ -187,7 +230,9 @@ export default function CheckoutPayment() {
                     <div className='payment_description'>Comming Soon.....</div>
                   </div>
                   <div className={styles.btn_container}>
-                    <button className={styles.btn}>SAVE</button>
+                    <button onClick={handleClick} className={styles.btn}>
+                      SAVE
+                    </button>
                   </div>
                 </div>
               </div>
@@ -202,15 +247,27 @@ export default function CheckoutPayment() {
               <div className={styles.summary_title}>Summary</div>
               <div className={styles.summary_flex}>
                 <div className={styles.item_name}>Items</div>
-                <div className={styles.item_price}>$1,586.98</div>
+                <div className={styles.item_price}>
+                  {" "}
+                  ৳{" "}
+                  {cartItems
+                    .reduce((acc, item) => acc + item.qty * item.price, 0)
+                    .toFixed(2)}
+                </div>
               </div>
               <div className={styles.summary_flex}>
                 <div className={styles.item_name}>Delivery Charge</div>
-                <div className={styles.item_price}>$1,586.98</div>
+                <div className={styles.item_price}>
+                  {" "}
+                  ৳{subtotal > 1000 ? 80 : 130}
+                </div>
               </div>
               <div className={styles.summary_flex}>
                 <div className={styles.item_name}>Tax Charge</div>
-                <div className={styles.item_price}>$1,586.98</div>
+                <div className={styles.item_price}>
+                  {" "}
+                  ৳{(subtotal * 0.025).toFixed(2)}
+                </div>
               </div>
               <div className={styles.promo_container}>
                 <div className={styles.promo_flex}>
@@ -242,7 +299,15 @@ export default function CheckoutPayment() {
               </div>
               <div className={styles.total_flex}>
                 <div className={styles.total_title}>Est.Total:</div>
-                <div className={styles.total_price}>$1,621.97</div>
+                <div className={styles.total_price}>
+                  {" "}
+                  ৳
+                  {(
+                    Number(subtotal * 0.025) +
+                    Number(subtotal) +
+                    Number(deliveryCharge)
+                  ).toFixed(2)}
+                </div>
               </div>
             </div>
           </div>

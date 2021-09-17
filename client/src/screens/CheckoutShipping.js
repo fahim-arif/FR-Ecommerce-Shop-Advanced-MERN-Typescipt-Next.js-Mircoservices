@@ -1,13 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, saveShippingAddress } from "../actions/cartActions";
+
 import styles from "../components/styles/checkoutShipping.module.css";
 import CheckoutProgressBar from "../components/CheckoutProgressBar";
 import { Add } from "@material-ui/icons";
-export default function CheckoutShipping() {
+export default function CheckoutShipping({ history }) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [promo, setPromo] = useState("");
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [country, setCountry] = useState("");
+  const [address, setAddress] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [city, setCity] = useState("");
+  const [division, setDivision] = useState("");
+  const [phone, setPhone] = useState("");
+  const [zip, setZip] = useState("");
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  let subtotal = cartItems
+    .reduce((acc, item) => acc + item.price * item.qty, 0)
+    .toFixed(2);
+
+  let deliveryCharge = subtotal > 1000 ? 60 : 130;
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/checkout-login");
+    }
+  }, []);
   const promoSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      saveShippingAddress({
+        firstName,
+        lastName,
+        address,
+        address2,
+        city,
+        division,
+        phone,
+        zip,
+      })
+    );
+    history.push("/checkout-payment");
   };
   return (
     <>
@@ -18,53 +65,97 @@ export default function CheckoutShipping() {
             <div className={styles.address_container}>
               <div className={styles.form_container}>
                 <div className={styles.address_title}>Add Address</div>
-                <form action={styles.address_form}>
+                <form onSubmit={onSubmit} className={styles.address_form}>
                   <div className={styles.input_container}>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>First Name</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        onChange={(e) => setFirstName(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                        required
+                      />
                     </div>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>Last Name</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        onChange={(e) => setLastName(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                        required
+                      />
                     </div>
                   </div>
                   <div type='text' className={styles.input_container}>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>Country / Region</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        onChange={(e) => setCountry(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                        required
+                      />
                     </div>
                   </div>
                   <div className={styles.input_container}>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>Address</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        onChange={(e) => setAddress(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                        required
+                      />
                     </div>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>
                         Address 2 / Delivery Instruction
                       </div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        onChange={(e) => setAddress2(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                      />
                     </div>
                   </div>
                   <div className={styles.input_container}>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>City / Town</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        type='text'
+                        onChange={(e) => setCity(e.target.value)}
+                        className={styles.input}
+                        required
+                      />
                     </div>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>State / Divison</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        onChange={(e) => setDivision(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                        required
+                      />
                     </div>
                   </div>
                   <div className={styles.input_container}>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>Zip Code</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        required
+                        onChange={(e) => setZip(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                      />
                     </div>
                     <div className={styles.input_wrapper}>
                       <div className={styles.input_name}>Phone</div>
-                      <input type='text' className={styles.input} />
+                      <input
+                        required
+                        onChange={(e) => setPhone(e.target.value)}
+                        type='text'
+                        className={styles.input}
+                      />
                     </div>
                   </div>
                   <div className={styles.btn_container}>
@@ -83,16 +174,30 @@ export default function CheckoutShipping() {
               <div className={styles.summary_wrapper}>
                 <div className={styles.summary_title}>Summary</div>
                 <div className={styles.summary_flex}>
-                  <div className={styles.item_name}>Items</div>
-                  <div className={styles.item_price}>$1,586.98</div>
+                  <div className={styles.item_name}>
+                    {" "}
+                    Subtotal (
+                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
+                  </div>
+                  <div className={styles.item_price}>
+                    ৳{" "}
+                    {cartItems
+                      .reduce((acc, item) => acc + item.qty * item.price, 0)
+                      .toFixed(2)}
+                  </div>
                 </div>
                 <div className={styles.summary_flex}>
                   <div className={styles.item_name}>Delivery Charge</div>
-                  <div className={styles.item_price}>$1,586.98</div>
+                  <div className={styles.item_price}>
+                    ৳{subtotal > 1000 ? 80 : 130}
+                  </div>
                 </div>
                 <div className={styles.summary_flex}>
                   <div className={styles.item_name}>Tax Charge</div>
-                  <div className={styles.item_price}>$1,586.98</div>
+                  <div className={styles.item_price}>
+                    {" "}
+                    ৳{(subtotal * 0.025).toFixed(2)}
+                  </div>
                 </div>
                 <div className={styles.promo_container}>
                   <div className={styles.promo_flex}>
@@ -127,7 +232,15 @@ export default function CheckoutShipping() {
                 </div>
                 <div className={styles.total_flex}>
                   <div className={styles.total_title}>Est.Total:</div>
-                  <div className={styles.total_price}>$1,621.97</div>
+                  <div className={styles.total_price}>
+                    {" "}
+                    ৳
+                    {(
+                      Number(subtotal * 0.025) +
+                      Number(subtotal) +
+                      Number(deliveryCharge)
+                    ).toFixed(2)}
+                  </div>
                 </div>
               </div>
             </div>
