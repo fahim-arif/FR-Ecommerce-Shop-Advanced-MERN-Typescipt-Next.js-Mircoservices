@@ -14,7 +14,8 @@ const ProductImage = ({ product }) => {
         </div>
       </div>
       <div className={styles.image_container}>
-        <img src={product.image} className={styles.product_image}></img>
+        {/* main chobi */}
+        <img src={product.image} className={styles.product_image}></img> 
       </div>
       <div className={styles.product_slider_container}>
         <img src='/images/AAM8S210409gvTpO.png' alt='' className='' />

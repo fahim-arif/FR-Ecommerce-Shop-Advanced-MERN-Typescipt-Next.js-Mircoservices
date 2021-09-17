@@ -42,19 +42,22 @@ export default function CheckoutPayment() {
   return (
     <>
       <CheckoutProgressBar step1 step2 step3 step4></CheckoutProgressBar>
-      <div className={styles.checkout_shipping}>
+      <div className={`${styles.checkout_shipping}`}>
         <div className={styles.container}>
-          <div className={styles.container_left}>
+          <div className={`${styles.container_left} place_order_left`}>
             <div className={styles.address_container}>
               <div className={styles.form_container}>
                 <div className={styles.address_title}>Shipping Address</div>
                 <div className='checkout_shipping_summary_container'>
                   <div className='checkout_shipping_summary_content'>
-                    <div className='checkout_shipping_person_detail'>
+                    <div className='checkout_shipping_person_name'>
                       Fahim Arif
                     </div>
                     <div className='checkout_shipping_person_detail'>
                       Address: Kaigari, Bogra
+                    </div>
+                    <div className='checkout_shipping_person_detail'>
+                      Zip Code: Bogra-5800
                     </div>
                     <div className='checkout_shipping_person_detail'>
                       Division, Country: Kaigari, Bogra
@@ -63,19 +66,26 @@ export default function CheckoutPayment() {
                       Phone: 01638418833
                     </div>
                   </div>
-                  <div className='checkout_shipping_summary_edit_btn'>EDIT</div>
+                  <div className='checkout_shipping_summary_edit_btn'>
+                    <button className='checkout_shipping_summary_btn'>
+                      EDIT
+                    </button>
+                  </div>
                 </div>
                 <div className={styles.address_title}>Payment Method</div>
                 <div className='checkout_payment_summary_container'>
                   <div className='checkout_payment_summary_img_container'>
                     <img
-                      src=''
+                      src='/images/TB14FT1JpOWBuNjy0FiXXXFxVXa-400-400.png'
                       alt=''
                       className='checkout_payment_summary_img'
                     />
                   </div>
                   <div className='checkout_payment_summary_change_btn'>
+                      <button className="checkout_payment_summary_btn">
+
                     CHANGE
+                      </button>
                   </div>
                 </div>
                 <div className={styles.address_title}>Order Items</div>
