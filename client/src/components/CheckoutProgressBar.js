@@ -1,5 +1,7 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
+
 import styles from "../components/styles/checkoutProgressBar.module.css";
 import { ShoppingCart } from "@material-ui/icons";
 
@@ -18,24 +20,16 @@ export default function CheckoutProgressBar({ step1, step2, step3, step4 }) {
               {step1 ? (
                 <>
                   <div className={styles.progress_container}>
-                    <Link to='/checkout-login'>
-                      <span className={styles.progress_number}>1</span>
-                    </Link>
-                    <Link to='/checkout-login'>
-                      <span className={styles.progress_text}>SIGN IN</span>
-                    </Link>
+                    <span className={styles.progress_number}>1</span>
+                    <span className={styles.progress_text}>SIGN IN</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div className={styles.progress_container}>
                     <div className={styles.progress_container}>
-                      <Link to='/sign-in'>
-                        <span className={styles.progress_number}>1</span>
-                      </Link>
-                      <Link to='/sign-in'>
-                        <span className={styles.progress_text}>SIGN IN</span>
-                      </Link>
+                      <span className={styles.progress_number}>1</span>
+                      <span className={styles.progress_text}>SIGN IN</span>
                     </div>
                   </div>
                 </>
@@ -47,12 +41,8 @@ export default function CheckoutProgressBar({ step1, step2, step3, step4 }) {
               {step2 ? (
                 <>
                   <div className={styles.progress_container}>
-                    <Link to='/checkout-shipping'>
-                      <span className={styles.progress_number}>2</span>
-                    </Link>
-                    <Link to='/checkout-shipping'>
-                      <span className={styles.progress_text}>SHIPPING</span>
-                    </Link>
+                    <span className={styles.progress_number}>2</span>
+                    <span className={styles.progress_text}>SHIPPING</span>
                   </div>
                 </>
               ) : (
@@ -74,12 +64,8 @@ export default function CheckoutProgressBar({ step1, step2, step3, step4 }) {
               {step3 ? (
                 <>
                   <div className={styles.progress_container}>
-                    <Link to='/payment'>
-                      <span className={styles.progress_number}>3</span>
-                    </Link>
-                    <Link to='/payment'>
-                      <span className={styles.progress_text}>PAYMENT</span>
-                    </Link>
+                    <span className={styles.progress_number}>3</span>
+                    <span className={styles.progress_text}>PAYMENT</span>
                   </div>
                 </>
               ) : (
@@ -101,12 +87,8 @@ export default function CheckoutProgressBar({ step1, step2, step3, step4 }) {
               {step4 ? (
                 <>
                   <div className={styles.progress_container}>
-                    <Link to='/place-order'>
-                      <span className={styles.progress_number}>4</span>
-                    </Link>
-                    <Link to='/place-order'>
-                      <span className={styles.progress_text}>PLACE ORDER</span>
-                    </Link>
+                    <span className={styles.progress_number}>4</span>
+                    <span className={styles.progress_text}>PLACE ORDER</span>
                   </div>
                 </>
               ) : (
@@ -124,8 +106,10 @@ export default function CheckoutProgressBar({ step1, step2, step3, step4 }) {
             </div>
           </div>
           <button className={styles.edit_btn}>
-            <ShoppingCart className={styles.edit_icons}></ShoppingCart> EDIT
-            SHOPPING CART
+            <Link to='/cart'>
+              <ShoppingCart className={styles.edit_icons}></ShoppingCart> EDIT
+              SHOPPING CART
+            </Link>
           </button>
         </div>
       </div>

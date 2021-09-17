@@ -64,7 +64,7 @@
 }
 
 .product_name {
-  max-width: 465px;
+  width: 400px;
   font-weight: 700;
   font-size: 14px;
 }
@@ -241,7 +241,7 @@
   font-weight: 700;
 }
 .secure_payment:hover {
-  background-color: #c60;
+  /* background-color: #c60; */
 }
 .arrow_icon {
   font-size: 16px !important;
@@ -250,4 +250,8 @@
 /* Toggle promo btn */
 .hide {
   display: none;
+}
+.show {
+  display: flex;
+  margin: 20px 0 30px;
 }

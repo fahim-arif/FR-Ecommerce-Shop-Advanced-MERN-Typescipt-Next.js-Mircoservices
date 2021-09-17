@@ -103,3 +103,19 @@ a:hover {
   font-size: 1rem;
   font-weight: 600;
 }
+
+/* Cart Empty Message */
+.alert-dark-container {
+  margin-top: 18px;
+  margin-right: 40px;
+}
+.alert-dark {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #e1b06a;
+  border-right: 15px solid #e1b06a;
+  font-size: 16px;
+  font-family: "Open Sans Condensed";
+  font-weight: 700;
+  /* display: none; */
+}
