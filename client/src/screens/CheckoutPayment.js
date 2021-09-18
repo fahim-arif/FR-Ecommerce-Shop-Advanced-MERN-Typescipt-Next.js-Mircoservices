@@ -11,7 +11,7 @@ export default function CheckoutPayment({ history }) {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  const { cartItems, shippingAddress } = cart;
+  const { cartItems, shippingAddress, paymentMethod } = cart;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -79,23 +79,32 @@ export default function CheckoutPayment({ history }) {
     if (!shippingAddress) {
       history.push("/checkout-shipping");
     }
-  }, []);
+    if (paymentMethod) {
+      if (paymentMethod.method === "bKash") {
+        setBkash(paymentMethod.method);
+      } else if (paymentMethod.method === "Rocket") {
+        setRocket(paymentMethod.method);
+      } else if (paymentMethod.method === "Credit") {
+        setCredit(paymentMethod.method);
+      } else if (paymentMethod.method === "Cash on Delivery") {
+        setCash(paymentMethod.method);
+      }
+    }
+  }, [paymentMethod]);
 
   const handleClick = () => {
     if (bkash) {
-      dispatch(savePaymentMethod({ method: "bkash" }));
+      dispatch(savePaymentMethod({ method: "bKash" }));
     } else if (rocket) {
-      dispatch(savePaymentMethod({ method: "rocket" }));
+      dispatch(savePaymentMethod({ method: "Rocket" }));
     } else if (cash) {
-      dispatch(savePaymentMethod({ method: "cash" }));
-    } else if (credit) {
-      dispatch(savePaymentMethod({ method: "credit" }));
+      dispatch(savePaymentMethod({ method: "Cash on Delivery" }));
     }
 
-    if (bkash || rocket || cash || credit) {
+    if (bkash || rocket || cash) {
       history.push("/checkout-placeorder");
     } else {
-      setMessage("Please Select a Payment Method");
+      setMessage("Please Select a Valid Payment Method");
     }
   };
   return (
@@ -139,7 +148,7 @@ export default function CheckoutPayment({ history }) {
                     >
                       <div className={`payment_img_wrapper `}>
                         <img
-                          src='/images/OSS_iWhp8Hi8_b09dedee68e947f9bde1f49182777d7f.png'
+                          src='/images/Rocket.png'
                           alt='rocket_payment'
                           className='payment_img'
                         />
@@ -154,7 +163,7 @@ export default function CheckoutPayment({ history }) {
                     >
                       <div className='payment_img_wrapper'>
                         <img
-                          src='/images/TB14FT1JpOWBuNjy0FiXXXFxVXa-400-400.png'
+                          src='/images/bKash.png'
                           alt='bkash payment'
                           className='payment_img'
                         />
@@ -300,7 +309,7 @@ export default function CheckoutPayment({ history }) {
               <div className={styles.total_flex}>
                 <div className={styles.total_title}>Est.Total:</div>
                 <div className={styles.total_price}>
-                  {" "}
+                
                   ৳
                   {(
                     Number(subtotal * 0.025) +

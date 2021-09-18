@@ -1,16 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { useHistory } from "react-router";
+// import { addToCart } from "../actions/cartActions";
 import styles from "../components/styles/checkoutShipping.module.css";
+
 import "../components/styles/checkoutPayment.css";
 import "../components/styles/checkoutPlaceOrder.css";
 import CheckoutProgressBar from "../components/CheckoutProgressBar";
 import { Add, PlayArrow } from "@material-ui/icons";
-export default function CheckoutPayment() {
+export default function CheckoutPayment({ history }) {
   const [open, setOpen] = useState(false);
   const [promo, setPromo] = useState("");
   const [bkash, setBkash] = useState(false);
   const [rocket, setRocket] = useState(false);
   const [cash, setCash] = useState(false);
   const [credit, setCredit] = useState(false);
+
+  // const history = useHistory();
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  const { paymentMethod, cartItems, shippingAddress } = cart;
+
+  const { method } = paymentMethod;
+
+  const { firstName, lastName, address, address2, city, division, phone, zip } =
+    shippingAddress;
+
+  let subtotal = cartItems
+    .reduce((acc, item) => acc + item.price * item.qty, 0)
+    .toFixed(2);
+
+  let deliveryCharge = subtotal > 1000 ? 60 : 130;
+
+  let total = (
+    Number(subtotal * 0.025) +
+    Number(subtotal) +
+    Number(deliveryCharge)
+  ).toFixed(2);
+
+  let estTotal = (Number(total * 0.0185) + Number(total)).toFixed(2);
+
+  useEffect(() => {
+    // if (!paymentMethod) {
+    //   history.push("/checkout-payment");
+    // }
+  }, [dispatch]);
 
   const promoSubmit = (e) => {
     e.preventDefault();
@@ -51,71 +86,117 @@ export default function CheckoutPayment() {
                 <div className='checkout_shipping_summary_container'>
                   <div className='checkout_shipping_summary_content'>
                     <div className='checkout_shipping_person_name'>
-                      Fahim Arif
+                      {firstName} {lastName}
                     </div>
                     <div className='checkout_shipping_person_detail'>
-                      Address: Kaigari, Bogra
+                      Address: {address}
                     </div>
                     <div className='checkout_shipping_person_detail'>
-                      Zip Code: Bogra-5800
+                      Zip Code: {city}-{zip}
                     </div>
                     <div className='checkout_shipping_person_detail'>
-                      Division, Country: Kaigari, Bogra
+                      Division, Country: {division}, Bangladesh
                     </div>
                     <div className='checkout_shipping_person_detail'>
-                      Phone: 01638418833
+                      Phone: {phone}
                     </div>
                   </div>
                   <div className='checkout_shipping_summary_edit_btn'>
-                    <button className='checkout_shipping_summary_btn'>
+                    <button
+                      onClick={() => history.push("/checkout-shipping")}
+                      className='checkout_shipping_summary_btn'
+                    >
                       EDIT
                     </button>
                   </div>
                 </div>
                 <div className={styles.address_title}>Payment Method</div>
-                <div className='checkout_payment_summary_container'>
-                  <div className='checkout_payment_summary_img_container'>
-                    <img
-                      src='/images/TB14FT1JpOWBuNjy0FiXXXFxVXa-400-400.png'
-                      alt=''
-                      className='checkout_payment_summary_img'
-                    />
-                  </div>
-                  <div className='checkout_payment_summary_change_btn'>
-                      <button className="checkout_payment_summary_btn">
-
+                <div className='checkout_payment_summary_change_btn'>
+                  <button
+                    onClick={() => history.push("/checkout-payment")}
+                    className='checkout_payment_summary_btn'
+                  >
                     CHANGE
-                      </button>
-                  </div>
+                  </button>
                 </div>
-                <div className={styles.address_title}>Order Items</div>
+                <div className='checkout_payment_summary_container'>
+                  {method === "Cash on Delivery" ? (
+                    <div className='checkout_payment_text'>
+                      {`Your payment method is ${method}. You will have to pay on full cash when our delivery man comes to your house after 3-5 days . `}
+                    </div>
+                  ) : (
+                    <div className='checkout_payment_text'>
+                      {`Please complete your ${method} payment at first. Also note that 1.85% ${method} "SEND MONEY" cost
+                    will be added with net price.`}
+                      <br />
+                      Total amount you need to pay us ৳{" "}
+                      <span className='bold'>6315 </span>
+                      at <span className='bold'>01638418833 </span>.
+                    </div>
+                  )}
+
+                  {method == "bKash" || method === "Rocket" ? (
+                    <div className='checkout_payment_form_container'>
+                      <form className='checkout_payment_form'>
+                        <label className='checkout_payment_label'>
+                          Your {method} Account Number
+                        </label>
+                        <input
+                          type='text'
+                          className='checkout_payment_phone_input'
+                        />
+                        <label className='checkout_payment_label'>
+                          {method} Account Number
+                        </label>
+                        <input
+                          type='text'
+                          className='checkout_payment_phone_input'
+                        />
+                        {/* <button className='payment_form_submit_btn'>
+                        SUBMIT
+                      </button> */}
+                      </form>
+                      <div className='checkout_payment_summary_img_container'>
+                        <img
+                          src={`/images/${method}.png`}
+                          alt=''
+                          className='checkout_payment_summary_img'
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+                <div className={`${styles.address_title} mt-5`}>
+                  Order Items
+                </div>
                 <div className='checkout_order_summary_edit_change_btn'>
                   <button className='summary_edit_change'>EDIT CHANGE</button>
                 </div>
                 <div className='checkout_order_summary_container'>
-                  <div className='checkout_order_summary_row'>
-                    <div className='checkout_order_summary_col-1'>
-                      <div className='checkout_order_summary_img_container'>
-                        <img
-                          src='/images/68-105-274-V01.jpg'
-                          alt='order product image'
-                          className='checkout_order_summary_img'
-                        />
+                  {cartItems.map((item) => (
+                    <div className='checkout_order_summary_row'>
+                      <div className='checkout_order_summary_col-1'>
+                        <div className='checkout_order_summary_img_container'>
+                          <img
+                            src={item.image}
+                            alt='order product image'
+                            className='checkout_order_summary_img'
+                          />
+                        </div>
+                      </div>
+                      <div className='checkout_order_summary_col-2'>
+                        <div className='checkout_order_summary_product_title'>
+                          {item.name}
+                        </div>
+                      </div>
+                      <div className='checkout_order_summary_col-3'>
+                        <div className='checkout_order_summary_product_price'>
+                          {item.qty} x {item.price} = ৳{" "}
+                          {(item.price * item.qty).toFixed(2)}
+                        </div>
                       </div>
                     </div>
-                    <div className='checkout_order_summary_col-2'>
-                      <div className='checkout_order_summary_product_title'>
-                        Intel Core i7 10th Gen - Core i7-10700K Comet Lake
-                        8-Core 3.8 GHz LGA 1200 125W Desktop Processor w/ Intel
-                        UHD Graphics 630
-                      </div>
-                    </div>
-                    <div className='checkout_order_summary_col-3'>
-                      <div className='checkout_order_summary_product_price'>
-                        $ 1 x 289.99 = $289.99
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -131,17 +212,37 @@ export default function CheckoutPayment() {
             <div className={styles.summary_container}>
               <div className={styles.summary_title}>Summary</div>
               <div className={styles.summary_flex}>
-                <div className={styles.item_name}>Items</div>
-                <div className={styles.item_price}>$1,586.98</div>
+                <div className={styles.item_name}>Items Price</div>
+                <div className={styles.item_price}>
+                  {" "}
+                  ৳
+                  {cartItems
+                    .reduce((acc, item) => acc + item.qty * item.price, 0)
+                    .toFixed(2)}
+                </div>
               </div>
               <div className={styles.summary_flex}>
                 <div className={styles.item_name}>Delivery Charge</div>
-                <div className={styles.item_price}>$1,586.98</div>
+                <div className={styles.item_price}>
+                  ৳{subtotal > 1000 ? 80 : 130}
+                </div>
               </div>
               <div className={styles.summary_flex}>
                 <div className={styles.item_name}>Tax Charge</div>
-                <div className={styles.item_price}>$1,586.98</div>
+                <div className={styles.item_price}>
+                  ৳{Number(subtotal * 0.025).toFixed(2)}
+                </div>
               </div>
+              {method === "Cash on Delivery" ? null : (
+                <div className={styles.summary_flex}>
+                  <div className={styles.item_name}>{method} Charge</div>
+                  <div className={styles.item_price}>
+                    {" "}
+                    ৳{(subtotal * 0.0185).toFixed(2)}
+                  </div>
+                </div>
+              )}
+
               <div className={styles.promo_container}>
                 <div className={styles.promo_flex}>
                   <div onClick={() => setOpen(!open)} className={styles.promo}>
@@ -172,7 +273,28 @@ export default function CheckoutPayment() {
               </div>
               <div className={styles.total_flex}>
                 <div className={styles.total_title}>Est.Total:</div>
-                <div className={styles.total_price}>$1,621.97</div>
+                <div className={styles.total_price}>
+                  {method === "Cash on Delivery" ? (
+                    <>
+                      ৳
+                      {(
+                        Number(subtotal * 0.025) +
+                        Number(subtotal) +
+                        Number(deliveryCharge)
+                      ).toFixed(2)}
+                    </>
+                  ) : (
+                    <>
+                      ৳
+                      {(
+                        Number(subtotal * 0.025) +
+                        Number(subtotal) +
+                        Number(deliveryCharge) +
+                        Number(subtotal * 0.0185)
+                      ).toFixed(2)}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
             <div className='place_order_btn_container'>

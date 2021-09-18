@@ -21,10 +21,11 @@ export default function CheckoutShipping({ history }) {
   const [zip, setZip] = useState("");
 
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const { cartItems, shippingAddress } = cart;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
   let subtotal = cartItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)
     .toFixed(2);
@@ -35,7 +36,20 @@ export default function CheckoutShipping({ history }) {
     if (!userInfo) {
       history.push("/checkout-login");
     }
-  }, []);
+
+    if (shippingAddress) {
+      setFirstName(shippingAddress.firstName);
+      setLastName(shippingAddress.lastName);
+      setAddress(shippingAddress.address);
+      setAddress2(shippingAddress.address2);
+      setCity(shippingAddress.city);
+      setCountry("Bangladesh");
+      setDivision(shippingAddress.division);
+      setPhone(shippingAddress.phone);
+      setZip(shippingAddress.zip);
+    }
+  }, [shippingAddress]);
+
   const promoSubmit = (e) => {
     e.preventDefault();
   };
@@ -73,6 +87,7 @@ export default function CheckoutShipping({ history }) {
                         onChange={(e) => setFirstName(e.target.value)}
                         type='text'
                         className={styles.input}
+                        value={firstName}
                         required
                       />
                     </div>
@@ -82,6 +97,7 @@ export default function CheckoutShipping({ history }) {
                         onChange={(e) => setLastName(e.target.value)}
                         type='text'
                         className={styles.input}
+                        value={lastName}
                         required
                       />
                     </div>
@@ -94,6 +110,7 @@ export default function CheckoutShipping({ history }) {
                         type='text'
                         className={styles.input}
                         required
+                        value={country}
                       />
                     </div>
                   </div>
@@ -105,6 +122,7 @@ export default function CheckoutShipping({ history }) {
                         type='text'
                         className={styles.input}
                         required
+                        value={address}
                       />
                     </div>
                     <div className={styles.input_wrapper}>
@@ -115,6 +133,7 @@ export default function CheckoutShipping({ history }) {
                         onChange={(e) => setAddress2(e.target.value)}
                         type='text'
                         className={styles.input}
+                        value={address2}
                       />
                     </div>
                   </div>
@@ -126,6 +145,7 @@ export default function CheckoutShipping({ history }) {
                         onChange={(e) => setCity(e.target.value)}
                         className={styles.input}
                         required
+                        value={city}
                       />
                     </div>
                     <div className={styles.input_wrapper}>
@@ -135,6 +155,7 @@ export default function CheckoutShipping({ history }) {
                         type='text'
                         className={styles.input}
                         required
+                        value={division}
                       />
                     </div>
                   </div>
@@ -146,6 +167,7 @@ export default function CheckoutShipping({ history }) {
                         onChange={(e) => setZip(e.target.value)}
                         type='text'
                         className={styles.input}
+                        value={zip}
                       />
                     </div>
                     <div className={styles.input_wrapper}>
@@ -155,6 +177,7 @@ export default function CheckoutShipping({ history }) {
                         onChange={(e) => setPhone(e.target.value)}
                         type='text'
                         className={styles.input}
+                        value={phone}
                       />
                     </div>
                   </div>

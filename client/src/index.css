@@ -119,3 +119,40 @@ a:hover {
   font-weight: 700;
   /* display: none; */
 }
+
+/* Delete user modal */
+.delete_user_modal_container {
+  /* height: 200px;
+  width: 200px; */
+  /* position: relative; */
+  /* display: none; */
+}
+#hiji {
+  /* display: none;"*/
+  /* position: absolute; */
+}
+#biji {
+  right: 0 !important;
+}
+.modal {
+  right: 0 !important;
+}
+.hijibiji {
+  position: absolute !important;
+  right: 0 !important;
+  display: none;
+}
+.cart_modal {
+  background-color: #fff;
+  width: 420px;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="text"] {
+  -webkit-appearance: auto;
+}
