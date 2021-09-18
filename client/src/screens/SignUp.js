@@ -120,7 +120,8 @@ const SignUp = ({ history, location }) => {
             onChange={(e) => setEmail(e.target.value)}
             className='SignIn-email'
             type='email'
-          />{" "}
+          />
+          <div> </div>
           <div className='alertMessage'>
             {message && <Message variant='danger'>{message}</Message>}
           </div>

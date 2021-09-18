@@ -87,9 +87,15 @@ export default function CartScreen({ history }) {
                         </select>
                       </form>
                     </div>
-                    <div className={styles.stock}>Qty: {item.countInStock}</div>
+                    <div className={styles.stock}>
+                      Stock: {item.countInStock}
+                    </div>
                   </div>
-                  <div className={styles.product_price}> ৳{item.price}</div>
+                  <div className={styles.product_price}>
+                    {" "}
+                    {item.price} x {item.qty} = ৳
+                    {(item.price * item.qty).toFixed(2)}
+                  </div>
                 </div>
                 <div className={styles.sub_row_2}>
                   <button className={styles.wish_list_btn}>

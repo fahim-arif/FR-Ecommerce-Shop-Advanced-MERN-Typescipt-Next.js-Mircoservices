@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import md5 from "md5";
 
 export const getLogin = (req, res, next) => {
   res.send("Login");
@@ -50,6 +51,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     name,
     email,
     password,
+    image: `http://gravatar.com/avatar/${md5(email)}?d=identicon`,
   });
 
   if (user) {

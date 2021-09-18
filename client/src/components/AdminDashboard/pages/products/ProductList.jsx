@@ -10,12 +10,16 @@ import Product from "../../../../components/Product_depricated";
 import { Col, Row, Container, Image } from "react-bootstrap";
 import Loading from "../../../Loading";
 import Message from "../../../Message";
+import DeleteProduct from "../../../modals/DeleteUser";
 
 const AdminProductList = () => {
   // Admin Verification or Else redirect to homepage
   let history = useHistory();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const [productName, setProductName] = useState("");
+  const [productId, setProductId] = useState("");
 
   if (!userInfo) {
     history.push("/");
@@ -39,13 +43,6 @@ const AdminProductList = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch, success, successCreate]);
-
-  const deleteHandler = (id) => {
-    if (window.confirm("Are You sure")) {
-      //Delete Products
-      dispatch(deleteProduct(id));
-    }
-  };
 
   // const handleEdit = (id) => {
   //   console.log(id);
@@ -122,33 +119,78 @@ const AdminProductList = () => {
 
             <DeleteOutline
               className='admin_service_list_delete'
-              onClick={() => deleteHandler(params.row.id)}
+              onClick={() => deleteHandler(params.row.name, params.row.id)}
             />
           </>
         );
       },
     },
   ];
+
+  const deleteHandler = (name, id) => {
+    setProductName(name);
+    setProductId(id);
+
+    document.getElementById("user-modal").style.display = "block";
+
+    // if (window.confirm("Are You Sure?")) {
+    // }
+  };
+
+  // Confirm Delete Button
+  const confirmDelete = () => {
+    dispatch(deleteProduct(productId));
+    document.getElementById("user-modal").style.display = "none";
+  };
+  // Calling From onDismiss prop
+  const hideModal = () => {
+    document.getElementById("user-modal").style.display = "none";
+  };
+
+  // Modal Action Buttons
+  const actions = (
+    <>
+      <button onClick={confirmDelete} className='ui button negative'>
+        Delete
+      </button>
+      <button
+        onClick={() =>
+          (document.getElementById("user-modal").style.display = "none")
+        }
+        className='ui button'
+      >
+        Cancel
+      </button>
+    </>
+  );
   return (
-    <div className='admin_services'>
-      <Link to='/admin/create-product'>
-        <button className='create_new_product_btn my-3 mb-5'>
-          Create New Product
-        </button>
-      </Link>
-      {loadingDelete && <Loading></Loading>}
-      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-      {success && <Message>{"Product Was Deleted Successfully"}</Message>}
-      <div style={{ height: 780, width: "100%", fontFamily: "Open Sans" }}>
-        <DataGrid
-          rows={products}
-          disableSelectionOnClick
-          columns={columns}
-          pageSize={12}
-          checkboxSelection
-        />
+    <>
+      <div className='admin_services'>
+        <Link to='/admin/create-product'>
+          <button className='create_new_product_btn my-3 mb-5'>
+            Create New Product
+          </button>
+        </Link>
+        {loadingDelete && <Loading></Loading>}
+        {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+        {success && <Message>{"Product Was Deleted Successfully"}</Message>}
+        <div style={{ height: 780, width: "100%", fontFamily: "Open Sans" }}>
+          <DataGrid
+            rows={products}
+            disableSelectionOnClick
+            columns={columns}
+            pageSize={12}
+            checkboxSelection
+          />
+        </div>
       </div>
-    </div>
+      <DeleteProduct
+        title='Product Delete'
+        content={`Are you sure you want to delete ${productName}`}
+        actions={actions}
+        onDismiss={hideModal}
+      ></DeleteProduct>
+    </>
   );
 };
 
