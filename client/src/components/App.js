@@ -22,10 +22,13 @@ import CheckoutPlaceOrder from "../screens/CheckoutPlaceOrder";
 
 // Order RELATED SCREEN
 import OrderScreen from "../screens/OrderScreen";
-// USER PROFILE SCREEN
+// Login/Signup Screen
 import SignIn from "../screens/SignIn";
 import SignUp from "../screens/SignUp";
+
+// USER PROFILE SCREEN
 import ProfileScreen from "../screens/ProfileScreen";
+import UserOrderListScreen from "../screens/UserOrderListScreen";
 
 // Admin Screens
 import AdminHomePage from "../components/AdminDashboard/pages/HomePage.jsx";
@@ -153,10 +156,14 @@ function App() {
           </Switch>
 
           <Switch>
-            <MainHeader path='/order' exact>
+            <MainHeader path='/profile/order/:id' exact>
               <div style={{ background: "#f4f4f4" }}>
-                <Footer path='/order' exact>
-                  <Route component={OrderScreen} path='/order' exact></Route>
+                <Footer path='/profile/order/:id' exact>
+                  <Route
+                    component={OrderScreen}
+                    path='/profile/order/:id'
+                    exact
+                  ></Route>
                 </Footer>
               </div>
             </MainHeader>
@@ -166,6 +173,17 @@ function App() {
             <MainHeader path='/profile' exact>
               <Footer path='/profile' exact>
                 <Route component={ProfileScreen} path='/profile' exact></Route>
+              </Footer>
+            </MainHeader>
+          </Switch>
+          <Switch>
+            <MainHeader path='/profile/orders' exact>
+              <Footer path='/profile/orders' exact>
+                <Route
+                  component={UserOrderListScreen}
+                  path='/profile/orders'
+                  exact
+                ></Route>
               </Footer>
             </MainHeader>
           </Switch>

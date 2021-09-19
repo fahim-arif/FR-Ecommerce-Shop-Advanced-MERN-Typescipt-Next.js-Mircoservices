@@ -1,9 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { myOrderDetails } from "../actions/orderActions";
+import { useParams } from "react-router-dom";
 import styles from "../components/styles/orderScreen.module.css";
 import { Link } from "react-router-dom";
-export default function OrderScreen() {
+
+import Loading from "../components/Loading";
+import Message from "../components/Message";
+
+export default function OrderScreen({ match }) {
+  let id = match.params.id;
+  let prodTotalPrice;
+  const dispatch = useDispatch();
+  const myOrder = useSelector((state) => state.myOrder);
+  const { order, loading, error } = myOrder;
+  let firstName;
+  let lastName;
+  let address;
+  let city;
+  let division;
+  let phone;
+  let zip;
+  if (order) {
+    const { shippingAddress } = order;
+    firstName = shippingAddress.firstName;
+    lastName = shippingAddress.lastName;
+    address = shippingAddress.address;
+    city = shippingAddress.city;
+    division = shippingAddress.division;
+    phone = shippingAddress.phone;
+    zip = shippingAddress.zip;
+  }
+
+  useEffect(() => {
+    dispatch(myOrderDetails(id));
+  }, [dispatch]);
+
+  if (order) {
+    prodTotalPrice = order.orderItems.reduce(
+      (acc, item) => acc + item.qty * item.price,
+      0
+    );
+    console.log(prodTotalPrice);
+  }
   return (
     <div className={styles.order_screen}>
+      {loading && <Loading></Loading>}
       <div className={styles.order_screen_container}>
         <div className={styles.main_title}>ORDER DETAILS</div>
         <div className={styles.container}>
@@ -53,9 +95,15 @@ export default function OrderScreen() {
           </div>
           <div className={styles.right_container}>
             <div className={styles.right_top}>
-              <div className={styles.order_id}>Orders: sdkjlfhasdljkfh</div>
+              <div className={styles.order_id}>
+                Orders: #{order && order._id}
+              </div>
               <div className={styles.total_price}>
-                Total: <span className={styles.bold}> ৳ 1,632</span>
+                Total:{" "}
+                <span className={styles.bold}>
+                  {" "}
+                  ৳ {order && order.totalPrice}
+                </span>
               </div>
             </div>
             <div className={styles.right_main}>
@@ -68,7 +116,7 @@ export default function OrderScreen() {
                   <img src='/images/Group 31.png' alt='' className='' />
                 </div>
                 <div className={styles.animation_status}>
-                  <div className={styles.processing}>Processing</div>
+                  <div className={styles.processing}>Pending</div>
                   <div className={styles.processing}>Shipped</div>
                   <div className={styles.processing}>Delivered</div>
                 </div>
@@ -80,29 +128,29 @@ export default function OrderScreen() {
                 </div>
               </div>
               <div className={styles.order_list_container}>
-                <div className={styles.row}>
-                  <div className={styles.col_1}>
-                    <div className={styles.img_container}>
-                      <img
-                        src='/images/68-105-274-V01.jpg'
-                        alt=''
-                        className={styles.img}
-                      />
+                {order &&
+                  order.orderItems.map((item) => (
+                    <div key={item._id} className={styles.row}>
+                      <div className={styles.col_1}>
+                        <div className={styles.img_container}>
+                          <img
+                            src={item.image}
+                            alt='product Image'
+                            className={styles.img}
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.col_2}>
+                        <div className={styles.order_title}>{item.name}</div>
+                      </div>
+                      <div className={styles.col_3}>
+                        <div className={styles.order_price}>
+                          {item.qty} x {item.price} = ৳{" "}
+                          {(item.qty * item.price).toFixed(2)}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className={styles.col_2}>
-                    <div className={styles.order_title}>
-                      Intel Core i7 10th Gen - Core i7-10700K Comet Lake 8-Core
-                      3.8 GHz LGA 1200 125W Desktop Processor w/ Intel UHD
-                      Graphics 630
-                    </div>
-                  </div>
-                  <div className={styles.col_3}>
-                    <div className={styles.order_price}>
-                      $ 1 x 289.99 = $289.99
-                    </div>
-                  </div>
-                </div>
+                  ))}
               </div>
             </div>
             <div className={styles.right_bottom}>
@@ -110,23 +158,31 @@ export default function OrderScreen() {
                 <div className={styles.col}>
                   <div className={styles.sub_title}>Delivery Addresss</div>
                   <div className={styles.user_name}>
-                    <span className={styles.bold_name}>Fahim Arif</span>
+                    <span className={styles.bold_name}>
+                      {order && firstName} {order && lastName}
+                    </span>
                   </div>
                   <div className={styles.user_address}>
                     Address:
-                    <span className={styles.content}>Kaigari, Bogra</span>
+                    <span className={styles.content}> {order && address}</span>
                   </div>
                   <div className={styles.user_address}>
                     City-Zip:
-                    <span className={styles.content}>Bogra-5800</span>
+                    <span className={styles.content}>
+                      {" "}
+                      {order && city}- {order && zip}
+                    </span>
                   </div>
                   <div className={styles.user_address}>
                     Division, Country:
-                    <span className={styles.content}>Rajshahi, Bangladesh</span>
+                    <span className={styles.content}>
+                      {" "}
+                      {order && division}, Bangladesh
+                    </span>
                   </div>
                   <div className={styles.user_address}>
                     Phone:
-                    <span className={styles.content}>01638418833</span>
+                    <span className={styles.content}> {order && phone}</span>
                   </div>
                 </div>
                 <div className={styles.col}>
@@ -134,26 +190,38 @@ export default function OrderScreen() {
                   <div className={styles.row_summary}>
                     <div className={styles.col_summary}>
                       <div className={styles.summary_title}>Sub Total:</div>
-                      <div className={styles.summary_value}>50000</div>
+                      <div className={styles.summary_value}>
+                        ৳ {prodTotalPrice}
+                      </div>
                     </div>
                     <div className={styles.col_summary}>
                       <div className={styles.summary_title}>
                         Delivery Charge:
                       </div>
-                      <div className={styles.summary_value}>50000</div>
+                      <div className={styles.summary_value}>
+                        ৳{order && order.shippingPrice}
+                      </div>
                     </div>
                     <div className={styles.col_summary}>
                       <div className={styles.summary_title}>Tax Fee:</div>
-                      <div className={styles.summary_value}>50000</div>
+                      <div className={styles.summary_value}>
+                        {" "}
+                        ৳ {order && order.taxPrice}
+                      </div>
                     </div>
                     <hr />
                     <div className={styles.col_summary}>
                       <div className={styles.sub_title}>Total</div>
-                      <div className={styles.total_price}>10000</div>
+                      <div className={styles.total_price}>
+                        {" "}
+                        ৳ {order && order.totalPrice}
+                      </div>
                     </div>
                     <div className={styles.title_payment}>
                       <span className={styles.payment_bold}>Payment: </span>
-                      <span className={styles.payment_content}>bKash</span>{" "}
+                      <span className={styles.payment_content}>
+                        {order && order.paymentMethod}
+                      </span>{" "}
                     </div>
                   </div>
                 </div>
