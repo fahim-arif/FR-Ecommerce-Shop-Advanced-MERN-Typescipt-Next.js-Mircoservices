@@ -9,6 +9,7 @@ import userRoutes from "./Routes/userRoutes.js";
 import uploadRoutes from "./Routes/uploadRoutes.js";
 import contactRoutes from "./Routes/contactRoutes.js";
 import couponRoutes from "./Routes/couponRoutes.js";
+import orderRoutes from "./Routes/orderRoutes.js";
 
 import { notFound, errorPageHandler } from "./middleware/errorMiddleware.js";
 
@@ -30,6 +31,8 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/contact-us", contactRoutes);
 
 app.use("/api/coupon", couponRoutes);
+
+app.use("/api/order", orderRoutes);
 
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

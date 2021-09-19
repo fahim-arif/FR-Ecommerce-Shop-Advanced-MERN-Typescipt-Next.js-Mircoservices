@@ -1,45 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../actions/orderActions";
+import { removeAllFromCart } from "../actions/cartActions";
+import { editProduct } from "../actions/productActions";
+import Message from "../components/Message";
+import Loading from "../components/Loading";
 // import { useHistory } from "react-router";
 // import { addToCart } from "../actions/cartActions";
+
 import styles from "../components/styles/checkoutShipping.module.css";
 
 import "../components/styles/checkoutPayment.css";
 import "../components/styles/checkoutPlaceOrder.css";
 import CheckoutProgressBar from "../components/CheckoutProgressBar";
 import { Add, PlayArrow } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 export default function CheckoutPayment({ history }) {
   const [open, setOpen] = useState(false);
   const [promo, setPromo] = useState("");
-  const [bkash, setBkash] = useState(false);
-  const [rocket, setRocket] = useState(false);
-  const [cash, setCash] = useState(false);
-  const [credit, setCredit] = useState(false);
+  const [paymentNumber, setPaymentNumber] = useState(0);
+  const [paymentTxNumber, setPaymentTxNumber] = useState(0);
+  const [message, setMessage] = useState("");
 
+  // let estTotal;
   // const history = useHistory();
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { paymentMethod, cartItems, shippingAddress } = cart;
 
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { loading, success, order } = orderCreate;
+
   const { method } = paymentMethod;
 
   const { firstName, lastName, address, address2, city, division, phone, zip } =
     shippingAddress;
-
-  let subtotal = cartItems
-    .reduce((acc, item) => acc + item.price * item.qty, 0)
-    .toFixed(2);
-
-  let deliveryCharge = subtotal > 1000 ? 60 : 130;
-
-  let total = (
-    Number(subtotal * 0.025) +
-    Number(subtotal) +
-    Number(deliveryCharge)
-  ).toFixed(2);
-
-  let estTotal = (Number(total * 0.0185) + Number(total)).toFixed(2);
 
   useEffect(() => {
     // if (!paymentMethod) {
@@ -50,38 +46,116 @@ export default function CheckoutPayment({ history }) {
   const promoSubmit = (e) => {
     e.preventDefault();
   };
-  const onBkash = () => {
-    setBkash(true);
-    setRocket(false);
-    setCash(false);
-    setCredit(false);
+
+  // Order variables
+  let paymentCharge;
+
+  let estTotal;
+  let deliveryCharge;
+  let taxCharge;
+  let onlinePayment;
+  let subtotal = cartItems
+    .reduce((acc, item) => acc + item.price * item.qty, 0)
+    .toFixed(2);
+
+  taxCharge = Number(subtotal * 0.025).toFixed(2);
+
+  deliveryCharge = subtotal > 1000 ? 60 : 130;
+
+  if (!(method === "Cash on Delivery")) {
+    paymentCharge = (subtotal * 0.0185).toFixed(2);
+
+    estTotal = (
+      Number(subtotal * 0.025) +
+      Number(subtotal) +
+      Number(paymentCharge) +
+      Number(deliveryCharge)
+    ).toFixed(2);
+  } else {
+    // paymentCharge = (subtotal * 0.0185).toFixed(2);
+    estTotal = (
+      Number(subtotal * 0.025) +
+      Number(subtotal) +
+      Number(deliveryCharge)
+    ).toFixed(2);
+  }
+
+  onlinePayment = {
+    phoneNumber: {
+      paymentNumber,
+    },
+    txnId: {
+      paymentTxNumber,
+    },
   };
-  const onRocket = () => {
-    setBkash(false);
-    setRocket(true);
-    setCash(false);
-    setCredit(false);
-  };
-  const onCredit = () => {
-    setBkash(false);
-    setRocket(false);
-    setCash(false);
-    setCredit(true);
-  };
-  const onCash = () => {
-    setBkash(false);
-    setRocket(false);
-    setCash(true);
-    setCredit(false);
+  // estTotal = (Number(total * 0.0185) + Number(total)).toFixed(2);
+
+  const submitOrder = () => {
+    if (method === "Cash on Delivery") {
+      dispatch(
+        createOrder({
+          orderItems: cart.cartItems,
+          shippingAddress: cart.shippingAddress,
+          paymentMethod: method,
+          itemsPrice: subtotal,
+          shippingPrice: deliveryCharge,
+          taxPrice: taxCharge,
+          totalPrice: estTotal,
+        })
+      );
+
+      dispatch(removeAllFromCart());
+    } else {
+      if (paymentTxNumber && paymentNumber) {
+        setMessage("");
+        dispatch(
+          createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: method,
+            paymentCharge: paymentCharge,
+            itemsPrice: subtotal,
+            shippingPrice: deliveryCharge,
+            taxPrice: taxCharge,
+            totalPrice: estTotal,
+            onlinePayment: onlinePayment,
+          })
+        );
+        dispatch(removeAllFromCart());
+      } else {
+        setMessage("Please enter phone number or transaction number");
+      }
+    }
   };
   return (
     <>
       <CheckoutProgressBar step1 step2 step3 step4></CheckoutProgressBar>
+      {loading && <Loading />}
       <div className={`${styles.checkout_shipping}`}>
         <div className={styles.container}>
           <div className={`${styles.container_left} place_order_left`}>
             <div className={styles.address_container}>
               <div className={styles.form_container}>
+                {message && <Message variant='dark'>{message}</Message>}
+                {success && (
+                  <Message variant='dark'>
+                    {`Your Order has been placed successfully.`}
+                    <Link
+                      to={`/profile/order/${order._id}`}
+                      style={{
+                        color: "#000",
+                        fontSize: "16px",
+                        fontWeight: "700",
+                        textDecoration: "none",
+                        paddingLeft: "5px",
+                      }}
+                      className='bold'
+                      to='/order'
+                    >
+                      Click to view update
+                    </Link>
+                  </Message>
+                )}
                 <div className={styles.address_title}>Shipping Address</div>
                 <div className='checkout_shipping_summary_container'>
                   <div className='checkout_shipping_summary_content'>
@@ -129,9 +203,10 @@ export default function CheckoutPayment({ history }) {
                       {`Please complete your ${method} payment at first. Also note that 1.85% ${method} "SEND MONEY" cost
                     will be added with net price.`}
                       <br />
+                      <br />
                       Total amount you need to pay us ৳{" "}
-                      <span className='bold'>6315 </span>
-                      at <span className='bold'>01638418833 </span>.
+                      <span className='bold'>{estTotal} </span>
+                      at <span className='bold'>01638418833 </span>(personal).
                     </div>
                   )}
 
@@ -142,13 +217,16 @@ export default function CheckoutPayment({ history }) {
                           Your {method} Account Number
                         </label>
                         <input
+                          onChange={(e) => setPaymentNumber(e.target.value)}
                           type='text'
                           className='checkout_payment_phone_input'
+                          required
                         />
                         <label className='checkout_payment_label'>
                           {method} Account Number
                         </label>
                         <input
+                          onChange={(e) => setPaymentTxNumber(e.target.value)}
                           type='text'
                           className='checkout_payment_phone_input'
                         />
@@ -170,7 +248,12 @@ export default function CheckoutPayment({ history }) {
                   Order Items
                 </div>
                 <div className='checkout_order_summary_edit_change_btn'>
-                  <button className='summary_edit_change'>EDIT CHANGE</button>
+                  <button
+                    onClick={() => history.push("/cart" )}
+                    className='summary_edit_change'
+                  >
+                    EDIT CHANGE
+                  </button>
                 </div>
                 <div className='checkout_order_summary_container'>
                   {cartItems.map((item) => (
@@ -298,7 +381,7 @@ export default function CheckoutPayment({ history }) {
               </div>
             </div>
             <div className='place_order_btn_container'>
-              <button className='place_order_button'>
+              <button onClick={submitOrder} className='place_order_button'>
                 PLACE ORDER
                 <PlayArrow className='place_order_button_icon'></PlayArrow>
               </button>

@@ -115,19 +115,21 @@
 .row {
   display: flex;
   max-width: 685px;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 .col_1 {
   flex-basis: 20%;
 }
 .col_2 {
+  flex-basis: 100%;
+  padding-right: 20px;
 }
 .order_title {
   font-size: 13px;
   font-weight: 600;
 }
 .col_3 {
-  flex-basis: 65%;
+  flex-basis: 50%;
 }
 .order_price {
   font-size: 16px;

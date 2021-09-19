@@ -18,6 +18,11 @@ import {
   productEditReducer,
 } from "./reducers/productsReducer";
 
+import {
+  orderCreateReducers,
+  myOrderListReducer,
+  myOrderReducer,
+} from "./reducers/orderReducer";
 import { marginReducer } from "./reducers/marginReducer";
 
 import { cartReducer } from "./reducers/cartsReducer";
@@ -28,7 +33,6 @@ const reducer = combineReducers({
   productCreate: productCreateReducer,
   productDelete: productDeleteReducer,
   productEdit: productEditReducer,
-  cart: cartReducer,
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
   sideMargin: marginReducer,
@@ -36,6 +40,10 @@ const reducer = combineReducers({
   userFetch: userFetchReducer,
   userDelete: userDeleteReducer,
   userEdit: userEditReducer,
+  cart: cartReducer,
+  orderCreate: orderCreateReducers,
+  myOrderList: myOrderListReducer,
+  myOrder: myOrderReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -156,3 +156,10 @@ input[type="search"],
 input[type="text"] {
   -webkit-appearance: auto;
 }
+
+.bold {
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1001;
+  color: #000;
+}
