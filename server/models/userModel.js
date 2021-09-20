@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  confirmed: {
+    type: Boolean,
+    default: false,
+  },
   phone: {
     type: String,
   },
@@ -50,7 +54,6 @@ userSchema.method("toClient", function () {
 
   return obj;
 });
-
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);

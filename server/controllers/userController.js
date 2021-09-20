@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import md5 from "md5";
@@ -8,6 +9,9 @@ export const getLogin = (req, res, next) => {
 };
 
 export const authUser = asyncHandler(async (req, res, next) => {
+  
+  // End
+
   const { email, password, googleAuth } = req.body;
 
   const user = await User.findOne({ email });

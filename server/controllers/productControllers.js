@@ -1,14 +1,19 @@
 import Product from "../models/productModel.js";
 import asyncHandler from "express-async-handler";
+import { mail } from "../utils/nodeMailer.js";
+import { pdf } from "../utils/pdfkit/pdfkit.js";
+
 
 const getProducts = async (req, res, next) => {
   const response = await Product.find();
+
 
   res.json(response);
 };
 
 const getProduct = async (req, res, next) => {
   const id = req.params.id;
+  mail(id);
   const response = await Product.findById(id);
 
   res.json(response);

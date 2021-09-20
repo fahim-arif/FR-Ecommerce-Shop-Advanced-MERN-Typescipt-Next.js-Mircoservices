@@ -42,6 +42,7 @@ import "../components/styles/AdminScreen.css";
 import ProductDetails from "./AdminDashboard/pages/products/AdminProductEdit.jsx";
 import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
 import CheckoutPayment from "../screens/CheckoutPayment";
+import ImageMagnify from "./magnify-image/ImageMagnify";
 
 function App() {
   return (
@@ -150,6 +151,16 @@ function App() {
                     path='/checkout-placeorder'
                     exact
                   ></Route>
+                </Footer>
+              </div>
+            </MainHeader>
+          </Switch>
+
+          <Switch>
+            <MainHeader path='/magnify' exact>
+              <div style={{ background: "#f4f4f4" }}>
+                <Footer path='/magnify' exact>
+                  <Route component={ImageMagnify} path='/magnify' exact></Route>
                 </Footer>
               </div>
             </MainHeader>
