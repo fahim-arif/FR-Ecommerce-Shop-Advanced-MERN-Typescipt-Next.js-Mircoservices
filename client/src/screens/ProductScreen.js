@@ -6,13 +6,15 @@ import ProductList from "../components/ProductList";
 import { getProducts } from "../actions/productActions";
 import { Row, Col } from "react-bootstrap";
 
-const ProductScreen = () => {
+const ProductScreen = ({ match }) => {
+  const keyword = match.params.keyword;
+
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    dispatch(getProducts(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <div className={styles.product_container}>

@@ -1,14 +1,26 @@
 import Product from "../models/productModel.js";
 import asyncHandler from "express-async-handler";
+import { mail } from "../utils/nodeMailer.js";
+import { pdf } from "../utils/pdfkit/pdfkit.js";
 
-const getProducts = async (req, res, next) => {
-  const response = await Product.find();
+const getProducts = asyncHandler(async (req, res, next) => {
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const response = await Product.find({ ...keyword });
 
   res.json(response);
-};
+});
 
 const getProduct = async (req, res, next) => {
   const id = req.params.id;
+  mail(id);
   const response = await Product.findById(id);
 
   res.json(response);

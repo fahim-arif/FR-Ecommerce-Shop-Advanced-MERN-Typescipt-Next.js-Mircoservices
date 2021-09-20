@@ -12,7 +12,6 @@ const HomeScreen = () => {
       <DailyDealsSection></DailyDealsSection>
       <FeaturedCategory></FeaturedCategory>
       <OtherSections></OtherSections>
-      <Slider></Slider>
     </div>
   );
 };

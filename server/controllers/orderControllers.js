@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
+import pdf from "html-pdf";
+import { pdfTemp } from "../utils/html-pdf/pdfTemp.js";
 
 export const addOrder = asyncHandler(async (req, res, next) => {
   const {
@@ -30,6 +32,7 @@ export const addOrder = asyncHandler(async (req, res, next) => {
     });
 
     const createOrder = await order.save();
+
     res.status(201).json(createOrder);
   } else {
     const order = new Order({
@@ -45,6 +48,18 @@ export const addOrder = asyncHandler(async (req, res, next) => {
 
     const createOrder = await order.save();
     res.status(201).json(createOrder);
+
+    console.log(createOrder);
+    console.log("Hiiiiiiiiiii");
+
+    pdf
+      .create(pdfTemp(req.body, createOrder._id), {})
+      .toFile("result.pdf", (err) => {
+        if (err) {
+          return Promise.reject();
+        }
+        return Promise.resolve();
+      });
   }
 });
 

@@ -44,7 +44,6 @@ const Hero = () => {
 
   return (
     <>
-     
       <div className='hero_container'>
         <div className='hero_collapse_menu'>
           <ul className='main_collapse_menu'>
@@ -332,6 +331,7 @@ const Hero = () => {
         </div>
 
         <div className='hero_section'>
+          <HomeSlider />
           {/* <div className='hero_main_slider'></div> */}
           <div className='hero_sub_slider'>
             <Link to='/55' className='sub_slider_left'></Link>

@@ -21,23 +21,27 @@ import {
 } from "../types/productTypes.js";
 import axios from "axios";
 
-export const getProducts = () => async (dispatch) => {
-  try {
-    dispatch({ type: GET_PRODUCTS_REQUEST });
-    // http://localhost:5000/api/user/
-    const { data } = await axios.get("http://localhost:5000/api/products");
+export const getProducts =
+  (keyword = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: GET_PRODUCTS_REQUEST });
+      // http://localhost:5000/api/user/
+      const { data } = await axios.get(
+        `http://localhost:5000/api/products?keyword=${keyword}`
+      );
 
-    dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: GET_PRODUCTS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: GET_PRODUCTS_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const getProduct = (id) => async (dispatch) => {
   try {

@@ -1,12 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../components/styles/profileScreen.module.css";
-import DemoModal from "../components/modals/DemoModal";
+import { useSelector } from "react-redux";
+import Message from "../components/Message";
+import Loading from "../components/Loading";
+import axios from "axios";
+import { SaveAltSharp } from "@material-ui/icons";
 const ProfileScreen = () => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+  const { username, email } = userInfo;
+
+  const cart = useSelector((state) => state.cart);
+
+  const demoHandler = () => {
+    axios
+      .post("http://localhost:5000/api/pdf")
+      .then(() =>
+        axios.get("http://localhost:5000/api/pdf", { responseType: "blob" })
+      )
+      .then((res) => {
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+        SaveAltSharp(pdfBlob, "newPdf.pdf");
+      });
+  };
   return (
     <>
-      <DemoModal></DemoModal>
       <div className={styles.container}>
+        {loading && <Loading></Loading>}
+        {error && <Message></Message>}
         <div className={styles.row}>
           <div className={styles.col_1}>
             <div className={styles.title}>Orders</div>
@@ -51,18 +73,22 @@ const ProfileScreen = () => {
             <div className={styles.user_info_container}>
               <div className={styles.field_name}>
                 Account Information{" "}
-                <span className={styles.name}>Fahim Arif Rahman</span>{" "}
+                <span className={styles.name}>{username}</span>{" "}
               </div>
               <button className={styles.btn}>EDIT</button>
             </div>
 
-            <div className={styles.email}>fahim1.618555@gmail.com</div>
-            <div className={styles.phone}>01638418833</div>
+            <div className={styles.email}>{email}</div>
+            <div className={styles.phone}>
+              {cart.shippingAddress && cart.shippingAddress.phone}
+            </div>
             <div className={styles.password_container}>
               <div className={styles.password}>
                 Password <span className={styles.stars}>*********</span>{" "}
               </div>
-              <button className={styles.btn}>EDIT</button>
+              <button onClick={demoHandler} className={styles.btn}>
+                EDIT
+              </button>
             </div>
             <div className={styles.verify_container}>
               <div className={styles.verification}>
