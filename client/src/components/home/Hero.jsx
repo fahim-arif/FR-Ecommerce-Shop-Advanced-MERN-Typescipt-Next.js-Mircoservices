@@ -331,8 +331,8 @@ const Hero = () => {
         </div>
 
         <div className='hero_section'>
-          {/* <HomeSlider /> */}
-          <div className='hero_main_slider'></div>
+          <HomeSlider />
+          {/* <div className='hero_main_slider'></div> */}
           <div className='hero_sub_slider'>
             <Link to='/55' className='sub_slider_left'></Link>
             <Link to='/ff' className='sub_slider_right'></Link>

@@ -84,6 +84,17 @@ function App() {
             </MainHeader>
           </Switch>
           <Switch>
+            <MainHeader path='/shop/search/:keyword' exact>
+              <Footer path='/shop/search/:keyword' exact>
+                <Route
+                  component={ProductScreen}
+                  path='/shop/search/:keyword'
+                  exact
+                ></Route>
+              </Footer>
+            </MainHeader>
+          </Switch>
+          <Switch>
             <MainHeader path='/shop/:id' exact>
               <Footer path='/shop/:id' exact>
                 <Route

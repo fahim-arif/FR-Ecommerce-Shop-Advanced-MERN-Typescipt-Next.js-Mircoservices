@@ -50,7 +50,9 @@
 }
 .hero_sub_slider {
   display: flex;
-  margin-top: 284px;
+  /* margin-top: 284px;
+   */
+  margin-top: 302px;
 }
 
 /* Collapse Menu */
@@ -159,8 +161,8 @@
 
 .flex-container {
   position: absolute;
-  top: 3px;
-  left: 0px;
+  top: -163px;
+  left: -253px;
   width: 100%;
   height: 295px;
 

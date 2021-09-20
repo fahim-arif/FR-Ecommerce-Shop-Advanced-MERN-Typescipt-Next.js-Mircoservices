@@ -3,17 +3,23 @@ import { Search } from "@material-ui/icons";
 import styles from "../styles/header.module.css";
 
 const SearchBox = ({ history }) => {
-  const [keyward, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
+    if (keyword.trim()) {
+      history.push(`/shop/search/${keyword}`);
+    } else {
+      history.push("/shop");
+    }
   };
 
   return (
     <div>
-      <form  className={styles.search_form} onSubmit={submitHandler}>
+      <form className={styles.search_form} onSubmit={submitHandler}>
         <input
           className={styles.search_input}
           type='text'
+          name='q'
           placeholder='Search..'
           onChange={(e) => setKeyword(e.target.value)}
         />
