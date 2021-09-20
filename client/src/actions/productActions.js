@@ -22,7 +22,7 @@ import {
 import axios from "axios";
 
 export const getProducts =
-  (keyword = "") =>
+  (keyword = "", category = "") =>
   async (dispatch) => {
     try {
       dispatch({ type: GET_PRODUCTS_REQUEST });
@@ -30,6 +30,17 @@ export const getProducts =
       const { data } = await axios.get(
         `http://localhost:5000/api/products?keyword=${keyword}`
       );
+
+      if (category) {
+        category = category.charAt(0).toUpperCase() + category.slice(1);
+        console.log(category);
+        const { data } = await axios.get(
+          `http://localhost:5000/api/products/search?category=${category}`
+        );
+        console.log(data);
+        dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
+        return;
+      }
 
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
     } catch (error) {

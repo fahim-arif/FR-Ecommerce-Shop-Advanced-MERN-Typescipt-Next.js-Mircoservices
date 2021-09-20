@@ -44,6 +44,7 @@
   padding: 0 10px;
   height: 176px;
   width: 304px;
+  object-fit: contain;
 }
 .card_rating {
   padding: 10px 0 10px 20px;
@@ -180,6 +181,7 @@
 }
 /* LAST COL Image */
 .last_sub_row-1_image {
+  object-fit: cover;
   height: 118px;
   width: 118px;
   margin-left: 20px;

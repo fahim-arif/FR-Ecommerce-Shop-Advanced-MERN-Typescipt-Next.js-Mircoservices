@@ -9,32 +9,23 @@ import { Row, Col } from "react-bootstrap";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 
-const ProductScreen = ({ match, location }) => {
+const CategoryScreen = ({ match }) => {
   const keyword = match.params.keyword;
 
   const category = match.params.category;
 
-  // console.log(category);
-  // console.log(keyword);
-
-  // console.log(location.search);
+  console.log(location.search);
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProducts(keyword, category));
-  }, [dispatch, keyword, category]);
+    dispatch(getProducts(keyword));
+  }, [dispatch, keyword]);
 
   const quickSearchHanlder = (e) => {
-    dispatch(getProducts(e.target.value));
+    dispatch(getProducts("", e.target.value));
   };
-
-  // Category Searching
-
-  // useEffect(() => {
-  //   dispatch(getProduct(category));
-  // }, [category]);
   return (
     <div className={styles.product_container}>
       <div className={styles.side_bar}>
@@ -245,4 +236,4 @@ const ProductScreen = ({ match, location }) => {
   );
 };
 
-export default ProductScreen;
+export default CategoryScreen;

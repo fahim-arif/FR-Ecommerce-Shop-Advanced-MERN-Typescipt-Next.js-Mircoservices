@@ -13,74 +13,86 @@ const FeaturedCatagory = () => {
           <div className={styles.category_row}>
             <div className={styles.category_col}>
               <div className={styles.feaured_img_container}>
-                <img
-                  src='/images/featured/1.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/shop/search/girls'>
+                  <img
+                    src='/images/featured/1.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Kid's</Link>
+                <Link to='/shop/search/girls'>Kid's</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.feaured_img_container}>
-                <img
-                  src='/images/featured/2.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/men'>
+                  <img
+                    src='/images/featured/2.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Men's</Link>
+                <Link to='/search/men'>Men's</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/3.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/women'>
+                  <img
+                    src='/images/featured/3.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Women's</Link>
+                <Link to='/search/women'>Women's</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/4.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/school'>
+                  <img
+                    src='/images/featured/4.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Ready For School</Link>
+                <Link to='/search/school'>Ready For School</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/5.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/home'>
+                  <img
+                    src='/images/featured/5.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Home</Link>
+                <Link to='/search/home'>Home</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.feaured_img_container}>
-                <img
-                  src='/images/featured/6.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/shop/search/fashion'>
+                  <img
+                    src='/images/featured/6.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Fashion</Link>
+                <Link to='/shop/search/fashion'>Fashion</Link>
               </div>
             </div>
           </div>
@@ -88,74 +100,88 @@ const FeaturedCatagory = () => {
           <div className={styles.category_row}>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/7.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/shop/search/gaming'>
+                  <img
+                    src='/images/featured/7.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Kid's</Link>
+                <Link to='/shop/search/gaming'>Gaming</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/8.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/furniture'>
+                  <img
+                    src='/images/featured/8.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Men's</Link>
+                <Link to='/search/furniture'>Furniture</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/9.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/Outdoor and bicycle'>
+                  <img
+                    src='/images/featured/9.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Women's</Link>
+                <Link to='/search/Outdoor and bicycle'>
+                  Sports {"&"} Outdoor
+                </Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/10.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/baby'>
+                  <img
+                    src='/images/featured/10.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Ready For School</Link>
+                <Link to='/search/baby'>Baby</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/11.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/cosmetics'>
+                  <img
+                    src='/images/featured/11.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Home</Link>
+                <Link to='/search/cosmetics'>Makeup {"&"} Cosmetics</Link>
               </div>
             </div>
             <div className={styles.category_col}>
               <div className={styles.featured_img_container}>
-                <img
-                  src='/images/featured/12.jpg'
-                  alt='featured image'
-                  className={styles.featured_img}
-                ></img>
+                <Link to='/search/electronics'>
+                  <img
+                    src='/images/featured/12.jpg'
+                    alt='featured image'
+                    className={styles.featured_img}
+                  ></img>
+                </Link>
               </div>
               <div className={styles.img_caption}>
-                <Link to='#'>Fashion</Link>
+                <Link to='/search/electronics'>Electronics</Link>
               </div>
             </div>
           </div>
