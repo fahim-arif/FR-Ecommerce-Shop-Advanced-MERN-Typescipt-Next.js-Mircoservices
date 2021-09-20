@@ -91,6 +91,7 @@
 
 /* Dropdown  */
 .mega_collapse_menu {
+  padding-top: 20px;
   box-shadow: var(--webkit-box-shadow);
   -webkit-box-shadow: var(--webkit-box-shadow);
   position: absolute;
@@ -118,6 +119,7 @@
 }
 
 .mega_collapse_menu-2 {
+  padding-top: 20px;
   box-shadow: var(--webkit-box-shadow);
   -webkit-box-shadow: var(--webkit-box-shadow);
   position: absolute;
@@ -128,6 +130,7 @@
   top: 45px;
 }
 .mega_collapse_menu-3 {
+  padding-top: 20px;
   box-shadow: var(--webkit-box-shadow);
   -webkit-box-shadow: var(--webkit-box-shadow);
   position: absolute;

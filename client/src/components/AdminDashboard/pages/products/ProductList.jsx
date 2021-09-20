@@ -171,7 +171,10 @@ const AdminProductList = () => {
             Create New Product
           </button>
         </Link>
+        {loading && <Loading></Loading>}
+
         {loadingDelete && <Loading></Loading>}
+        {error && <Message variant='danger'>{error}</Message>}
         {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
         {success && <Message>{"Product Was Deleted Successfully"}</Message>}
         <div style={{ height: 780, width: "100%", fontFamily: "Open Sans" }}>

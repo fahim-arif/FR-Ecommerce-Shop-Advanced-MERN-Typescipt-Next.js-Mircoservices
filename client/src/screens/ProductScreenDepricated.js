@@ -44,7 +44,9 @@ const ProductScreen = ({ match, history }) => {
             <Col md={4}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h4>{product.name}</h4>
+                  {/* <h4>{product.name.length > 10 ? "long" : product.name}</h4> */}
+
+                  {/* <h4>{product.name}</h4> */}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating

@@ -128,6 +128,8 @@ const UserList = () => {
   return (
     <>
       <div className='admin_userList'>
+        {loading && <Loading></Loading>}
+
         {loadingDelete && <Loading></Loading>}
         {error && <Message variant='danger'>{error}</Message>}
         {success && <Message>{"User Was Deleted Successfully"}</Message>}

@@ -18,6 +18,14 @@ const getProducts = asyncHandler(async (req, res, next) => {
   res.json(response);
 });
 
+const getProductCategory = asyncHandler(async (req, res, next) => {
+  const category = req.query.category;
+
+  const response = await Product.find({ category });
+
+  res.json(response);
+});
+
 const getProduct = async (req, res, next) => {
   const id = req.params.id;
   mail(id);
@@ -89,4 +97,11 @@ const editProduct = asyncHandler(async (req, res, next) => {
   // });
   res.status(201).json(updatedProduct);
 });
-export { getProducts, postProduct, getProduct, editProduct, deleteProduct };
+export {
+  getProducts,
+  getProductCategory,
+  postProduct,
+  getProduct,
+  editProduct,
+  deleteProduct,
+};
