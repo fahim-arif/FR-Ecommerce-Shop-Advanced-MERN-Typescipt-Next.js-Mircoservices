@@ -16,6 +16,9 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
+  ORDER_CANCEL_FAIL,
+  ORDER_CANCEL_REQUEST,
+  ORDER_CANCEL_SUCCESS,
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAIL,
@@ -109,6 +112,72 @@ export const listOrderReducer = (state = {}, action) => {
     //   return {
     //     order: [],
     //   };
+    default:
+      return state;
+  }
+};
+
+export const orderPayReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_PAY_REQUEST:
+      return { loading: true };
+
+    case ORDER_PAY_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        order: action.payload,
+      };
+    case ORDER_PAY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const orderDeliverReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_DELIVER_REQUEST:
+      return { loading: true };
+
+    case ORDER_DELIVER_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        order: action.payload,
+      };
+    case ORDER_DELIVER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const orderCancelReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_CANCEL_FAIL:
+      return { loading: true };
+
+    case ORDER_CANCEL_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        order: action.payload,
+      };
+    case ORDER_CANCEL_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

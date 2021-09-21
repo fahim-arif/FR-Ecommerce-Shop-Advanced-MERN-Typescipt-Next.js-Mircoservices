@@ -10,6 +10,7 @@ import Message from "../components/Message";
 
 export default function OrderScreen({ match }) {
   let id = match.params.id;
+  console.log(typeof id);
   let prodTotalPrice;
   const dispatch = useDispatch();
   const myOrder = useSelector((state) => state.myOrder);
@@ -46,7 +47,7 @@ export default function OrderScreen({ match }) {
       if (order.isPaid) {
         setShipped(true);
       }
-      if (order.deliverd) {
+      if (order.isDelivered) {
         setDeliverd(true);
       }
     }
@@ -127,11 +128,18 @@ export default function OrderScreen({ match }) {
                 <span className={styles.status_light}>Status:</span>
                 <span className={styles.status_value}>
                   {/* Not Delivered */}
-                  {order && order.isPaid
+                  {order && order.isCancelled
+                    ? "Order Cancelled"
+                    : order && order.isPaid
                     ? order.isDelivered
                       ? "Delivered"
                       : "Payment Confirmed Waiting For Delivery"
                     : "Payment Pending"}
+                  {/* {order && order.isPaid
+                    ? order.isDelivered
+                      ? "Delivered"
+                      : "Payment Confirmed Waiting For Delivery"
+                    : "Payment Pending"} */}
                   {/* {order && order.isPaid && order.isDelivered ? 'Not '} */}
                 </span>
               </div>
@@ -151,14 +159,14 @@ export default function OrderScreen({ match }) {
                   <div className={styles.processing}>Pending</div>
                   <div
                     className={`${styles.processing_status} ${
-                      shipped ? "active" : ""
+                      shipped ? `${styles.active}` : ""
                     }`}
                   >
                     Shipped
                   </div>
                   <div
                     className={`${styles.processing_status} ${
-                      deliverd ? "active" : ""
+                      deliverd ? `${styles.active}` : ""
                     }`}
                   >
                     Delivered

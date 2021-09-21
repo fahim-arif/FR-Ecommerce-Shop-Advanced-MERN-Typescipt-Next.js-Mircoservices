@@ -2,7 +2,7 @@ const products = [
   {
     _id: "0",
     name: "Calvin Klein Women's 3/4 Sleeve T-Shirt Dress",
-    image: "/images/pro1.jpg",
+    image:.jpg", "/images/pro1
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
     brand: "Calvin Klein",

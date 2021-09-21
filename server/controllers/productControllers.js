@@ -28,7 +28,7 @@ const getProductCategory = asyncHandler(async (req, res, next) => {
 
 const getProduct = async (req, res, next) => {
   const id = req.params.id;
-  mail(id);
+  // mail(id);
   const response = await Product.findById(id);
 
   res.json(response);

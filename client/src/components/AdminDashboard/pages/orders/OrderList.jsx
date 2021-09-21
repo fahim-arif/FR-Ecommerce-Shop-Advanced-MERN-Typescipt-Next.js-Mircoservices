@@ -39,7 +39,6 @@ const OrderList = () => {
   const productDelete = useSelector((state) => state.productDelete);
   const { loading: loadingDelete, error: errorDelete, success } = productDelete;
 
-
   // useEffect(() => {
   //   dispatch(getProducts());
   // }, [dispatch, success]);
@@ -155,7 +154,7 @@ const OrderList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/admin/product-list/${params.row.id}`}>
+            <Link to={`/admin/order-list/${params.row.id}`}>
               <div className='admin_service_list_edit btn'>Details</div>
             </Link>
             {/* <div>
@@ -216,11 +215,6 @@ const OrderList = () => {
   return (
     <>
       <div className='admin_services'>
-        <Link to='/admin/create-product'>
-          <button className='create_new_product_btn my-3 mb-5'>
-            Create New Product
-          </button>
-        </Link>
         {loading && <Loading></Loading>}
 
         {loadingDelete && <Loading></Loading>}

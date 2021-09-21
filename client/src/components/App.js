@@ -44,7 +44,7 @@ import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
 import CheckoutPayment from "../screens/CheckoutPayment";
 import ImageMagnify from "./magnify-image/ImageMagnify";
 import OrderList from "./AdminDashboard/pages/orders/OrderList";
-
+import OrderDetails from "./AdminDashboard/pages/orders/AdminOrderDetails";
 function App() {
   return (
     <>
@@ -191,7 +191,7 @@ function App() {
 
           <Switch>
             <MainHeader path='/profile/order/:id' exact>
-              <div style={{ background: "#f4f4f4" }}>
+              <div style={{ background: "#F4F5F7" }}>
                 <Footer path='/profile/order/:id' exact>
                   <Route
                     component={OrderScreen}
@@ -285,11 +285,22 @@ function App() {
               <UserDetails />
             </div>
           </Route>
+        </Switch>
+        <Switch>
           <Route path='/admin/order-list' exact>
             <Topbar />
             <div className='admin_container'>
               <Sidebar />
               <OrderList />
+            </div>
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path='/admin/order-list/:id' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <OrderDetails />
             </div>
           </Route>
         </Switch>
