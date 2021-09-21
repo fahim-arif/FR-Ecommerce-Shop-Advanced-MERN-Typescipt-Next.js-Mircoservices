@@ -43,6 +43,7 @@ import ProductDetails from "./AdminDashboard/pages/products/AdminProductEdit.jsx
 import CreateProduct from "./AdminDashboard/pages/products/CreateProduct";
 import CheckoutPayment from "../screens/CheckoutPayment";
 import ImageMagnify from "./magnify-image/ImageMagnify";
+import OrderList from "./AdminDashboard/pages/orders/OrderList";
 
 function App() {
   return (
@@ -282,6 +283,13 @@ function App() {
             <div className='admin_container'>
               <Sidebar />
               <UserDetails />
+            </div>
+          </Route>
+          <Route path='/admin/order-list' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <OrderList />
             </div>
           </Route>
         </Switch>

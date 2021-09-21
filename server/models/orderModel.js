@@ -88,6 +88,24 @@ const orderSchema = mongoose.Schema(
   }
 );
 
+orderSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+orderSchema.set("toJSON", {
+  virtuals: true,
+});
+orderSchema.method("toClient", function () {
+  var obj = this.toObject();
+
+  //Rename fields
+  obj.id = obj._id;
+  delete obj._id;
+
+  return obj;
+});
+
 const Order = mongoose.model("Order", orderSchema);
 
 export default Order;

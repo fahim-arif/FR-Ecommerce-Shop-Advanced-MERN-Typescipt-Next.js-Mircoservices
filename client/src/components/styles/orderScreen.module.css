@@ -83,6 +83,7 @@
 .animation_container {
   max-width: 420px;
   margin: 0 auto;
+  padding-top: 50px;
 }
 
 .animation_status {
@@ -208,4 +209,15 @@
 .payment_bold {
   font-weight: 700;
   color: 000;
+}
+
+/* Processing bar bottom text */
+
+.processing_status {
+  color: rgb(172, 168, 168);
+  font-weight: 600;
+}
+.processing {
+  color: #000;
+  font-weight: 600;
 }
