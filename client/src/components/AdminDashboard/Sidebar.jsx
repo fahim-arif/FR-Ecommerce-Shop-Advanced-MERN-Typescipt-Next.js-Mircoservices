@@ -60,10 +60,10 @@ const Sidebar = () => {
                 Products
               </li>
             </Link>
-            <Link to='/admin/transaction'>
+            <Link to='/admin/order-list'>
               <li className='admin_side_bar_item'>
                 <AccountCircle />
-                Transaction
+                Orders
               </li>
             </Link>
             <Link to='/admin/sales-report'>

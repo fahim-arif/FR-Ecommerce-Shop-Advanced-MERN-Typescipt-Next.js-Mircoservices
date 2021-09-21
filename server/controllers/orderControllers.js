@@ -78,3 +78,8 @@ export const getMyOrder = asyncHandler(async (req, res, next) => {
     throw new Error("Order not found");
   }
 });
+
+export const getOrders = asyncHandler(async (req, res, next) => {
+  const orders = await Order.find({}).populate("user", "id name image email");
+  res.json(orders);
+});

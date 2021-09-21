@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { myOrderDetails } from "../actions/orderActions";
 import { useParams } from "react-router-dom";
@@ -14,6 +14,11 @@ export default function OrderScreen({ match }) {
   const dispatch = useDispatch();
   const myOrder = useSelector((state) => state.myOrder);
   const { order, loading, error } = myOrder;
+
+  const [pending, setPending] = useState(false);
+  const [deliverd, setDeliverd] = useState(false);
+  const [shipped, setShipped] = useState(false);
+
   let firstName;
   let lastName;
   let address;
@@ -36,6 +41,16 @@ export default function OrderScreen({ match }) {
     dispatch(myOrderDetails(id));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (order) {
+      if (order.isPaid) {
+        setShipped(true);
+      }
+      if (order.deliverd) {
+        setDeliverd(true);
+      }
+    }
+  }, [order]);
   if (order) {
     prodTotalPrice = order.orderItems.reduce(
       (acc, item) => acc + item.qty * item.price,
@@ -46,6 +61,7 @@ export default function OrderScreen({ match }) {
   return (
     <div className={styles.order_screen}>
       {loading && <Loading></Loading>}
+      {error && <Message>{error}</Message>}
       <div className={styles.order_screen_container}>
         <div className={styles.main_title}>ORDER DETAILS</div>
         <div className={styles.container}>
@@ -109,22 +125,53 @@ export default function OrderScreen({ match }) {
             <div className={styles.right_main}>
               <div className={styles.status}>
                 <span className={styles.status_light}>Status:</span>
-                <span className={styles.status_value}>Not Delivered</span>
+                <span className={styles.status_value}>
+                  {/* Not Delivered */}
+                  {order && order.isPaid
+                    ? order.isDelivered
+                      ? "Delivered"
+                      : "Payment Confirmed Waiting For Delivery"
+                    : "Payment Pending"}
+                  {/* {order && order.isPaid && order.isDelivered ? 'Not '} */}
+                </span>
               </div>
               <div className={styles.animation_container}>
                 <div className={styles.animation_status}>
-                  <img src='/images/Group 31.png' alt='' className='' />
+                  {order && order.isPaid ? (
+                    order.isDelivered ? (
+                      <img src='/images/Group 31.png' alt='' className='' />
+                    ) : (
+                      <img src='/images/Group 34 (1).jpg' alt='' className='' />
+                    )
+                  ) : (
+                    <img src='/images/Group 35.jpg' alt='' className='' />
+                  )}
                 </div>
                 <div className={styles.animation_status}>
                   <div className={styles.processing}>Pending</div>
-                  <div className={styles.processing}>Shipped</div>
-                  <div className={styles.processing}>Delivered</div>
+                  <div
+                    className={`${styles.processing_status} ${
+                      shipped ? "active" : ""
+                    }`}
+                  >
+                    Shipped
+                  </div>
+                  <div
+                    className={`${styles.processing_status} ${
+                      deliverd ? "active" : ""
+                    }`}
+                  >
+                    Delivered
+                  </div>
                 </div>
               </div>
               <div className={styles.order_msg_container}>
                 <div className={styles.order_msg}>
-                  Your order is pending. Admin is looking into your payment.
-                  Please wait a few minutes.
+                  {order && order.isPaid
+                    ? order.isDelivered
+                      ? "Your order has been delivered successfully. Thank you for purchasing from FR Store"
+                      : "Your payment has been confirmed and your order is being shipped. You will most likely receive your order within 3-5 days."
+                    : "Your order is pending. Admin is looking into your payment.Please wait a few minutes."}
                 </div>
               </div>
               <div className={styles.order_list_container}>

@@ -284,7 +284,7 @@ const UserDetails = () => {
                   style={{ display: "none" }}
                 />
               </div>
-              <button className='admin_edit_update_btn'>Update</button>b
+              <button className='admin_edit_update_btn'>Update</button>
             </div>
           </form>
         </div>
