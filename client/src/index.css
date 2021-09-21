@@ -163,3 +163,8 @@ input[type="text"] {
   z-index: 1001;
   color: #000;
 }
+
+/* order Screen status process light to dark */
+.active_status {
+  color: #000;
+}

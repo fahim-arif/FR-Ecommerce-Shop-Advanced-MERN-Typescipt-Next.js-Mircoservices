@@ -83,3 +83,47 @@ export const getOrders = asyncHandler(async (req, res, next) => {
   const orders = await Order.find({}).populate("user", "id name image email");
   res.json(orders);
 });
+
+export const updateOrderToPaid = asyncHandler(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.isCancelled = false;
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order Not Found");
+  }
+});
+
+export const updateOrderToDelivered = asyncHandler(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+    order.isCancelled = false;
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order Not Found");
+  }
+});
+
+export const updateToCancel = asyncHandler(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isCancelled = true;
+    order.isDelivered = false;
+    order.isPaid = false;
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order Not Found");
+  }
+});

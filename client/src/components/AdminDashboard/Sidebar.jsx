@@ -19,7 +19,7 @@ const Sidebar = () => {
     <div
       classname='admin_side_bar'
       style={{
-        width: "250px",
+        minWidth: "255px",
         paddingLeft: "20px",
         borderRight: "1px solid #dbdbdb",
         marginTop: "0",
