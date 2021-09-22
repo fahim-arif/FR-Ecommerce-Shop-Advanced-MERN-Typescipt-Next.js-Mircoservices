@@ -122,3 +122,49 @@
   padding: 5px 25px;
   border-radius: 4px;
 }
+
+/* tracking order searching box */
+.search_form input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  /* margin: 8px 0; */
+  box-sizing: border-box;
+}
+.header_icon_content {
+  position: relative;
+}
+.header_icon_content:nth-child(1) {
+  padding-right: 25px;
+}
+.header_icon_content svg {
+  margin-right: 5px;
+  font-size: 30px;
+}
+
+.header_search_button__2y8G5 {
+  padding: 0;
+}
+.search_form {
+  display: flex;
+  height: 40px;
+}
+.search_button {
+  border: none;
+  width: 90px;
+  background-color: #000;
+  height: inherit;
+  height: 39.7px !important;
+  border-top-right-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+}
+
+.search_icon {
+  color: #fff;
+  border: none;
+  min-height: 40px;
+  font-size: 35px !important;
+}
+
+.search_box {
+  padding-top: 20px;
+}
