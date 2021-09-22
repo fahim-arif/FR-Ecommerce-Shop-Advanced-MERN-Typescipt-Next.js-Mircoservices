@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../actions/orderActions";
 import { removeAllFromCart } from "../actions/cartActions";
 import { editProduct } from "../actions/productActions";
+import { postCoupon } from "../actions/couponActions";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
 // import { useHistory } from "react-router";
@@ -29,8 +30,11 @@ export default function CheckoutPayment({ history }) {
   const cart = useSelector((state) => state.cart);
   const { paymentMethod, cartItems, shippingAddress } = cart;
 
+  const coupons = useSelector((state) => state.coupons);
+  const { success, error } = coupons;
+
   const orderCreate = useSelector((state) => state.orderCreate);
-  const { loading, success, order } = orderCreate;
+  const { loading, success: successCreate, order } = orderCreate;
 
   const { method } = paymentMethod;
 
@@ -45,6 +49,8 @@ export default function CheckoutPayment({ history }) {
 
   const promoSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(postCoupon(promo));
   };
 
   // Order variables
@@ -62,6 +68,11 @@ export default function CheckoutPayment({ history }) {
 
   deliveryCharge = subtotal > 1000 ? 60 : 130;
 
+  let discount = 0;
+  if (success) {
+    discount = Number(subtotal * 0.1);
+  }
+
   if (!(method === "Cash on Delivery")) {
     paymentCharge = (subtotal * 0.0185).toFixed(2);
 
@@ -69,14 +80,16 @@ export default function CheckoutPayment({ history }) {
       Number(subtotal * 0.025) +
       Number(subtotal) +
       Number(paymentCharge) +
-      Number(deliveryCharge)
+      Number(deliveryCharge) -
+      Number(discount)
     ).toFixed(2);
   } else {
     // paymentCharge = (subtotal * 0.0185).toFixed(2);
     estTotal = (
       Number(subtotal * 0.025) +
       Number(subtotal) +
-      Number(deliveryCharge)
+      Number(deliveryCharge) -
+      Number(discount)
     ).toFixed(2);
   }
 
@@ -137,11 +150,11 @@ export default function CheckoutPayment({ history }) {
             <div className={styles.address_container}>
               <div className={styles.form_container}>
                 {message && <Message variant='dark'>{message}</Message>}
-                {success && (
+                {successCreate && (
                   <Message variant='dark'>
                     {`Your Order has been placed successfully.`}
                     <Link
-                      to={`/profile/order/${order._id}`}
+                      to={`/profile/orders/`}
                       style={{
                         color: "#000",
                         fontSize: "16px",
@@ -249,7 +262,7 @@ export default function CheckoutPayment({ history }) {
                 </div>
                 <div className='checkout_order_summary_edit_change_btn'>
                   <button
-                    onClick={() => history.push("/cart" )}
+                    onClick={() => history.push("/cart")}
                     className='summary_edit_change'
                   >
                     EDIT CHANGE
@@ -325,6 +338,14 @@ export default function CheckoutPayment({ history }) {
                   </div>
                 </div>
               )}
+              {success && (
+                <div className={styles.summary_flex}>
+                  <div className={styles.item_name}>Coupon Discount</div>
+                  <div className={styles.item_price}>
+                    -৳{(subtotal * 0.1).toFixed(2)}
+                  </div>
+                </div>
+              )}
 
               <div className={styles.promo_container}>
                 <div className={styles.promo_flex}>
@@ -363,7 +384,8 @@ export default function CheckoutPayment({ history }) {
                       {(
                         Number(subtotal * 0.025) +
                         Number(subtotal) +
-                        Number(deliveryCharge)
+                        Number(deliveryCharge) -
+                        Number(discount)
                       ).toFixed(2)}
                     </>
                   ) : (
@@ -373,7 +395,8 @@ export default function CheckoutPayment({ history }) {
                         Number(subtotal * 0.025) +
                         Number(subtotal) +
                         Number(deliveryCharge) +
-                        Number(subtotal * 0.0185)
+                        Number(subtotal * 0.0185) -
+                        Number(discount)
                       ).toFixed(2)}
                     </>
                   )}

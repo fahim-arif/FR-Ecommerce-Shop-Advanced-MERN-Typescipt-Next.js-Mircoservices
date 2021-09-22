@@ -157,3 +157,7 @@
 .open_height_large {
   max-height: 420px;
 }
+
+.grey {
+  color: rgb(170, 167, 167);
+}

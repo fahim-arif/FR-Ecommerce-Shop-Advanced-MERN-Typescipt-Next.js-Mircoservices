@@ -3,7 +3,7 @@
 }
 /* Checkout Summary Right Side */
 .checkout_promo_collapse_off {
-  height: 400px;
+  height: 450px;
 }
 .checkout_promo_collapse_on {
   max-height: 480px;
@@ -11,7 +11,7 @@
 .checkout_cart_summary_container {
   flex: 1;
   /* margin-left: 20px; */
-  max-height: 480px;
+  max-height: 500px;
   background-color: #fff;
 }
 
@@ -202,4 +202,7 @@
 .checkout_order_summary_product_price {
   font-weight: 700;
   font-size: 16px;
+}
+.grey {
+  color: rgb(170, 167, 167);
 }
