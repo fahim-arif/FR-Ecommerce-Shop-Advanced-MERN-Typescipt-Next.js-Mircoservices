@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, saveShippingAddress } from "../actions/cartActions";
+import { postCoupon } from "../actions/couponActions";
 
+import Message from "../components/Message";
 import styles from "../components/styles/checkoutShipping.module.css";
 import CheckoutProgressBar from "../components/CheckoutProgressBar";
 import { Add } from "@material-ui/icons";
@@ -9,6 +11,9 @@ export default function CheckoutShipping({ history }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [promo, setPromo] = useState("");
+
+  const coupons = useSelector((state) => state.coupons);
+  const { success, error } = coupons;
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -32,6 +37,11 @@ export default function CheckoutShipping({ history }) {
 
   let deliveryCharge = subtotal > 1000 ? 60 : 130;
 
+  let discount = 0;
+  if (success) {
+    discount = Number(subtotal * 0.1);
+  }
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/checkout-login");
@@ -52,6 +62,8 @@ export default function CheckoutShipping({ history }) {
 
   const promoSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(postCoupon(promo));
   };
 
   const onSubmit = (e) => {
@@ -74,6 +86,13 @@ export default function CheckoutShipping({ history }) {
     <>
       <CheckoutProgressBar step1 step2></CheckoutProgressBar>
       <div className={styles.checkout_shipping}>
+        {error && (
+          <div className='alert-dark-container'>
+            <Message id='cart-alert' variant='dark'>
+              {"Coupon code did not match"}
+            </Message>
+          </div>
+        )}
         <div className={styles.container}>
           <div className={styles.container_left}>
             <div className={styles.address_container}>
@@ -222,47 +241,90 @@ export default function CheckoutShipping({ history }) {
                     ৳{(subtotal * 0.025).toFixed(2)}
                   </div>
                 </div>
-                <div className={styles.promo_container}>
+                {/* Promo */}
+                {success && (
+                  <div className={styles.summary_flex}>
+                    <div className={styles.item_name}>Coupon Discount</div>
+                    <div className={styles.item_price}>
+                      -৳{(subtotal * 0.1).toFixed(2)}
+                    </div>
+                  </div>
+                )}
+                <div
+                  className={`${styles.promo_container} ${
+                    success && styles.grey
+                  }`}
+                >
                   <div className={styles.promo_flex}>
-                    <div
-                      onClick={() => setOpen(!open)}
-                      className={styles.promo}
-                    >
-                      APPLY PROMO CODE
-                    </div>
-                    <div
-                      onClick={() => setOpen(!open)}
-                      className={styles.plus_btn}
-                    >
-                      <Add className={styles.add_icon}></Add>
-                    </div>
+                    {success ? (
+                      <div className={styles.promo}>APPLY PROMO CODE</div>
+                    ) : (
+                      <div
+                        onClick={() => setOpen(!open)}
+                        className={styles.promo}
+                      >
+                        APPLY PROMO CODE
+                      </div>
+                    )}
+
+                    {success ? (
+                      <div className={styles.plus_btn}>
+                        <Add className={styles.add_icon}></Add>
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => setOpen(!open)}
+                        className={styles.plus_btn}
+                      >
+                        <Add className={styles.add_icon}></Add>
+                      </div>
+                    )}
                   </div>
-                  <div className={styles.promo_code_container}>
-                    <form
-                      onSubmit={promoSubmit}
-                      className={`${styles.promo_form} ${
-                        open ? styles.show : styles.hide
-                      }`}
-                    >
-                      <input
-                        type='text'
-                        onChange={(e) => setPromo(e.target.value)}
-                        className={styles.promo_input}
-                      />
-                      <button className={styles.promo_apply_btn}>APPLY</button>
-                    </form>
-                  </div>
+                  {success ? (
+                    ""
+                  ) : (
+                    <div className={styles.promo_code_container}>
+                      <form
+                        onSubmit={promoSubmit}
+                        className={`${styles.promo_form} ${
+                          open ? styles.show : styles.hide
+                        }`}
+                      >
+                        <input
+                          type='text'
+                          onChange={(e) => setPromo(e.target.value)}
+                          className={styles.promo_input}
+                        />
+                        <button className={styles.promo_apply_btn}>
+                          APPLY
+                        </button>
+                      </form>
+                    </div>
+                  )}
                 </div>
                 <div className={styles.total_flex}>
                   <div className={styles.total_title}>Est.Total:</div>
                   <div className={styles.total_price}>
-                    {" "}
-                    ৳
-                    {(
-                      Number(subtotal * 0.025) +
-                      Number(subtotal) +
-                      Number(deliveryCharge)
-                    ).toFixed(2)}
+                    {success ? (
+                      <div className={styles.total_price_value}>
+                        ৳
+                        {(
+                          Number(subtotal * 0.025) +
+                          Number(subtotal) +
+                          Number(deliveryCharge) -
+                          Number(discount)
+                        ).toFixed(2)}
+                      </div>
+                    ) : (
+                      <div className={styles.total_price_value}>
+                        ৳
+                        {(
+                          Number(subtotal * 0.025) +
+                          Number(subtotal) +
+                          Number(deliveryCharge)
+                        ).toFixed(2)}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

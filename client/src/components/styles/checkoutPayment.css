@@ -79,3 +79,7 @@
 .payment_img_inactive-b {
   border: none;
 }
+
+.grey {
+  color: rgb(170, 167, 167);
+}

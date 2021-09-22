@@ -3,18 +3,25 @@ const router = express.Router();
 import Coupon from "../models/couponModel.js";
 import { admin } from "../middleware/authMiddleware.js";
 
-router.post("/", async (req, res, next) => {
-  const { coupon } = req.body;
+import asyncHandler from "express-async-handler";
 
-  const couponExist = await Coupon.findOne({ coupon });
-  if (couponExist) {
-    res.status(200);
-    res.json({ status: true });
-  } else {
-    res.status(404);
-    throw new Erorr("Coupon did not matched");
-  }
-});
+router.post(
+  "/:id",
+  asyncHandler(async (req, res, next) => {
+    const id = req.params.id;
+
+    // const { coupon } = req.body;
+
+    const couponExist = await Coupon.findOne({ coupon: id });
+    if (couponExist) {
+      res.status(200);
+      res.json({ success: true });
+    } else {
+      res.status(404);
+      throw new Error("Coupon did not matched");
+    }
+  })
+);
 
 router.get("/create", (req, res, next) => {
   res.send("Success");

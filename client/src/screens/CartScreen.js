@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { postCoupon } from "../actions/couponActions";
+
 import styles from "../components/styles/cartScreen.module.css";
 import { DeleteOutline, Favorite, Add, PlayArrow } from "@material-ui/icons";
 import {
@@ -15,20 +17,31 @@ export default function CartScreen({ history }) {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  // const { product: id, name, image, qty, price } = cart[0];
+
+  const coupons = useSelector((state) => state.coupons);
+  const { success, error } = coupons;
+
   let subtotal = cartItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)
     .toFixed(2);
 
   let deliveryCharge = subtotal > 1000 ? 60 : 130;
 
+  let discount = 0;
+  if (success) {
+    discount = Number(subtotal * 0.1);
+  }
+
+  console.log(discount);
   useEffect(() => {
     if (cartItems.length === 0) {
       document.getElementById("secure-checkout").disabled = true;
     }
-  }, [cartItems]);
+  }, [cartItems, coupons, dispatch]);
   const promoSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(postCoupon(promo));
   };
   const CheckoutHandler = () => {
     history.push("/checkout-login");
@@ -54,6 +67,13 @@ export default function CartScreen({ history }) {
             <div className='alert-dark-container'>
               <Message id='cart-alert' variant='dark'>
                 {"Cart Is empty"}
+              </Message>
+            </div>
+          )}
+          {error && (
+            <div className='alert-dark-container'>
+              <Message id='cart-alert' variant='dark'>
+                {"Coupon code did not match"}
               </Message>
             </div>
           )}
@@ -144,13 +164,23 @@ export default function CartScreen({ history }) {
               </div>
             </div>
             {/* Promo Section */}
+            {success && (
+              <div className={styles.cart_tax}>
+                <div className={styles.tax_text}>Coupon Discount</div>
+                <div className={styles.items_price}>
+                  -৳{(subtotal * 0.1).toFixed(2)}
+                </div>
+              </div>
+            )}
 
             <div
               className={`${styles.promo_section} ${
                 open ? styles.open_height_large : styles.open_height_small
               }`}
             >
-              <div className={styles.promo_1st_part}>
+              <div
+                className={`${styles.promo_1st_part} ${success && styles.grey}`}
+              >
                 <div onClick={() => setOpen(!open)} className={styles.promo}>
                   APPLY PROMO CODE
                 </div>
@@ -161,31 +191,48 @@ export default function CartScreen({ history }) {
                   <Add className={styles.plus_icon}></Add>
                 </div>
               </div>
-              <div className={styles.promo_code_container}>
-                <form
-                  className={`${styles.promo_form} ${
-                    open ? styles.show : styles.hide
-                  }`}
-                >
-                  <input
-                    onChange={(e) => setPromo(e.target.value)}
-                    type='text'
-                    className={styles.promo_input}
-                  />
-                  <button className={styles.promo_apply_btn}>APPLY</button>
-                </form>
-              </div>
+              {success ? (
+                ""
+              ) : (
+                <div className={styles.promo_code_container}>
+                  <form
+                    onSubmit={promoSubmit}
+                    className={`${styles.promo_form} ${
+                      open ? styles.show : styles.hide
+                    }`}
+                  >
+                    <input
+                      onChange={(e) => setPromo(e.target.value)}
+                      type='text'
+                      className={styles.promo_input}
+                    />
+                    <button className={styles.promo_apply_btn}>APPLY</button>
+                  </form>
+                </div>
+              )}
             </div>
             <div className={styles.total_price_section}>
               <div className={styles.total_price_text}>Est. Total:</div>
-              <div className={styles.total_price_value}>
-                ৳
-                {(
-                  Number(subtotal * 0.025) +
-                  Number(subtotal) +
-                  Number(deliveryCharge)
-                ).toFixed(2)}
-              </div>
+              {success ? (
+                <div className={styles.total_price_value}>
+                  ৳
+                  {(
+                    Number(subtotal * 0.025) +
+                    Number(subtotal) +
+                    Number(deliveryCharge) -
+                    Number(discount)
+                  ).toFixed(2)}
+                </div>
+              ) : (
+                <div className={styles.total_price_value}>
+                  ৳
+                  {(
+                    Number(subtotal * 0.025) +
+                    Number(subtotal) +
+                    Number(deliveryCharge)
+                  ).toFixed(2)}
+                </div>
+              )}
             </div>
             <div className={styles.checkout_container}>
               <button

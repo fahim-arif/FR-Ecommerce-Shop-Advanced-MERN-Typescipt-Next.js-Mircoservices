@@ -30,6 +30,7 @@ import {
 import { marginReducer } from "./reducers/marginReducer";
 
 import { cartReducer } from "./reducers/cartsReducer";
+import { couponReducer } from "./reducers/couponReducer";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -52,6 +53,7 @@ const reducer = combineReducers({
   orderPay: orderPayReducer,
   orderDeliver: orderDeliverReducer,
   orderCancel: orderCancelReducer,
+  coupons: couponReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
@@ -67,6 +69,10 @@ const shippingInfoFromStorage = localStorage.getItem("shippingAddress")
 const paymentInfoFromStorage = localStorage.getItem("paymentMethod")
   ? JSON.parse(localStorage.getItem("paymentMethod"))
   : null;
+
+const couponInfoFromStorage = localStorage.getItem("Coupons")
+  ? JSON.parse(localStorage.getItem("Coupons"))
+  : { success: false };
 const initialValue = {
   cart: {
     cartItems: cartInfoFromStorage,
@@ -76,6 +82,7 @@ const initialValue = {
   userLogin: {
     userInfo: userInfoFromStorage,
   },
+  coupons: couponInfoFromStorage,
 };
 
 const store = createStore(

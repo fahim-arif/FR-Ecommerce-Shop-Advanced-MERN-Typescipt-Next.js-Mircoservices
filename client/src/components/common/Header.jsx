@@ -128,7 +128,7 @@ const Header = () => {
               </div>
             </div>
             <div className={styles.header_icon_content}>
-              <Link to='#'>
+              <Link to='/cart'>
                 <ShoppingCartOutlined class={styles.header_icons} />
               </Link>
               <Link className={styles.cart_link} to='/cart'>
