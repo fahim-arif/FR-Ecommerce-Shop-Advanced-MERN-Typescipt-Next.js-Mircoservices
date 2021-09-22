@@ -27,9 +27,7 @@ const HeaderBottom = () => {
         </div>
         <div className={styles.header_right}>
           {localStorage.getItem("userInfo") ? (
-            <Link to='/' onClick={handleLogout}>
-              Logout
-            </Link>
+            ""
           ) : (
             <>
               <Link to='/sign-in'>Sign In</Link>
