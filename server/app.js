@@ -65,9 +65,6 @@ app.use(notFound);
 
 app.use(errorPageHandler);
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(__dirname);
+app.listen(process.env.PORT || 5000, () => {
   console.log("server is running at 5000");
 });
