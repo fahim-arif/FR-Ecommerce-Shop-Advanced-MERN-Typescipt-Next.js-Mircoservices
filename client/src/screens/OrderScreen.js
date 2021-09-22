@@ -71,11 +71,11 @@ export default function OrderScreen({ match }) {
               <div className={styles.small}>Hello, Fahim</div>
               <div className={styles.side_bar_items}>
                 <div className={styles.main_sidebar}>
-                  <Link to='#'>Manage My Account</Link>
+                  <Link to='/profile'>Manage My Account</Link>
                 </div>
 
                 <div className={styles.secondary_sidebar}>
-                  <Link to='#'>My Profile</Link>
+                  <Link to='/profile'>My Profile</Link>
                 </div>
                 <div className={styles.secondary_sidebar}>
                   <Link to='#'>Address Book</Link>
@@ -89,7 +89,7 @@ export default function OrderScreen({ match }) {
               </div>
               <div className={styles.side_bar_items}>
                 <div className={styles.main_sidebar}>
-                  <Link to='#'>My Order</Link>
+                  <Link to='/profile/orders'>My Order</Link>
                 </div>
                 <div className={styles.secondary_sidebar}>
                   <Link to='#'>Cancelled Orders</Link>

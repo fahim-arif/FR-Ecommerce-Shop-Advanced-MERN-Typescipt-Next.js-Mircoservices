@@ -45,6 +45,7 @@ import CheckoutPayment from "../screens/CheckoutPayment";
 import ImageMagnify from "./magnify-image/ImageMagnify";
 import OrderList from "./AdminDashboard/pages/orders/OrderList";
 import OrderDetails from "./AdminDashboard/pages/orders/AdminOrderDetails";
+import TrackOrderScreen from "../screens/TrackOrderScreen";
 function App() {
   return (
     <>
@@ -216,6 +217,17 @@ function App() {
                 <Route
                   component={UserOrderListScreen}
                   path='/profile/orders'
+                  exact
+                ></Route>
+              </Footer>
+            </MainHeader>
+          </Switch>
+          <Switch>
+            <MainHeader path='/profile/track-order' exact>
+              <Footer path='/profile/track-order' exact>
+                <Route
+                  component={TrackOrderScreen}
+                  path='/profile/track-order'
                   exact
                 ></Route>
               </Footer>

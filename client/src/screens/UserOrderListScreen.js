@@ -25,7 +25,7 @@ const UserOrderListScreen = () => {
         <div className={styles.row}>
           <div className={styles.col_1}>
             <div className={styles.title}>Orders</div>
-            <Link to='#'>
+            <Link to='/profile/orders'>
               <div className={styles.sub_title}>Order History</div>
             </Link>
             <Link to='#'>
@@ -35,7 +35,7 @@ const UserOrderListScreen = () => {
               <div className={styles.sub_title}>Return Status</div>
             </Link>
             <div className={styles.title}>Manage Account</div>
-            <Link to='#'>
+            <Link to='/profile'>
               <div className={styles.sub_title}>Account Settings</div>
             </Link>
             <Link to='#'>
