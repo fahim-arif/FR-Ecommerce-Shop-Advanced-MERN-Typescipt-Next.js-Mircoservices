@@ -19,9 +19,9 @@ const ProfileScreen = ({ history }) => {
 
   const demoHandler = () => {
     axios
-      .post("http://localhost:5000/api/pdf")
+      .post("/api/pdf")
       .then(() =>
-        axios.get("http://localhost:5000/api/pdf", { responseType: "blob" })
+        axios.get("/api/pdf", { responseType: "blob" })
       )
       .then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });

@@ -55,7 +55,7 @@ const SignIn = ({ history }) => {
     //   },
     // };
     // const { data } = await axios.post(
-    //   "http://localhost:5000/api/user/",
+    //   "/api/user/",
     //   {
     //     email: enteredEmail,
     //     password: enteredPassword,

@@ -26,16 +26,16 @@ export const getProducts =
   async (dispatch) => {
     try {
       dispatch({ type: GET_PRODUCTS_REQUEST });
-      // http://localhost:5000/api/user/
+      ///api/user/
       const { data } = await axios.get(
-        `http://localhost:5000/api/products?keyword=${keyword}`
+        `/api/products?keyword=${keyword}`
       );
 
       if (category) {
         category = category.charAt(0).toUpperCase() + category.slice(1);
         console.log(category);
         const { data } = await axios.get(
-          `http://localhost:5000/api/products/search?category=${category}`
+          `/api/products/search?category=${category}`
         );
         console.log(data);
         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
@@ -59,7 +59,7 @@ export const getProduct = (id) => async (dispatch) => {
     dispatch({ type: GET_PRODUCT_REQUEST });
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/products/${id}`
+      `/api/products/${id}`
     );
 
     dispatch({ type: GET_PRODUCT_SUCCESS, payload: data });
@@ -110,7 +110,7 @@ export const createProduct =
       //   countInStock
       // );
       const { data } = await axios.post(
-        "http://localhost:5000/api/products",
+        "/api/products",
         {
           name,
           brandImage,
@@ -149,7 +149,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
     console.log(id);
-    await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+    await axios.delete(`/api/products/${id}`, config);
 
     dispatch({ type: PRODUCT_DELETE_SUCESS });
   } catch (error) {
@@ -202,7 +202,7 @@ export const editProduct = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/products/${product._id}`,
+      `/api/products/${product._id}`,
       product,
       config
     );

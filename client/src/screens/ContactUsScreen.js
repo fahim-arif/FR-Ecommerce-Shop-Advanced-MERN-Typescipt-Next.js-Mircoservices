@@ -10,7 +10,7 @@ const ContactUsScreen = () => {
     e.preventDefault();
     // console.log(name,email,subject,message);
     axios
-      .post("http://localhost:5000/api/contact-us", {
+      .post("/api/contact-us", {
         name: name,
         email: email,
         subject: subject,

@@ -32,7 +32,7 @@ export const registerUser = (name, email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "http://localhost:5000/api/user/register",
+      "/api/user/register",
       { name, email, password },
       config
     );
@@ -60,7 +60,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "http://localhost:5000/api/user/",
+      "/api/user/",
       {
         email: email,
         password: password,
@@ -96,7 +96,7 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      "http://localhost:5000/api/user/admin",
+      "/api/user/admin",
       config
     );
 
@@ -127,7 +127,7 @@ export const getUser = (id) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      `http://localhost:5000/api/user/admin/${id}`,
+      `/api/user/admin/${id}`,
       config
     );
 
@@ -157,7 +157,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.delete(
-      `http://localhost:5000/api/user/admin/${id}`,
+      `/api/user/admin/${id}`,
       config
     );
 
@@ -190,7 +190,7 @@ export const editUser = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/user/admin/${user._id}`,
+      `/api/user/admin/${user._id}`,
       user,
       config
     );

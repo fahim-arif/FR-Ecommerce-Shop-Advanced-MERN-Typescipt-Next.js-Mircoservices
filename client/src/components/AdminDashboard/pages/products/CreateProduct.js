@@ -41,9 +41,9 @@ const CreateProduct = () => {
           "Content-Type": "multipart/form-data",
         },
       };
-      // http://localhost:5000/api/user/
+      // /api/user/
       const { data } = await axios.post(
-        "http://localhost:5000/api/upload",
+        "/api/upload",
         formData,
         config
       );
