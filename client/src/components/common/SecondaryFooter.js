@@ -44,7 +44,7 @@ const Footer = ({ children }) => {
           <div className='footer_bottom pt-4'>
             <div className='footer_site_logo'>
               <Link to='/'>
-                <img src='images/FR Store.png' alt='' />
+                <img src='images/logo.png' alt='' />
               </Link>
             </div>
             <Link to='#'>Terms of Service</Link>

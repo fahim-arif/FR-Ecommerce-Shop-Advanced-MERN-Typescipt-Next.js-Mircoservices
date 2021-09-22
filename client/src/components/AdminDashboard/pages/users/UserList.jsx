@@ -32,14 +32,13 @@ const UserList = () => {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const { loading, users, error } = userList;
-  const [data, setData] = useState(userRows);
+  const [data, setData] = useState();
   const [name, setName] = useState("");
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
     dispatch(listUsers());
-    if (users) setData(users);
-  }, [dispatch, users]);
+  }, [dispatch, success]);
 
   const deleteHandler = (name, id) => {
     setName(name);
@@ -135,13 +134,15 @@ const UserList = () => {
         {success && <Message>{"User Was Deleted Successfully"}</Message>}
         <div style={{ display: "flex", justifyContent: "space-between" }}></div>
         <div style={{ height: 780, width: "100%" }}>
-          <DataGrid
-            rows={data}
-            disableSelectionOnClick
-            columns={columns}
-            pageSize={12}
-            checkboxSelection
-          />
+          {users && (
+            <DataGrid
+              rows={users}
+              disableSelectionOnClick
+              columns={columns}
+              pageSize={12}
+              checkboxSelection
+            />
+          )}
         </div>
       </div>
       <DeleteModal

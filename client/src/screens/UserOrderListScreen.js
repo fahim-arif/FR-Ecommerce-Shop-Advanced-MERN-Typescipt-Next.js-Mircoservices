@@ -93,7 +93,13 @@ const UserOrderListScreen = () => {
                         <div className={classes.text}>{prod.name}</div>
                         <div className={classes.qty}>Qty: {prod.qty} </div>
                         <div className={classes.status_container}>
-                          <span className={classes.status}>Pending</span>
+                          <span className={classes.status}>
+                            {order && order.isPaid
+                              ? order.isDelivered
+                                ? "Complete"
+                                : "Processing"
+                              : "Pending"}
+                          </span>
                         </div>
                       </div>
                     ))}

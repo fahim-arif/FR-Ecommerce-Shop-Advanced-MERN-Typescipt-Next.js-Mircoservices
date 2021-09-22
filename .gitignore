@@ -2,6 +2,8 @@ node_modules
 
 /client/build
 
+/frstore
+
 .env
 .env.local
 .env.development.local

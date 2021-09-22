@@ -195,7 +195,7 @@ const ProductScreen = ({ match, location }) => {
       <div className={styles.main_section}>
         <div className={styles.slider}>
           <img
-            src='/images/shopPage/1920x120 (2).jpg'
+            src='/images/shopPage/1920x120(2).jpg'
             alt=''
             className={styles.slider_img}
           />

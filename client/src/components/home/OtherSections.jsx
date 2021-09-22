@@ -96,7 +96,7 @@ const OtherSections = () => {
             <div className={styles.con_col}>
               <div className={styles.contactless_container}>
                 <img
-                  src='/images/Delivery_SB_1200x300-201030-1604068255716 (1).jpg'
+                  src='/images/Delivery_SB_1200x300-201030-1604068255716(1).jpg'
                   alt=''
                   className={styles.contactless_img}
                 />

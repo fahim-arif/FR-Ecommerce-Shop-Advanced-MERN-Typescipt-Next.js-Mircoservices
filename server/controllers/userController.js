@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-
+import { mailRegister } from "../utils/nodeMailer.js";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import md5 from "md5";
@@ -9,7 +9,6 @@ export const getLogin = (req, res, next) => {
 };
 
 export const authUser = asyncHandler(async (req, res, next) => {
-  
   // End
 
   const { email, password, googleAuth } = req.body;
@@ -59,6 +58,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
   });
 
   if (user) {
+    mailRegister(name, email);
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -66,6 +66,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
+    // here implement
   } else {
     res.status(400);
     throw new Error("Invalid User Data");

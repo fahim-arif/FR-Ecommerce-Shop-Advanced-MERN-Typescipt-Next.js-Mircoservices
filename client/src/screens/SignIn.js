@@ -68,7 +68,7 @@ const SignIn = ({ history }) => {
     <>
       <div className='text-center pt-4 mt-4'>
         <Link to='/'>
-          <img src='/images/FR Store.png' alt='' />
+          <img src='/images/logo.png' alt='' />
         </Link>
       </div>
       <div className='signin_error_container'>
