@@ -6,9 +6,13 @@ import Message from "../components/Message";
 import Loading from "../components/Loading";
 import axios from "axios";
 import { SaveAltSharp } from "@material-ui/icons";
-const ProfileScreen = () => {
+const ProfileScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
+  // if (!userInfo) {
+  //   history.push("/login");
+  
+  // }
   const { username, email } = userInfo;
 
   const cart = useSelector((state) => state.cart);
