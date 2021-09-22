@@ -70,3 +70,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(process.env.PORT, () => {
   console.log(`server at ${PORT}`);
 });
+
+
+// "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm audit fix --prefix client && npm run build --prefix client"
