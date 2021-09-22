@@ -13,7 +13,7 @@ const DemoProductAdd = () => {
     // console.log(data);
     axios
       .post(
-        "http://localhost:5000/product-add",
+        "/product-add",
         {  input },
         {
           headers: {

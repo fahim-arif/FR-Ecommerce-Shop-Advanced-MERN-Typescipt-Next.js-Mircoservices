@@ -1,7 +1,7 @@
 import express from "express";
 import env from "dotenv";
 import cors from "cors";
-import path from "path";
+import path, { dirname } from "path";
 import colors from "colors";
 import productRoutes from "./Routes/ProductRoutes.js";
 import connectDB from "./config/db.js";
@@ -54,13 +54,17 @@ app.get("/api/pdf", (req, res) => {
 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 app.use(notFound);
 
 app.use(errorPageHandler);
 
-const PORT = process.env.NODE_ENV || 5000;
-
-app.listen(PORT, () => {
-  console.log(path.resolve());
+app.listen(process.env.PORT || 5000, () => {
   console.log("server is running at 5000");
 });

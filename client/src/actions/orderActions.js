@@ -40,7 +40,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/order",
+      "/api/order",
       order,
       config
     );
@@ -73,7 +73,7 @@ export const myOrders = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      "http://localhost:5000/api/order/myorder",
+      "/api/order/myorder",
 
       config
     );
@@ -105,7 +105,7 @@ export const myOrderDetails = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/order/myorder/${id}`,
+      `/api/order/myorder/${id}`,
 
       config
     );
@@ -137,7 +137,7 @@ export const orderList = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/order/all`,
+      `/api/order/all`,
 
       config
     );
@@ -172,7 +172,7 @@ export const payOrder = (orderId) => async (dispatch, getState) => {
 
     console.log(config);
     const { data } = await axios.post(
-      `http://localhost:5000/api/order/admin/pay/${orderId}`,
+      `/api/order/admin/pay/${orderId}`,
       config
     );
 
@@ -206,7 +206,7 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.put(
-      `http://localhost:5000/api/order/admin/deliver/${orderId}`,
+      `/api/order/admin/deliver/${orderId}`,
       config
     );
 
@@ -240,7 +240,7 @@ export const cancelOrder = (orderId) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.put(
-      `http://localhost:5000/api/order/admin/cancel/${orderId}`,
+      `/api/order/admin/cancel/${orderId}`,
       config
     );
 

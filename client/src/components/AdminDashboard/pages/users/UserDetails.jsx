@@ -62,7 +62,7 @@ const UserDetails = () => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:5000/api/upload",
+        "/api/upload",
         formData,
         config
       );
