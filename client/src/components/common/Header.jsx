@@ -45,7 +45,7 @@ const Header = () => {
             {/* <MenuOutlined class={styles.header_icons_menu}></MenuOutlined> */}
             <Link to='/'>
               <img
-                src='/images/FR Store.png'
+                src='/images/logo.png'
                 alt='Logo'
                 className={styles.header_logo}
               />

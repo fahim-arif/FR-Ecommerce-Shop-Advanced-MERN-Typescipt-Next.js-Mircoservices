@@ -136,7 +136,7 @@ const Footer = ({ children }) => {
           <hr />
           <div className='footer_bottom'>
             <div className='footer_site_logo'>
-              <img src='images/FR Store.png' alt='' />
+              <img src='images/logo.png' alt='' />
             </div>
             <Link to='#'>Terms of Service</Link>
             <Link to='#'>Privacy Policy</Link>

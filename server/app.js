@@ -54,22 +54,21 @@ app.get("/api/pdf", (req, res) => {
 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "client/build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 app.use(notFound);
 
 app.use(errorPageHandler);
-
 const PORT = process.env.PORT || 5000;
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
+  console.log(path.join(__dirname, "client/build"));
   console.log(`server at ${PORT}`);
 });
-
 
 // "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm audit fix --prefix client && npm run build --prefix client"

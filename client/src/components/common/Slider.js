@@ -30,7 +30,7 @@ export default class AutoPlayMethods extends Component {
             <div className='hero_container_right'>
               <img
                 className='hero_main_images'
-                src='/images/slider/1920x360@2x (1).jpg'
+                src='/images/slider/1920x360@2x(1).jpg'
                 alt=''
               />
             </div>
