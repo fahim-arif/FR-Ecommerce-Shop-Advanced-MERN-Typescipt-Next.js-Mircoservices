@@ -100,7 +100,7 @@ const SignUp = ({ history, location }) => {
       </div>
       <div className='text-center pt-4 mt-4'>
         <Link to='/'>
-          <img src='/images/FR Store.png' alt='' />
+          <img src='/images/logo.png' alt='' />
         </Link>
       </div>
       <div className='SignUp-container pt-5'>

@@ -154,7 +154,7 @@ export default function CheckoutPayment({ history }) {
                   <Message variant='dark'>
                     {`Your Order has been placed successfully.`}
                     <Link
-                      to={`/profile/orders/`}
+                      to={`/profile/order/${order._id}`}
                       style={{
                         color: "#000",
                         fontSize: "16px",
@@ -163,7 +163,6 @@ export default function CheckoutPayment({ history }) {
                         paddingLeft: "5px",
                       }}
                       className='bold'
-                      to='/order'
                     >
                       Click to view update
                     </Link>

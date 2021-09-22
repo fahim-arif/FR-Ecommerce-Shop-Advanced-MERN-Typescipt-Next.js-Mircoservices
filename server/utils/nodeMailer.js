@@ -1,21 +1,21 @@
 import nodemailer from "nodemailer";
 
-export const mail = (id) => {
+export const mailRegister = (name, email) => {
+  console.log(name);
+  console.log(email);
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "frstore@gmail.com",
+      user: "frstorebd@gmail.com",
       pass: "sunlite.1245209", // naturally, replace both with your real credentials or an application-specific password
     },
   });
 
   const mailOptions = {
-    from: "frstore@gmail.com",
-    to: "fahim1.618555@gmail.com",
-    subject: "Invoices due",
-    html: `<h1>Thank you for purchasing</h1>${id}`,
-    attachments: [{ filename: "invoice.pdf", path: "./result.pdf" }],
-    // attachments: [{ filename: "1.jpg", path: "./server/utils/1.jpg" }],
+    from: "frstorebd@gmail.com",
+    to: email,
+    subject: "User Registration",
+    html: `<p>Hello ${name}, You have successfully created an account in FR Store. Stay Tuned. Thank you </p>`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

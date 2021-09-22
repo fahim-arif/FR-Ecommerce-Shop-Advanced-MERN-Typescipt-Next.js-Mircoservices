@@ -16,6 +16,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
+    window.location.reload()
   };
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;

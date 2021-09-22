@@ -1,7 +1,7 @@
 import Product from "../models/productModel.js";
 import asyncHandler from "express-async-handler";
-import { mail } from "../utils/nodeMailer.js";
 import { pdf } from "../utils/pdfkit/pdfkit.js";
+import { mailRegister } from "../utils/nodeMailer.js";
 
 const getProducts = asyncHandler(async (req, res, next) => {
   const keyword = req.query.keyword
@@ -28,8 +28,9 @@ const getProductCategory = asyncHandler(async (req, res, next) => {
 
 const getProduct = async (req, res, next) => {
   const id = req.params.id;
-  // mail(id);
   const response = await Product.findById(id);
+
+  // mailRegister("fahim", "fa");
 
   res.json(response);
 };

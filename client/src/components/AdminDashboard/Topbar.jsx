@@ -106,7 +106,7 @@ const Topbar = () => {
                 <Link to='/'>
                   <img
                     className='navbar-logo'
-                    src='/images/FR Store.png'
+                    src='/images/logo.png'
                     alt='logo'
                   />
                 </Link>

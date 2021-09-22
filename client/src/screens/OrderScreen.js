@@ -147,12 +147,12 @@ export default function OrderScreen({ match }) {
                 <div className={styles.animation_status}>
                   {order && order.isPaid ? (
                     order.isDelivered ? (
-                      <img src='/images/Group 31.png' alt='' className='' />
+                      <img src='/images/Group31.png' alt='' className='' />
                     ) : (
-                      <img src='/images/Group 34 (1).jpg' alt='' className='' />
+                      <img src='/images/Group34(1).jpg' alt='' className='' />
                     )
                   ) : (
-                    <img src='/images/Group 35.jpg' alt='' className='' />
+                    <img src='/images/Group35.jpg' alt='' className='' />
                   )}
                 </div>
                 <div className={styles.animation_status}>
@@ -179,7 +179,7 @@ export default function OrderScreen({ match }) {
                     ? order.isDelivered
                       ? "Your order has been delivered successfully. Thank you for purchasing from FR Store"
                       : "Your payment has been confirmed and your order is being shipped. You will most likely receive your order within 3-5 days."
-                    : "Your order is pending. Admin is looking into your payment.Please wait a few minutes."}
+                    : "Your order is pending. Admin is looking into your payment. Please wait a few minutes."}
                 </div>
               </div>
               <div className={styles.order_list_container}>

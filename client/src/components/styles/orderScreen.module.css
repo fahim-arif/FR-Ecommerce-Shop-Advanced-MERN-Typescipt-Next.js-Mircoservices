@@ -227,3 +227,7 @@
 .active {
   color: #000;
 }
+
+.inactive {
+  color: rgb(172, 168, 168);
+}
