@@ -54,11 +54,19 @@ app.get("/api/pdf", (req, res) => {
 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  );
+}
+
 app.use(notFound);
 
 app.use(errorPageHandler);
 
-const PORT = process.env.NODE_ENV || 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log(path.resolve());
