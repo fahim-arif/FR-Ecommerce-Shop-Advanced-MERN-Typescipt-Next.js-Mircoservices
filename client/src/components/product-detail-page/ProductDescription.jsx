@@ -3,6 +3,14 @@ import styles from "../styles/productDescription.module.css";
 import { Link } from "react-router-dom";
 const ProductDescription = ({ product }) => {
   const { rating } = product;
+
+  const handleReview = () => {
+    document.getElementById("comment-box").select();
+    // window.scrollTo(0, window.innerHeight / 2);
+    // window.scrollTo(0, document.body.scrollHeight);
+    // console.log("click");
+    window.scrollBy(0, 1000);
+  };
   return (
     <div className={styles.product_description_container}>
       <div className={styles.title}>{product.name}</div>
@@ -54,7 +62,9 @@ const ProductDescription = ({ product }) => {
         ></i>
         <span className={styles.review_nums}>({product.numReviews})</span>
         <span className={styles.write_reviews}>
-          <Link to='/'>Write a Review</Link>
+          <Link onClick={handleReview} to='#'>
+            Write a Review
+          </Link>
         </span>
       </div>
       <hr />

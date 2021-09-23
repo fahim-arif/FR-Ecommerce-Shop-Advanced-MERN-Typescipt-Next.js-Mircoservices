@@ -168,3 +168,16 @@ input[type="text"] {
 .active_status {
   color: #000;
 }
+
+.review_button {
+  margin-top: 20px;
+  background-color: #f39834;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 40px;
+  border-radius: 4px;
+  /* color: #fff; */
+  font-family: "Open Sans Condensed";
+  letter-spacing: 1px;
+}

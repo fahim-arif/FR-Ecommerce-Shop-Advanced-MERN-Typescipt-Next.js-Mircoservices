@@ -45,7 +45,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
     setTimeout(() => {
       axios.post("/api/email/invoice", data, data);
-    }, 5000);
+    }, 1000);
 
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
   } catch (error) {

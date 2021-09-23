@@ -70,16 +70,24 @@ const Hero = () => {
                   </div>
                   <div className='rows'>
                     <div className='col'>
-                      <Link to='#'>Desktop Computer</Link>
+                      <Link to='/shop/614c12938a441070c0d0799a'>
+                        Desktop Computer
+                      </Link>
                     </div>
                     <div className='col'>
-                      <Link to='#'>Laptop/Notebook</Link>
+                      <Link to='/shop/614c17d58a441070c0d0799b'>
+                        Laptop/Notebook
+                      </Link>
                     </div>
                     <div className='col'>
-                      <Link to='#'>Gaming Laptop</Link>
+                      <Link to='/shop/614c18e88a441070c0d0799c'>
+                        Gaming Laptop
+                      </Link>
                     </div>
                     <div className='col'>
-                      <Link to='#'>Monitor Buying Guide</Link>
+                      <Link to='/shop/614c194b8a441070c0d0799d'>
+                        Monitor Buying Guide
+                      </Link>
                     </div>
                   </div>
                   <div className='rows'>
@@ -150,7 +158,7 @@ const Hero = () => {
                   </div>
                   <div className='rows'>
                     <div className='col'>
-                      <Link to='#'>TV & Vide</Link>
+                      <Link to='/shop/6148ce6b043d544188162d31'>TV & Vide</Link>
                     </div>
                     <div className='col'>
                       <Link to='#'>Home Appliences</Link>
