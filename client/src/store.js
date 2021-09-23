@@ -29,6 +29,7 @@ import {
   orderCancelReducer,
 } from "./reducers/orderReducer";
 import { marginReducer } from "./reducers/marginReducer";
+import { dropReducer } from "./reducers/dropdownReducer";
 
 import { cartReducer } from "./reducers/cartsReducer";
 import { couponReducer } from "./reducers/couponReducer";
@@ -56,6 +57,7 @@ const reducer = combineReducers({
   orderCancel: orderCancelReducer,
   coupons: couponReducer,
   productReviewCreate: productReviewCreateReducer,
+  drop: dropReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

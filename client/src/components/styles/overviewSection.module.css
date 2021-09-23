@@ -1,6 +1,18 @@
 .container {
   margin-top: 50px;
 }
+.title_1 {
+  font-size: 32px;
+  font-family: "Open Sans Condensed";
+  margin-bottom: 20px;
+  /* margin-top: 80px; */
+}
+.title_2 {
+  font-size: 20px;
+  font-family: "Open Sans Condensed";
+  margin-bottom: 20px;
+  /* margin-top: 80px; */
+}
 .title {
   font-size: 32px;
   font-family: "Open Sans Condensed";

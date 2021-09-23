@@ -181,3 +181,9 @@ input[type="text"] {
   font-family: "Open Sans Condensed";
   letter-spacing: 1px;
 }
+.dropdown_hide {
+  display: hide;
+}
+.dropdown_show {
+  display: block;
+}

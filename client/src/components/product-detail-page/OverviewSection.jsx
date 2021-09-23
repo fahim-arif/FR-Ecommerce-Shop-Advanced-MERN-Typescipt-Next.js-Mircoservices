@@ -60,8 +60,8 @@ const OverviewSection = ({ match }) => {
     <div className={styles.overview_container}>
       <Row className={styles.review_container}>
         <Col md={6}>
-          <h2>Reviews</h2>
-          {product.review.length === 0 && "No Reviews"}
+          <div className={styles.title_1}>CUSTOMER REVIEWS</div>
+          {/* {product.review.length === 0 && "No Reviews"} */}
           <ListGroup variant='flush'>
             {product.review.map((review) => (
               <ListGroup.Item className={styles.comment_field} key={review._id}>
@@ -81,7 +81,7 @@ const OverviewSection = ({ match }) => {
               </ListGroup.Item>
             ))}
             <ListGroup.Item>
-              <h2 className={styles.review_title}>Write a customer review</h2>
+              <h2 className={styles.title_2}>WRITE A CUSTOMER REVIEW</h2>
               {errorProductReview && (
                 <Message variant='danger'>{errorProductReview}</Message>
               )}
