@@ -6,7 +6,9 @@ import { editProduct } from "../actions/productActions";
 import { postCoupon } from "../actions/couponActions";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
+import axios from "axios";
 // import { useHistory } from "react-router";
+
 // import { addToCart } from "../actions/cartActions";
 
 import styles from "../components/styles/checkoutShipping.module.css";
@@ -30,6 +32,11 @@ export default function CheckoutPayment({ history }) {
   const cart = useSelector((state) => state.cart);
   const { paymentMethod, cartItems, shippingAddress } = cart;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const {
+    userInfo: { email },
+  } = userLogin;
+
   const coupons = useSelector((state) => state.coupons);
   const { success, error } = coupons;
 
@@ -45,7 +52,8 @@ export default function CheckoutPayment({ history }) {
     // if (!paymentMethod) {
     //   history.push("/checkout-payment");
     // }
-  }, [dispatch]);
+    // if (order) axios.post("/api/email/invoice", email, order._id);
+  }, [order]);
 
   const promoSubmit = (e) => {
     e.preventDefault();
@@ -118,6 +126,8 @@ export default function CheckoutPayment({ history }) {
       );
 
       dispatch(removeAllFromCart());
+
+      // setTimeout(() => {}, 5000);
     } else {
       if (paymentTxNumber && paymentNumber) {
         setMessage("");

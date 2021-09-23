@@ -1,4 +1,14 @@
-export const pdfTemp = ({ shippingAddress, createdAt, paymentMethod, _id }) => {
+export const pdfTemp = ({
+  shippingAddress,
+  createdAt,
+  paymentMethod,
+  _id,
+  orderItems,
+  taxPrice,
+  shippingPrice,
+  paymentCharge,
+  totalPrice,
+}) => {
   // const { _id, paymentMethod, shippingAddress, createdAt } = body;
 
   // console.log(paymentMethod, _id, shippingAddress);
@@ -79,6 +89,10 @@ export const pdfTemp = ({ shippingAddress, createdAt, paymentMethod, _id }) => {
       font-size: 18px;
       font-weight: 600;
     }
+     .table-striped > tbody > tr:nth-of-type(odd) {
+      --bs-table-accent-bg: #fff;
+      color: #000;
+    }
   </style>
   <body>
     <div class="container">
@@ -136,75 +150,60 @@ export const pdfTemp = ({ shippingAddress, createdAt, paymentMethod, _id }) => {
                   <table class="table table-striped">
                     <thead>
                       <tr class="line">
-                        <td><strong>#</strong></td>
+                        
                         <td class="text-center"><strong>PRODUCT</strong></td>
                         <td class="text-center"><strong>QTY</strong></td>
-                        <td class="text-center"><strong>PRICE</strong></td>
+                        <td colspan='2' class="text-center"><strong>PRICE</strong></td>
                         <td class="text-right"><strong>SUBTOTAL</strong></td>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="flex">
+                    ${orderItems.map(
+                      (item) =>
+                        `<tr class='flex'>
                         <td>
-                          <strong>Template Design</strong><br />A website
-                          template is a pre-designed webpage, or set of
-                          webpages, that anyone can modify with their own
-                          content and images to setup a website.
+                          <strong>${item.name}</strong>
                         </td>
-                        <td class="text-center bold">15</td>
-                        <td class="text-center bold">$75</td>
-                        <td class="text-right bold">$1,125.00</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>
-                          <strong>Template Development</strong><br />Web
-                          development is a broad term for the work involved in
-                          developing a web site for the Internet (World Wide
-                          Web) or an intranet (a private network).
+                        <td class='text-center bold'>${item.qty}</td>
+                        <td colspan='2' class='text-center bold'>
+                          ${item.price} x ${item.qty}
                         </td>
-                        <td class="text-center">15</td>
-                        <td class="text-center">$75</td>
-                        <td class="text-right">$1,125.00</td>
-                      </tr>
-                      <tr class="line">
-                        <td>3</td>
-                        <td>
-                          <strong>Testing</strong><br />Take measures to check
-                          the quality, performance, or reliability of
-                          (something), especially before putting it into
-                          widespread use or practice.
+                        <td class='text-right bold'>
+                         
+                        ${item.qty * item.price}
+                    
                         </td>
-                        <td class="text-center">2</td>
-                        <td class="text-center">$75</td>
-                        <td class="text-right">$150.00</td>
-                      </tr>
+                      </tr>`
+                    )}
+                      
+                    
+                   
                         
                           
                         
                       <tr>
                         <td colspan="3"></td>
                         <td class="text-right"><strong>Taxes</strong></td>
-                        <td class="text-right"><strong>N/A</strong></td>
+                        <td class="text-right">৳ <strong> ${taxPrice}</strong></td>
                       </tr>
                       <tr>
                         <td colspan="3"></td>
                         <td style="width: 180px" class="text-right">
                           <strong>Payment Charge</strong>
                         </td>
-                        <td class="text-right"><strong>N/A</strong></td>
+                        <td class="text-right">৳ <strong> ${paymentCharge}</strong></td>
                       </tr>
                       <tr>
                         <td colspan="3"></td>
                         <td class="text-right">
                           <strong>Delivery Charge</strong>
                         </td>
-                        <td class="text-right"><strong>N/A</strong></td>
+                        <td class="text-right">৳ <strong> ${shippingPrice}</strong></td>
                       </tr>
                       <tr>
                         <td colspan="3"></td>
                         <td class="text-right"><strong>Total</strong></td>
-                        <td class="text-right"><strong>$2,400.00</strong></td>
+                        <td class="text-right">৳ <strong> ${totalPrice}</strong></td>
                       </tr>
                     </tbody>
                   </table>

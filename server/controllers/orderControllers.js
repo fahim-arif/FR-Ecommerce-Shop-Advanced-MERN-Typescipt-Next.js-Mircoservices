@@ -22,6 +22,7 @@ export const addOrder = asyncHandler(async (req, res, next) => {
     const order = new Order({
       orderItems,
       user: req.user._id,
+      email: req.user.email,
       shippingAddress,
       paymentMethod,
       itemsPrice,
@@ -44,6 +45,7 @@ export const addOrder = asyncHandler(async (req, res, next) => {
     const order = new Order({
       orderItems,
       user: req.user._id,
+      email: req.user.email,
       shippingAddress,
       paymentMethod,
       itemsPrice,

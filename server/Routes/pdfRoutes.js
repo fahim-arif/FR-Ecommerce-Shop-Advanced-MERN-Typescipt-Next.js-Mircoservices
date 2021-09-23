@@ -12,12 +12,15 @@ router.post(
     // const id = req.params.id;
 
     if (req.body) {
-      pdf.create(pdfTemp(req.body), {}).toFile("result.pdf", (err) => {
-        if (err) {
-          return Promise.reject();
-        }
-        return Promise.resolve();
-      });
+      const { _id } = req.body;
+      pdf
+        .create(pdfTemp(req.body), {})
+        .toFile(`invoices/invoice-${_id}.pdf`, (err) => {
+          if (err) {
+            return Promise.reject();
+          }
+          return Promise.resolve();
+        });
     } else {
       throw new Error("No body found");
     }

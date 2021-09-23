@@ -11,7 +11,7 @@ import contactRoutes from "./Routes/contactRoutes.js";
 import couponRoutes from "./Routes/couponRoutes.js";
 import orderRoutes from "./Routes/orderRoutes.js";
 import pdfRoutes from "./Routes/pdfRoutes.js";
-import pdf from "html-pdf";
+import emailRoutes from "./Routes/emailRoutes.js";
 
 import { notFound, errorPageHandler } from "./middleware/errorMiddleware.js";
 
@@ -56,6 +56,8 @@ const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 app.use("/api/pdf", pdfRoutes);
+
+app.use("/api/email", emailRoutes);
 
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static(path.join(__dirname, "client/build")));
