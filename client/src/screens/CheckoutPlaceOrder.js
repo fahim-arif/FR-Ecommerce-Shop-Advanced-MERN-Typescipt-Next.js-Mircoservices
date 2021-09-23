@@ -49,11 +49,14 @@ export default function CheckoutPayment({ history }) {
     shippingAddress;
 
   useEffect(() => {
+    setTimeout(() => {
+      setMessage("");
+    }, 5000);
     // if (!paymentMethod) {
     //   history.push("/checkout-payment");
     // }
     // if (order) axios.post("/api/email/invoice", email, order._id);
-  }, [order]);
+  }, [successCreate]);
 
   const promoSubmit = (e) => {
     e.preventDefault();
@@ -163,8 +166,8 @@ export default function CheckoutPayment({ history }) {
                 {successCreate && (
                   <Message variant='dark'>
                     {`Your Order has been placed successfully.`}
-                    <Link
-                      to={`/profile/order/${order._id}`}
+                    <a
+                      href={`/profile/order/${order._id}`}
                       style={{
                         color: "#000",
                         fontSize: "16px",
@@ -175,7 +178,7 @@ export default function CheckoutPayment({ history }) {
                       className='bold'
                     >
                       Click to view update
-                    </Link>
+                    </a>
                   </Message>
                 )}
                 <div className={styles.address_title}>Shipping Address</div>
@@ -356,33 +359,55 @@ export default function CheckoutPayment({ history }) {
                 </div>
               )}
 
-              <div className={styles.promo_container}>
+              <div
+                className={`${styles.promo_container} ${
+                  success && styles.grey
+                }`}
+              >
                 <div className={styles.promo_flex}>
-                  <div onClick={() => setOpen(!open)} className={styles.promo}>
-                    APPLY PROMO CODE
-                  </div>
-                  <div
-                    onClick={() => setOpen(!open)}
-                    className={styles.plus_btn}
-                  >
-                    <Add className={styles.add_icon}></Add>
-                  </div>
+                  {success ? (
+                    <div className={styles.promo}>APPLY PROMO CODE</div>
+                  ) : (
+                    <div
+                      onClick={() => setOpen(!open)}
+                      className={styles.promo}
+                    >
+                      APPLY PROMO CODE
+                    </div>
+                  )}
+
+                  {success ? (
+                    <div className={styles.plus_btn}>
+                      <Add className={styles.add_icon}></Add>
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => setOpen(!open)}
+                      className={styles.plus_btn}
+                    >
+                      <Add className={styles.add_icon}></Add>
+                    </div>
+                  )}
                 </div>
-                <div className={styles.promo_code_container}>
-                  <form
-                    onSubmit={promoSubmit}
-                    className={`${styles.promo_form} ${
-                      open ? styles.show : styles.hide
-                    }`}
-                  >
-                    <input
-                      type='text'
-                      onChange={(e) => setPromo(e.target.value)}
-                      className={styles.promo_input}
-                    />
-                    <button className={styles.promo_apply_btn}>APPLY</button>
-                  </form>
-                </div>
+                {success ? (
+                  ""
+                ) : (
+                  <div className={styles.promo_code_container}>
+                    <form
+                      onSubmit={promoSubmit}
+                      className={`${styles.promo_form} ${
+                        open ? styles.show : styles.hide
+                      }`}
+                    >
+                      <input
+                        type='text'
+                        onChange={(e) => setPromo(e.target.value)}
+                        className={styles.promo_input}
+                      />
+                      <button className={styles.promo_apply_btn}>APPLY</button>
+                    </form>
+                  </div>
+                )}
               </div>
               <div className={styles.total_flex}>
                 <div className={styles.total_title}>Est.Total:</div>

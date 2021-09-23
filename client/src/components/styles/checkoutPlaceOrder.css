@@ -84,13 +84,9 @@
 /* Payment Summary  */
 .checkout_payment_summary_container {
   background-color: #fafafa;
-  padding: 20px 80px 20px 20px;
-  margin-top: 10px;
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 60px; */
-  margin-bottom: 60px;
+  padding: 20px 80px 30px 31px;
+  margin-top: 24px;
+  margin-bottom: 62px;
 }
 .checkout_payment_text {
   font-weight: 600;
