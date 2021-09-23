@@ -10,7 +10,8 @@ import uploadRoutes from "./Routes/uploadRoutes.js";
 import contactRoutes from "./Routes/contactRoutes.js";
 import couponRoutes from "./Routes/couponRoutes.js";
 import orderRoutes from "./Routes/orderRoutes.js";
-import pdf from "html-pdf";
+import pdfRoutes from "./Routes/pdfRoutes.js";
+import emailRoutes from "./Routes/emailRoutes.js";
 
 import { notFound, errorPageHandler } from "./middleware/errorMiddleware.js";
 
@@ -37,22 +38,26 @@ app.use("/api/order", orderRoutes);
 
 const __dirname = path.resolve();
 
-import { pdfTemp } from "./utils/html-pdf/pdfTemp.js";
+// import { pdfTemp } from "./utils/html-pdf/pdfTemp.js";
 
-app.post("/api/pdf", (req, res) => {
-  pdf.create(pdfTemp(req.body), {}).toFile("result.pdf", (err) => {
-    if (err) {
-      return Promise.reject();
-    }
-    return Promise.resolve();
-  });
-});
+// app.post("/api/pdf", (req, res) => {
+//   pdf.create(pdfTemp(req.body), {}).toFile("result.pdf", (err) => {
+//     if (err) {
+//       return Promise.reject();
+//     }
+//     return Promise.resolve();
+//   });
+// });
 
-app.get("/api/pdf", (req, res) => {
-  res.sendFile(`${__dirname}/result.pdf`);
-});
+// app.get("/api/pdf", (req, res) => {
+//   res.sendFile(`${__dirname}/result.pdf`);
+// });
 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+app.use("/api/pdf", pdfRoutes);
+
+app.use("/api/email", emailRoutes);
 
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static(path.join(__dirname, "client/build")));

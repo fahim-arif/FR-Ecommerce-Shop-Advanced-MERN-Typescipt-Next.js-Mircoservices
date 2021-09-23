@@ -19,6 +19,10 @@ import {
   PRODUCT_EDIT_SUCCESS,
   PRODUCT_EDIT_FAIL,
   PRODUCT_EDIT_RESET,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCESS,
+  PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_CREATE_REVIEW_RESET,
 } from "../types/productTypes";
 
 export const productListReducer = (state = { products: [] }, action) => {
@@ -110,3 +114,31 @@ export const productDeleteReducer = (
       return state;
   }
 };
+
+export const productReviewCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_CREATE_REVIEW_REQUEST:
+      return { loading: true };
+    case PRODUCT_CREATE_REVIEW_SUCESS:
+      return { loading: false, success: true };
+    case PRODUCT_CREATE_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+    case PRODUCT_CREATE_REVIEW_RESET:
+      return { product: {} };
+    default:
+      return state;
+  }
+};
+
+// export const productTopRatedReducer = (state = { products: [] }, action) => {
+//   switch (action.type) {
+//     case PRODUCT_TOP_REQUEST:
+//       return { loading: true, products: [] };
+//     case PRODUCT_TOP_SUCESS:
+//       return { loading: false, products: action.payload };
+//     case PRODUCT_TOP_FAIL:
+//       return { loading: false, error: action.payload };
+//     default:
+//       return state;
+//   }
+// };

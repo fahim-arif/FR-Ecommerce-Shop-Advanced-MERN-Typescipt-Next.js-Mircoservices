@@ -39,11 +39,13 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
-      "/api/order",
-      order,
-      config
-    );
+    const { data } = await axios.post("/api/order", order, config);
+
+    axios.post("/api/pdf/create-pdf", data, config);
+
+    setTimeout(() => {
+      axios.post("/api/email/invoice", data, data);
+    }, 5000);
 
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
   } catch (error) {

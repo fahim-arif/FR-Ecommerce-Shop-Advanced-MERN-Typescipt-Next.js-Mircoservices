@@ -27,7 +27,7 @@ router.get("/create", (req, res, next) => {
   res.send("Success");
 });
 
-router.post("/create", admin, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const { coupon } = req.body;
   const couponExist = await Coupon.findOne({ coupon: coupon });
   if (couponExist) {
