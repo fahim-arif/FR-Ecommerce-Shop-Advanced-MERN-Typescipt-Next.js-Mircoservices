@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import DropDown from "../components/home/DropDown";
 import styles from "../components/styles/productScreen.module.css";
 import ProductList from "../components/ProductList";
 import { getProducts } from "../actions/productActions";
@@ -10,6 +11,7 @@ import Loading from "../components/Loading";
 import Message from "../components/Message";
 
 const ProductScreen = ({ match, location }) => {
+  const [hide, setHide] = useState(true);
   const keyword = match.params.keyword;
 
   const category = match.params.category;
@@ -30,13 +32,19 @@ const ProductScreen = ({ match, location }) => {
     dispatch(getProducts(e.target.value));
   };
 
-  // Category Searching
-
-  // useEffect(() => {
-  //   dispatch(getProduct(category));
-  // }, [category]);
+  const dropDownHandler = () => {
+    setHide(!hide);
+  };
   return (
     <div className={styles.product_container}>
+      <div
+        onClick={dropDownHandler}
+        className={`${styles.drop_down} ${
+          hide ? "dropdown_hide" : "dropdown_show"
+        }`}
+      >
+        {/* <DropDown></DropDown> */}
+      </div>
       <div className={styles.side_bar}>
         <div className={styles.fiter_container}>
           <div className={styles.filter_option}>

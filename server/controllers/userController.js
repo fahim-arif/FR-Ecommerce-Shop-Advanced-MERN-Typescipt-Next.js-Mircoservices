@@ -22,6 +22,7 @@ export const authUser = asyncHandler(async (req, res, next) => {
       email: user.email,
       googleAuth: user.googleAuth,
       isAdmin: user.isAdmin,
+      image: user.image,
 
       token: generateToken(user._id),
     });
@@ -33,6 +34,7 @@ export const authUser = asyncHandler(async (req, res, next) => {
       isAdmin: user.isAdmin,
       googleAuth: user.googleAuth,
       token: generateToken(user._id),
+      image: user.image,
     });
   } else {
     res.status(400);

@@ -98,6 +98,46 @@ const editProduct = asyncHandler(async (req, res, next) => {
   // });
   res.status(201).json(updatedProduct);
 });
+
+const createProductReview = asyncHandler(async (req, res, next) => {
+  const { rating, comment } = req.body;
+
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    const alreadyReviewed = product.review.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
+
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error("Product already reviewed");
+    }
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+      image: req.user.image,
+    };
+    product.review.push(review);
+
+    product.numReviews = product.review.length;
+
+    product.rating =
+      product.review.reduce((acc, item) => item.rating + acc, 0) /
+      product.review.length;
+
+    await product.save();
+    res.status(201).json({ message: "Review Added" });
+  } else {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+
+  const updateProduct = await product.save();
+  res.status(201).json(updateProduct);
+});
+
 export {
   getProducts,
   getProductCategory,
@@ -105,4 +145,5 @@ export {
   getProduct,
   editProduct,
   deleteProduct,
+  createProductReview,
 };

@@ -41,6 +41,20 @@ export default class AutoPlayMethods extends Component {
                 alt=''
               />
             </div>
+            {/* <div className='hero_container_right'>
+              <img
+                className='hero_main_images'
+                src='/images/slider/1920x660.jpg'
+                alt=''
+              />
+            </div>
+            <div className='hero_container_right'>
+              <img
+                className='hero_main_images'
+                src='/images/slider/1920x660123.jpg'
+                alt=''
+              />
+            </div> */}
           </Slider>
           <div style={{ textAlign: "center" }}>
             {/* <button className='button' onClick={this.play}>
