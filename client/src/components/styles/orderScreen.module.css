@@ -118,6 +118,7 @@
   display: flex;
   max-width: 685px;
   margin: 20px auto;
+  position: relative;
 }
 .col_1 {
   flex-basis: 20%;
@@ -231,3 +232,4 @@
 .inactive {
   color: rgb(172, 168, 168);
 }
+

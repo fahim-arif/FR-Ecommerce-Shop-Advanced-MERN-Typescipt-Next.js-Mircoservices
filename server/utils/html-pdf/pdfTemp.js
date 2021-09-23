@@ -1,5 +1,8 @@
-export const pdfTemp = (body, id) => {
-  console.log(id);
+export const pdfTemp = ({ shippingAddress, createdAt, paymentMethod, _id }) => {
+  // const { _id, paymentMethod, shippingAddress, createdAt } = body;
+
+  // console.log(paymentMethod, _id, shippingAddress);
+
   return `
    <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +96,7 @@ export const pdfTemp = (body, id) => {
                   <div class="col-xs-12">
                     <h2>
                       invoice<br />
-                      <span class="small">order #${id}</span>
+                      <span class="small">order #${_id}</span>
                     </h2>
                   </div>
                 </div>
@@ -103,10 +106,12 @@ export const pdfTemp = (body, id) => {
                 <div class="col-xs-6 text-right">
                   <address>
                     <strong>Shipped To:</strong><br />
-                    Elaine Hernandez<br />
-                    P. Sherman 42,<br />
-                    Wallaby Way, Sidney<br />
-                    <abbr title="Phone">P:</abbr> (123) 345-6789
+                    ${shippingAddress.firstName} ${
+    shippingAddress.lastName
+  }<br />
+                    ${shippingAddress.address}<br />
+                    ${shippingAddress.city}-${shippingAddress.zip}<br />
+                    ${shippingAddress.phone}"
                   </address>
                 </div>
               </div>
@@ -114,14 +119,14 @@ export const pdfTemp = (body, id) => {
                 <div class="col-xs-6">
                   <address>
                     <strong>Payment Method:</strong><br />
-                    bkash<br />
-                    01638418833<br />
+                    ${paymentMethod}<br />
+                   
                   </address>
                 </div>
                 <div class="col-xs-6 text-right">
                   <address>
                     <strong>Order Date:</strong><br />
-                    17/06/14
+                    ${createdAt.slice(0, 10)}
                   </address>
                 </div>
               </div>
@@ -140,7 +145,6 @@ export const pdfTemp = (body, id) => {
                     </thead>
                     <tbody>
                       <tr class="flex">
-                        <td>1</td>
                         <td>
                           <strong>Template Design</strong><br />A website
                           template is a pre-designed webpage, or set of
@@ -174,7 +178,7 @@ export const pdfTemp = (body, id) => {
                         <td class="text-center">2</td>
                         <td class="text-center">$75</td>
                         <td class="text-right">$150.00</td>
-                      </tr>align-items: center;
+                      </tr>
                         
                           
                         

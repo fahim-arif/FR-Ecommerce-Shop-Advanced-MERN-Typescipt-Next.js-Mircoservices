@@ -32,6 +32,12 @@ export const addOrder = asyncHandler(async (req, res, next) => {
     });
 
     const createOrder = await order.save();
+    // pdf.create(pdfTemp(createOrder), {}).toFile("result.pdf", (err) => {
+    //   if (err) {
+    //     return Promise.reject();
+    //   }
+    //   return Promise.resolve();
+    // });
 
     res.status(201).json(createOrder);
   } else {
@@ -46,20 +52,18 @@ export const addOrder = asyncHandler(async (req, res, next) => {
       totalPrice,
     });
 
+    let copy = order;
+
     const createOrder = await order.save();
-    res.status(201).json(createOrder);
 
-    console.log(createOrder);
-    console.log("Hiiiiiiiiiii");
+    res.json(createOrder);
 
-    pdf
-      .create(pdfTemp(req.body, createOrder._id), {})
-      .toFile("result.pdf", (err) => {
-        if (err) {
-          return Promise.reject();
-        }
-        return Promise.resolve();
-      });
+    // pdf.create(pdfTemp(createOrder._id), {}).toFile("result.pdf", (err) => {
+    //   if (err) {
+    //     return Promise.reject();
+    //   }
+    //   return Promise.resolve();
+    // });
   }
 });
 
