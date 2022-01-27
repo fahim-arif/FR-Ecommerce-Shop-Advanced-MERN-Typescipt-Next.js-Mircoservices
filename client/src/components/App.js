@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 // COMMON
 import ScrollToTop from "./common/ScrollToTop";
@@ -46,13 +46,17 @@ import ImageMagnify from "./magnify-image/ImageMagnify";
 import OrderList from "./AdminDashboard/pages/orders/OrderList";
 import OrderDetails from "./AdminDashboard/pages/orders/AdminOrderDetails";
 import TrackOrderScreen from "../screens/TrackOrderScreen";
+import LeadGeneration from './AdminDashboard/pages/lead/LeadGeneration';
+
+
+
 function App() {
   return (
     <>
       <Router>
         <ScrollToTop />
         <main>
-          <Switch>
+          {/* <Switch>
             <MainHeader exact path='/'>
               <Footer exact path='/'>
                 <Route component={HomeScreen} path='/' exact></Route>
@@ -120,7 +124,7 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/cart' exact>
-              <div style={{ background: "#f4f4f4" }}>
+              <div style={{background: "#f4f4f4"}}>
                 <Footer path='/cart' exact>
                   <Route component={CartScreen} path='/cart' exact></Route>
                 </Footer>
@@ -129,7 +133,7 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/checkout-login' exact>
-              <div style={{ background: "#f4f4f4" }}>
+              <div style={{background: "#f4f4f4"}}>
                 <Footer path='/checkout-login' exact>
                   <Route
                     component={CheckoutLogin}
@@ -142,7 +146,7 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/checkout-shipping' exact>
-              <div style={{ background: "#f4f4f4" }}>
+              <div style={{background: "#f4f4f4"}}>
                 <Footer path='/checkout-shipping' exact>
                   <Route
                     component={CheckoutShipping}
@@ -155,7 +159,7 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/checkout-payment' exact>
-              <div style={{ background: "#f4f4f4" }}>
+              <div style={{background: "#f4f4f4"}}>
                 <Footer path='/checkout-payment' exact>
                   <Route
                     component={CheckoutPayment}
@@ -168,7 +172,7 @@ function App() {
           </Switch>
           <Switch>
             <MainHeader path='/checkout-placeorder' exact>
-              <div style={{ background: "#f4f4f4" }}>
+              <div style={{background: "#f4f4f4"}}>
                 <Footer path='/checkout-placeorder' exact>
                   <Route
                     component={CheckoutPlaceOrder}
@@ -182,7 +186,7 @@ function App() {
 
           <Switch>
             <MainHeader path='/magnify' exact>
-              <div style={{ background: "#f4f4f4" }}>
+              <div style={{background: "#f4f4f4"}}>
                 <Footer path='/magnify' exact>
                   <Route component={ImageMagnify} path='/magnify' exact></Route>
                 </Footer>
@@ -192,7 +196,7 @@ function App() {
 
           <Switch>
             <MainHeader path='/profile/order/:id' exact>
-              <div style={{ background: "#F4F5F7" }}>
+              <div style={{background: "#F4F5F7"}}>
                 <Footer path='/profile/order/:id' exact>
                   <Route
                     component={OrderScreen}
@@ -243,10 +247,20 @@ function App() {
                 ></Route>
               </Footer>
             </MainHeader>
-          </Switch>
+          </Switch> */}
           {/* <Route component={DemoScreen} path='/demo' exact></Route> */}
         </main>
         {/* <Route component={AdminScreen} path='/admin' exact></Route> */}
+          <Switch>
+            <SecondaryFooter path='/sign-in' exact>
+              <Route component={SignIn} path='/sign-in' exact></Route>
+            </SecondaryFooter>
+          </Switch>
+          <Switch>
+            <SecondaryFooter path='/sign-up' exact>
+              <Route component={SignUp} path='/sign-up' exact></Route>
+            </SecondaryFooter>
+          </Switch>
         <Switch>
           <Route path='/admin' exact>
             <Topbar />
@@ -313,6 +327,15 @@ function App() {
             <div className='admin_container'>
               <Sidebar />
               <OrderDetails />
+            </div>
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path='/admin/lead-gen' exact>
+            <Topbar />
+            <div className='admin_container'>
+              <Sidebar />
+              <LeadGeneration />
             </div>
           </Route>
         </Switch>

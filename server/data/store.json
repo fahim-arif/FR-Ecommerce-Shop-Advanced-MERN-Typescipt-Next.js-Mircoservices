@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Anowar Medical Store",
+    "image": "/images/2020-07-20.jpg",
+    "description": "A medical store in Khulshi.",
+    "location": "Jakir Hossain Society, Khulshi 4",
+    "rating": 4.5,
+    "review": 6
+
+  },
+  {
+    "name": "Jonota Pharmacy",
+    "image": "/images/2016-12-28.jpg",
+    "description": "A medical store 2 no gate",
+    "location": "Cosmopoliton, road no-9, 2 no gate",
+    "rating": 3.6,
+    "review":9
+  },
+  {
+      "name":"Shah Amanot Pharmacy",
+      "image":"/images/mubarak-medical-and-general-store-krishna-nagar-gadwal-chemists-fnj6wya851.jpg",
+      "description":"A medical store GEC",
+      "location": "GEC residential area, 10 no road",
+      "rating": 4.6,
+      "review": 7
+  },
+  {
+      "name": "Shanti Pharmacy", 
+      "image": "/images/2020-11-25.jpg",
+      "description":"Medical store in Agrabad.",
+      "location":"Agradbad, Chittagong",
+      "rating": 4.2,
+      "review": 17
+  }
+]

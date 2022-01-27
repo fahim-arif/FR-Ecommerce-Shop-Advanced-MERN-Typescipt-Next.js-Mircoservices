@@ -22,50 +22,52 @@ import {
   PRODUCT_CREATE_REVIEW_SUCESS,
   PRODUCT_CREATE_REVIEW_FAIL,
 } from "../types/productTypes.js";
+
 import axios from "axios";
+// import env from 'dotenv';
+
+// env.config();
 
 export const getProducts =
   (keyword = "", category = "") =>
-  async (dispatch) => {
-    try {
-      dispatch({ type: GET_PRODUCTS_REQUEST });
-      ///api/user/
-      const { data } = await axios.get(
-        `/api/products?keyword=${keyword}`
-      );
-
-      if (category) {
-        category = category.charAt(0).toUpperCase() + category.slice(1);
-        console.log(category);
-        const { data } = await axios.get(
-          `/api/products/search?category=${category}`
+    async (dispatch) => {
+      try {
+        dispatch({type: GET_PRODUCTS_REQUEST});
+        const {data} = await axios.get(
+          `http://localhost:5000/api/medicine/all/stores`
         );
-        console.log(data);
-        dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
-        return;
-      }
 
-      dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({
-        type: GET_PRODUCTS_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+        if (category) {
+          category = category.charAt(0).toUpperCase() + category.slice(1);
+          const {data} = await axios.get(
+            `/api/products/search?category=${category}`
+          );
+          console.log(data);
+          dispatch({type: GET_PRODUCTS_SUCCESS, payload: data});
+          return;
+        }
+
+        dispatch({type: GET_PRODUCTS_SUCCESS, payload: data});
+      } catch (error) {
+        dispatch({
+          type: GET_PRODUCTS_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+      }
+    };
 
 export const getProduct = (id) => async (dispatch) => {
   try {
-    dispatch({ type: GET_PRODUCT_REQUEST });
+    dispatch({type: GET_PRODUCT_REQUEST});
 
-    const { data } = await axios.get(
-      `/api/products/${id}`
+    const {data} = await axios.get(
+      `http://localhost:5000/api/medicine/${id}`
     );
 
-    dispatch({ type: GET_PRODUCT_SUCCESS, payload: data });
+    dispatch({type: GET_PRODUCT_SUCCESS, payload: data});
   } catch (error) {
     dispatch({
       type: GET_PRODUCT_FAIL,
@@ -88,62 +90,53 @@ export const createProduct =
     description,
     countInStock
   ) =>
-  async (dispatch, getState) => {
-    try {
-      dispatch({ type: PRODUCT_CREATE_REQUEST });
+    async (dispatch, getState) => {
+      try {
+        dispatch({type: PRODUCT_CREATE_REQUEST});
 
-      const {
-        userLogin: { userInfo },
-      } = getState();
+        const {
+          userLogin: {userInfo},
+        } = getState();
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      };
+        const config = {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        };
 
-      // console.log(
-      //   name,
-      //   brandImage,
-      //   image,
-      //   brand,
-      //   price,
-      //   category,
-      //   description,
-      //   countInStock
-      // );
-      const { data } = await axios.post(
-        "/api/products",
-        {
-          name,
-          brandImage,
-          image,
-          price,
-          brand,
-          category,
-          description,
-          countInStock,
-        },
-        config
-      );
+        const {data} = await axios.post(
+          "/api/medicine",
+          {
+            name,
+            brandImage,
+            image,
+            price,
+            brand,
+            category,
+            description,
+            countInStock,
+          },
+          config
+        );
 
-      dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({
-        type: PRODUCT_CREATE_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+        dispatch({type: PRODUCT_CREATE_SUCCESS, payload: data});
+      } catch (error) {
+        dispatch({
+          type: PRODUCT_CREATE_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+      }
+    };
+
 export const deleteProduct = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: PRODUCT_DELETE_REQUEST });
+    dispatch({type: PRODUCT_DELETE_REQUEST});
 
     const {
-      userLogin: { userInfo },
+      userLogin: {userInfo},
     } = getState();
 
     const config = {
@@ -151,10 +144,9 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    console.log(id);
     await axios.delete(`/api/products/${id}`, config);
 
-    dispatch({ type: PRODUCT_DELETE_SUCESS });
+    dispatch({type: PRODUCT_DELETE_SUCESS});
   } catch (error) {
     dispatch({
       type: PRODUCT_DELETE_FAIL,
@@ -168,32 +160,32 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
 export const listProduct =
   (keyword = "", pageNumber = "") =>
-  async (dispatch) => {
-    try {
-      dispatch({ type: PRODUCT_LIST_REQUEST });
+    async (dispatch) => {
+      try {
+        dispatch({type: PRODUCT_LIST_REQUEST});
 
-      const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
-      );
+        const {data} = await axios.get(
+          `/api/medicine?keyword=${keyword}&pageNumber=${pageNumber}`
+        );
 
-      dispatch({ type: PRODUCT_LIST_SUCESS, payload: data });
-    } catch (error) {
-      dispatch({
-        type: PRODUCT_LIST_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-    }
-  };
+        dispatch({type: PRODUCT_LIST_SUCESS, payload: data});
+      } catch (error) {
+        dispatch({
+          type: PRODUCT_LIST_FAIL,
+          payload:
+            error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+        });
+      }
+    };
 
 export const editProduct = (product) => async (dispatch, getState) => {
   try {
-    dispatch({ type: PRODUCT_EDIT_REQUEST });
+    dispatch({type: PRODUCT_EDIT_REQUEST});
 
     const {
-      userLogin: { userInfo },
+      userLogin: {userInfo},
     } = getState();
 
     const token = userInfo.token;
@@ -204,14 +196,13 @@ export const editProduct = (product) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/products/${product._id}`,
+    const {data} = await axios.put(
+      `${process.env.SERVER_URL}/api/products/${product._id}`,
       product,
       config
     );
-    console.log(data);
 
-    dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
+    dispatch({type: PRODUCT_EDIT_SUCCESS, payload: data});
   } catch (error) {
     dispatch({
       type: PRODUCT_EDIT_FAIL,
@@ -226,10 +217,10 @@ export const editProduct = (product) => async (dispatch, getState) => {
 export const createProductReview =
   (productId, review) => async (dispatch, getState) => {
     try {
-      dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
+      dispatch({type: PRODUCT_CREATE_REVIEW_REQUEST});
 
       const {
-        userLogin: { userInfo },
+        userLogin: {userInfo},
       } = getState();
 
       const config = {
@@ -240,7 +231,7 @@ export const createProductReview =
       };
       await axios.post(`/api/products/${productId}/reviews`, review, config);
 
-      dispatch({ type: PRODUCT_CREATE_REVIEW_SUCESS });
+      dispatch({type: PRODUCT_CREATE_REVIEW_SUCESS});
     } catch (error) {
       dispatch({
         type: PRODUCT_CREATE_REVIEW_FAIL,

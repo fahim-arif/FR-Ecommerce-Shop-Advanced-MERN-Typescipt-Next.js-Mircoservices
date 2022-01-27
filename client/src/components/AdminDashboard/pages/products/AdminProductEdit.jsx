@@ -138,6 +138,12 @@ const AdminProductEdit = () => {
                 {product.name}
               </span>
             </div>
+             <div className='user_show_info'>
+              <span className='user_show_info_title'>
+                <span className='admin_bold'>Store: </span>
+                {product.store}
+              </span>
+            </div>
             <div className='user_show_info'>
               <span className='user_show_info_title'>
                 <span className='admin_bold'>Price: </span>

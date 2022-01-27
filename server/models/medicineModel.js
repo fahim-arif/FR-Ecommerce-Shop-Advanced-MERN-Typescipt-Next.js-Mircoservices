@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const reviewSchema = mongoose.Schema(
   {
-    name: { type: String, required: true },
-    rating: { type: Number, required: true },
-    comment: { type: String, required: true },
+    name: {type: String, required: true},
+    rating: {type: Number, required: true},
+    comment: {type: String, required: true},
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -16,7 +16,7 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
-const productSchema = new mongoose.Schema(
+const medicineSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -59,6 +59,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    store: {
+      type: String,
+      required: true,
+    },
     countInStock: {
       type: Number,
       required: true,
@@ -71,15 +75,15 @@ const productSchema = new mongoose.Schema(
 );
 
 // Duplicate the ID field.
-productSchema.virtual("id").get(function () {
+medicineSchema.virtual("id").get(function () {
   return this._id.toHexString();
 });
 
 // Ensure virtual fields are serialised.
-productSchema.set("toJSON", {
+medicineSchema.set("toJSON", {
   virtuals: true,
 });
-productSchema.method("toClient", function () {
+medicineSchema.method("toClient", function () {
   var obj = this.toObject();
 
   //Rename fields
@@ -89,10 +93,10 @@ productSchema.method("toClient", function () {
   return obj;
 });
 
-// productSchema.virtual("id").get(function () {
+// medicineSchema.virtual("id").get(function () {
 //   return this._id;
 // });
 
-const Product = mongoose.model("Product", productSchema);
+const Medicine = mongoose.model("Medicine", medicineSchema);
 
-export default Product;
+export default Medicine;

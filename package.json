@@ -5,12 +5,11 @@
   "main": "app.js",
   "type": "module",
   "engines": {
-    "node": "14.15.4"
+    "node": "16.13.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
-    "server": "nodemon server/app.js"
+    "dev": "nodemon server/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +29,10 @@
     "nodemailer": "^6.6.3",
     "nodemailer-express-handlebars": "^4.0.0",
     "nodemon": "^2.0.7",
-    "pdfkit": "^0.12.3"
+    "pdfkit": "^0.12.3",
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
   }
 }

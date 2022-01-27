@@ -1,16 +1,25 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useRef, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import Loading from "../../../Loading";
-import { createProduct } from "../../../../actions/productActions";
+import {createProduct} from "../../../../actions/productActions";
 import axios from "axios";
 import Message from "../../../Message";
 
 import "../users/userCreate.css";
 import "./createProduct.css";
 const CreateProduct = () => {
-  const { product, loading, error, success } = useSelector(
+  const [storeData, setStoreData] = useState([]);
+  const {product, loading, error, success} = useSelector(
     (state) => state.productCreate
   );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const {data} = await axios.get('http://localhost:5000/api/store')
+      setStoreData(data);
+    }
+    fetchData();
+  }, [])
 
   const dispatch = useDispatch();
 
@@ -42,8 +51,8 @@ const CreateProduct = () => {
         },
       };
       // /api/user/
-      const { data } = await axios.post(
-        "/api/upload",
+      const {data} = await axios.post(
+        "http://localhost:5000/api/upload",
         formData,
         config
       );
@@ -100,7 +109,7 @@ const CreateProduct = () => {
               type='text'
               value={name}
               className='admin_input_field'
-              style={{ display: "block" }}
+              style={{display: "block"}}
               required
               onChange={(e) => setName(e.target.value)}
             />
@@ -110,6 +119,17 @@ const CreateProduct = () => {
           <input className='admin_input_field' type='file' />
         </div> */}
           {uploading && <Loading />}
+          <div style={{width:'100%'}} className='admin_create_product_item'>
+            <label>Select Store</label>
+            <div>
+
+              <select>
+                {storeData.map((data) => (
+                  <option value={data.name} key={data._id}>{data.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
           <div className='admin_create_product_item'>
             <label>Product Image</label>
             <input

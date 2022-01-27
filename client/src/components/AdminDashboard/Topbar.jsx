@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { margin } from "../../actions/marginActions";
+import React, {useState, useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
+import {margin} from "../../actions/marginActions";
 // import { userLogout } from "../../actions/userActions" ;
 
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import {NotificationsNone, Language, Settings} from "@material-ui/icons";
 // import avatar from "../images/64383378_1276948462470075_871232239092891648_n.jpg";
 // import "../../css/Header.css";
 import "./topbar.css";
@@ -15,7 +15,7 @@ const Topbar = () => {
   const dispatch = useDispatch();
 
   const sideMargin = useSelector((state) => state.sideMargin);
-  const { margin: space } = sideMargin;
+  const {margin: space} = sideMargin;
 
   function debounce(fn, ms) {
     let timer;
@@ -89,22 +89,24 @@ const Topbar = () => {
 
   return (
     <section className='admin_top_bar'>
-      <div style={{ margin: `0 ${space}px` }} className='header_wrapper'>
+      <div style={{margin: `0 ${space}px`}} className='header_wrapper'>
         <div className={clicked ? "opacity" : ""} onClick={showSideBar}></div>
         <nav className='nav'>
           <div className={clicked ? "nav-menu active" : "nav-menu"}>
             <ul className='nav__list'>
               <div className='header_col hambarger_and_logo'>
                 <div className='menu-icon' onClick={showSideBar}>
-                  <img
+                  {/* <img
                     src='images/bars.svg'
                     alt='Menu bars'
                     className='menu_bars'
-                  />
+                  /> */}
                 </div>
 
                 <Link to='/'>
                   <img
+                    width={170}
+                    height={50}
                     className='navbar-logo'
                     src='/images/logo.png'
                     alt='logo'

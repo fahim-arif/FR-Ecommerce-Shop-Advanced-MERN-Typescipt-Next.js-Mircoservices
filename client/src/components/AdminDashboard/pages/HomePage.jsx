@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import LargeWidget from "../widgets/LargeWidget";
@@ -24,11 +24,6 @@ const HomePage = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (!isAdmin) {
-  //     history.push("/");
-  //   }
-  // }, []);
   return (
     <div className='admin_home_page'>
       <FeaturedInfo />

@@ -7,7 +7,7 @@ export const mailRegister = (name, email) => {
     service: "gmail",
     auth: {
       user: "frstorebd@gmail.com",
-      pass: "sunlite.1245209", // naturally, replace both with your real credentials or an application-specific password
+      pass: "appleisred", // naturally, replace both with your real credentials or an application-specific password
     },
   });
 
@@ -15,7 +15,7 @@ export const mailRegister = (name, email) => {
     from: "frstorebd@gmail.com",
     to: email,
     subject: "User Registration",
-    html: `<p>Hello ${name}, You have successfully created an account in FR Store. Stay Tuned. Thank you </p>`,
+    html: `<p>Hello ${name}, You have successfully created an account in Emergency Medical Store. Stay Tuned. Thank you </p>`,
     attachments: [
       {
         filename: "invoice-614be88ec618391b6041289b.pdf",

@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import { mailRegister } from "../utils/nodeMailer.js";
+import {mailRegister} from "../utils/nodeMailer.js";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import md5 from "md5";
@@ -11,9 +11,9 @@ export const getLogin = (req, res, next) => {
 export const authUser = asyncHandler(async (req, res, next) => {
   // End
 
-  const { email, password, googleAuth } = req.body;
+  const {email, password, googleAuth} = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({email});
 
   if (googleAuth && googleAuth === user.googleAuth) {
     res.status(200).json({
@@ -43,9 +43,9 @@ export const authUser = asyncHandler(async (req, res, next) => {
 });
 
 export const registerUser = asyncHandler(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const {name, email, password} = req.body;
 
-  const userExist = await User.findOne({ email });
+  const userExist = await User.findOne({email});
 
   if (userExist) {
     res.status(400);
@@ -141,7 +141,7 @@ export const adminGetUser = asyncHandler(async (req, res, next) => {
 });
 
 export const adminEditUser = asyncHandler(async (req, res, next) => {
-  const { name, email, phone, dateOfBirth, address, password, isAdmin, image } =
+  const {name, email, phone, dateOfBirth, address, password, isAdmin, image} =
     req.body;
 
   const userId = req.params.id;
@@ -171,7 +171,7 @@ export const adminDeleteUser = asyncHandler(async (req, res, next) => {
 
   if (user) {
     await user.remove();
-    res.json({ message: "User was deleted successfully" });
+    res.json({message: "User was deleted successfully"});
   } else {
     res.status(404);
     throw new Erorr("User Not Found");

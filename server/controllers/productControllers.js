@@ -1,38 +1,66 @@
-import Product from "../models/productModel.js";
+import Medicine from "../models/medicineModel.js";
+import Store from "../models/storeModel.js";
 import asyncHandler from "express-async-handler";
-import { pdf } from "../utils/pdfkit/pdfkit.js";
-import { mailRegister } from "../utils/nodeMailer.js";
+import {pdf} from "../utils/pdfkit/pdfkit.js";
+import {mailRegister} from "../utils/nodeMailer.js";
 
-const getProducts = asyncHandler(async (req, res, next) => {
-  const keyword = req.query.keyword
-    ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
-      }
-    : {};
 
-  const response = await Product.find({ ...keyword });
+const getStoreById = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const response = await Store.findById(id)
+  res.json(response)
+})
 
+const getProduct = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+
+  const response = await Medicine.findById(id);
   res.json(response);
 });
+
+const getProducts = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const {name} = await Store.findById(id);
+  const keyword = req.query.keyword
+    ? {
+      name: {
+        $regex: name,
+        $options: "i",
+      },
+    }
+    : {};
+
+  const response = await Medicine.find({...keyword});
+  res.json(response);
+});
+
+const allMedicines = asyncHandler(async (req, res, next) => {
+  const response = await Medicine.find();
+  res.json(response);
+})
 
 const getProductCategory = asyncHandler(async (req, res, next) => {
   const category = req.query.category;
 
-  const response = await Product.find({ category });
+  const response = await Product.find({category});
 
   res.json(response);
 });
 
-const getProduct = async (req, res, next) => {
-  const id = req.params.id;
-  const response = await Product.findById(id);
+const getProductByStore = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const product = await Store.findById(id);
+    if (!product) {
+      return res.json([])
+    } else {
+      const response = await Medicine.find({store: product.name});
+      res.json(response);
+    }
+  } catch (error) {
+    console.log(error)
+  }
 
-  // mailRegister("fahim", "fa");
-
-  res.json(response);
 };
 
 const postProduct = asyncHandler(async (req, res, next) => {
@@ -67,7 +95,7 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
   const productId = await Product.findById(req.params.id);
   if (productId) {
     await productId.remove();
-    res.json({ message: "Product Removed" });
+    res.json({message: "Product Removed"});
   } else {
     res.status(404);
     throw new Error("Product Not Found");
@@ -75,10 +103,10 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
 });
 
 const editProduct = asyncHandler(async (req, res, next) => {
-  const { name, image, brand, price, category, countInStock, description } =
+  const {name, image, brand, price, category, countInStock, description} =
     req.body;
   const productId = req.params.id;
-  const product = await Product.findById(productId);
+  const product = await Medicine.findById(productId);
 
   if (product) {
     product.name = name;
@@ -100,7 +128,7 @@ const editProduct = asyncHandler(async (req, res, next) => {
 });
 
 const createProductReview = asyncHandler(async (req, res, next) => {
-  const { rating, comment } = req.body;
+  const {rating, comment} = req.body;
 
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -128,7 +156,7 @@ const createProductReview = asyncHandler(async (req, res, next) => {
       product.review.length;
 
     await product.save();
-    res.status(201).json({ message: "Review Added" });
+    res.status(201).json({message: "Review Added"});
   } else {
     res.status(404);
     throw new Error("Product Not Found");
@@ -140,10 +168,13 @@ const createProductReview = asyncHandler(async (req, res, next) => {
 
 export {
   getProducts,
+  getProduct,
   getProductCategory,
   postProduct,
-  getProduct,
+  getProductByStore,
   editProduct,
   deleteProduct,
   createProductReview,
+  allMedicines,
+  getStoreById
 };

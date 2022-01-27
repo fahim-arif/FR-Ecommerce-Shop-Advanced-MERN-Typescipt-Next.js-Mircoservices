@@ -1,9 +1,9 @@
 import express from "express";
 import env from "dotenv";
 import cors from "cors";
-import path, { dirname } from "path";
+import path, {dirname} from "path";
 import colors from "colors";
-import productRoutes from "./Routes/ProductRoutes.js";
+import medicineRoutes from "./Routes/medicineRoutes.js";
 import connectDB from "./config/db.js";
 import userRoutes from "./Routes/userRoutes.js";
 import uploadRoutes from "./Routes/uploadRoutes.js";
@@ -12,8 +12,13 @@ import couponRoutes from "./Routes/couponRoutes.js";
 import orderRoutes from "./Routes/orderRoutes.js";
 import pdfRoutes from "./Routes/pdfRoutes.js";
 import emailRoutes from "./Routes/emailRoutes.js";
+import leadRoutes from './Routes/leadRoutes.js';
+import storeRoutes from './Routes/storeRoutes.js';
+import doctorRoutes from './Routes/doctorRoutes.js';
+import testReport from './Routes/testReportRoutes.js';
+import videoServer from "./utils/videoServer.js";
 
-import { notFound, errorPageHandler } from "./middleware/errorMiddleware.js";
+import {notFound, errorPageHandler} from "./middleware/errorMiddleware.js";
 
 env.config();
 
@@ -24,7 +29,7 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use("/api/products", productRoutes);
+app.use("/api/medicine", medicineRoutes);
 
 app.use("/api/user", userRoutes);
 
@@ -35,6 +40,14 @@ app.use("/api/contact-us", contactRoutes);
 app.use("/api/coupon", couponRoutes);
 
 app.use("/api/order", orderRoutes);
+
+app.use('/api/lead', leadRoutes);
+
+app.use('/api/store', storeRoutes);
+
+app.use('/api/doctor', doctorRoutes);
+
+videoServer();
 
 const __dirname = path.resolve();
 

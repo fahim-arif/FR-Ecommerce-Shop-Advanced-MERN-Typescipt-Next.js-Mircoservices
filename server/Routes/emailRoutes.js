@@ -20,7 +20,8 @@ router.post(
         service: "gmail",
         auth: {
           user: "frstorebd@gmail.com",
-          pass: "sunlite.1245209", // naturally, replace both with your real credentials or an application-specific password
+          pass: "appleisred", // naturally, replace both with your real credentials or an application-specific password
+
         },
       });
 

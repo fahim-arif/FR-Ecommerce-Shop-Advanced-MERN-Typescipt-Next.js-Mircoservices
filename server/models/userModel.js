@@ -30,6 +30,10 @@ const userSchema = mongoose.Schema({
   image: {
     type: String,
   },
+  accountType: {
+    type: String,
+    default: 'Regular'
+  },
   isAdmin: {
     type: Boolean,
 

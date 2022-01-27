@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, {useState, useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
 import "./productLists.css";
-import { Link, useHistory } from "react-router-dom";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { serviceRows } from "../../DummyData";
-import { getProducts, deleteProduct } from "../../../../actions/productActions";
+import {Link, useHistory} from "react-router-dom";
+import {DataGrid} from "@material-ui/data-grid";
+import {DeleteOutline} from "@material-ui/icons";
+import {serviceRows} from "../../DummyData";
+import {getProducts, deleteProduct} from "../../../../actions/productActions";
 import Product from "../../../../components/Product_depricated";
-import { Col, Row, Container, Image } from "react-bootstrap";
+import {Col, Row, Container, Image} from "react-bootstrap";
 import Loading from "../../../Loading";
 import Message from "../../../Message";
 import DeleteProduct from "../../../modals/DeleteUser";
+import axios from 'axios';
 
 const AdminProductList = () => {
   // Admin Verification or Else redirect to homepage
   let history = useHistory();
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const {userInfo} = userLogin;
 
   const [productName, setProductName] = useState("");
   const [productId, setProductId] = useState("");
@@ -24,31 +25,27 @@ const AdminProductList = () => {
   if (!userInfo) {
     history.push("/");
   } else {
-    const { isAdmin } = userInfo;
+    const {isAdmin} = userInfo;
     if (!isAdmin) {
       history.push("/");
     }
   }
 
+  const [medicineData, setMedicineData] =  useState([]);
+
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { error, loading, products } = productList;
+  const {error, loading, products} = productList;
 
   const productDelete = useSelector((state) => state.productDelete);
-  const { loading: loadingDelete, error: errorDelete, success } = productDelete;
+  const {loading: loadingDelete, error: errorDelete, success} = productDelete;
 
   const productCreate = useSelector((state) => state.productCreate);
-  const { success: successCreate } = productCreate;
+  const {success: successCreate} = productCreate;
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch, success, successCreate]);
-
-  // const handleEdit = (id) => {
-  //   console.log(id);
-  //   // history.push("/");
-  //   history.push(`/admin/product-list/${id}`);
-  // };
 
   const columns = [
     {
@@ -177,7 +174,7 @@ const AdminProductList = () => {
         {error && <Message variant='danger'>{error}</Message>}
         {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
         {success && <Message>{"Product Was Deleted Successfully"}</Message>}
-        <div style={{ height: 780, width: "100%", fontFamily: "Open Sans" }}>
+        <div style={{height: 780, width: "100%", fontFamily: "Open Sans"}}>
           <DataGrid
             rows={products}
             disableSelectionOnClick

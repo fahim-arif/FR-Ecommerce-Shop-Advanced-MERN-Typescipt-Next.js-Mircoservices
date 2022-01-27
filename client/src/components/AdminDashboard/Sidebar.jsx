@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
   LineStyle,
   TrendingUp,
@@ -28,7 +28,7 @@ const Sidebar = () => {
       <div classname='admin_side_bar_wrapper'>
         <div classname='admin_side_bar_menu'>
           <h3 className='admin_side_bar_title mt-3'>Dashboard</h3>
-          <ul classname='admin_side_bar_list' style={{ padding: "10px" }}>
+          <ul classname='admin_side_bar_list' style={{padding: "10px"}}>
             <Link to='/admin'>
               <li className='admin_side_bar_item active'>
                 <LineStyle className='admin_side_bar_icons' />
@@ -57,7 +57,7 @@ const Sidebar = () => {
             <Link to='/admin/product-list'>
               <li className='admin_side_bar_item'>
                 <WorkOutline />
-                Products
+                Services
               </li>
             </Link>
             <Link to='/admin/order-list'>
@@ -66,10 +66,10 @@ const Sidebar = () => {
                 Orders
               </li>
             </Link>
-            <Link to='/admin/sales-report'>
+            <Link to='/admin/lead-gen'>
               <li className='admin_side_bar_item'>
                 <Group />
-                Sales Report
+                Lead Generation
               </li>
             </Link>
           </ul>

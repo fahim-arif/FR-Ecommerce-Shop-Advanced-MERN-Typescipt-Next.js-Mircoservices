@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import DropDown from "../components/home/DropDown";
 import styles from "../components/styles/productScreen.module.css";
 import ProductList from "../components/ProductList";
 import { getProducts } from "../actions/productActions";

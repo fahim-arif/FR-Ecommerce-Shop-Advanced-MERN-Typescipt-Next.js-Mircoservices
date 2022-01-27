@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Dr. Kabir Hasan",
+    "image": "/images/pro1.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
+    "location": "Khulshi, Chittagong",
+    "visitPrice": 299,
+    "phone": "01775539561",
+    "visitTime": "7AM-5PM",
+    "rating": 4.6,
+    "medicalField": "Ear, Nose & Skin",
+    "locationImage": "/images/",
+    "isVerified": true
+  },
+  {
+    "name": "Dr. Ikqbal Rahman",
+    "image": "/images/pro1.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
+    "location": "Khulshi, Chittagong",
+    "visitPrice": 299,
+    "phone": "01775539562",
+    "visitTime": "11AM-6PM",
+    "rating": 5,
+    "medicalField": "Chemical Specialist",
+    "locationImage": "/images/",
+    "isVerified": true
+  },
+  {
+    "name": "Dr. Shirin Sharmin",
+    "image": "/images/pro1.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
+    "location": "Khulshi, Chittagong",
+    "visitPrice": 299,
+    "phone": "01775539564",
+    "visitTime": "2PM-7PM",
+    "rating": 4.3,
+    "medicalField": "Heart Surgeon",
+    "locationImage": "/images/",
+    "isVerified": true
+  },
+  {
+    "name": "Dr. Azom Khan",
+    "image": "/images/pro1.jpg",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, magnam eum aut numquam libero sed nemo perferendis facilis expedita doloremque temporibus quibusdam fuga deleniti voluptatum nesciunt veniam a est rem.",
+    "location": "GEC, Chittagong",
+    "visitPrice": 499,
+    "phone": "01775539562",
+    "visitTime": "7PM-11PM",
+    "rating": 4.6,
+    "medicalField": "Neuro Surgeon",
+    "locationImage": "/images/",
+    "isVerified": true
+  }
+]
